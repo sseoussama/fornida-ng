@@ -1,0 +1,153 @@
+<div class="drop-content" id="login-form" *ngIf="!mode.auth">
+
+
+	<!-- drop-head -->
+	<div class="drop-head level hide">
+		<div class="level-left">
+			<h4 [ngClass]="{'active':active=='login'}" class="mono"><a>login</a></h4>
+		</div>
+		<div class="level-right">
+			<h4 [ngClass]="{'active':active=='register'}" class="mono"><a>register</a></h4>
+		</div>
+	</div>
+	
+
+	<!-- drop-foot -->
+	<div class="drop-foot level">
+		<div class="foot-pop columns m0p0 active-{{active}}">
+			<a (mouseenter)="active='register'" class=" column register m0 level-item action">Register</a>
+			<a (mouseenter)="active='login'" class=" column m0 action login">Sign In</a>
+			<div class="bg"></div>
+		</div>
+	</div>
+
+
+	<!-- drop-body -->
+	<div class="drop-body">
+		<form action="" id="user" (submit)="userFormSubmit($event)">
+			<Field 
+				[id]="'first'"
+				[type]="'text'"
+				[label]="'first name'"
+				[icon]="'user'"
+				*ngIf="active==='register'"
+			></Field>
+
+			<Field 
+				[id]="'last'"
+				[type]="'text'"
+				[label]="'last name'"
+				[icon]="'users'"
+				*ngIf="active==='register'"
+			></Field>
+
+			<Field 
+				[id]="'company'"
+				[type]="'text'"
+				[label]="'company name'"
+				[icon]="'building'"
+				*ngIf="active==='register'"
+			></Field>
+
+			<Field 
+				[id]="'phone'"
+				[type]="'phone'"
+				[label]="'phone'"
+				[icon]="'mobile'"
+				*ngIf="active==='register'"
+			></Field>
+
+			<Field 
+				[id]="'email'"
+				[type]="'email'"
+				[label]="'email'"
+				[icon]="'envelope'"
+				(fieldChanged)="onEmailVal($event)"
+			></Field>
+
+			<Field 
+				[id]="'password'"
+				[type]="'password'"
+				[label]="'password'"
+				[icon]="'lock'"
+			></Field>
+
+			<Field 
+				[id]="'confirm'"
+				[type]="'password'"
+				[label]="'confirm password'"
+				[icon]="'lock'"
+				*ngIf="active==='register'"
+			></Field>
+
+			<input type="uId" id="uId" name="uId" *ngIf="active==='login'" [ngClass]="{hide: !mode.admin}">
+
+			<br>
+
+			<input class="button green-bg logon" type="submit" value="Sign In" *ngIf="active==='login'">
+
+			<input class="button green-bg" type="submit" value="Create Account" *ngIf="active==='register'">
+			
+			<br> <br>
+			<!-- <a class="button light-bg dark social" *ngIf="active==='login'">Login with Google</a> -->
+			<!-- <a class="button light-bg dark social" *ngIf="active==='login'">Login with Facebook</a> -->
+
+			<pre [ngClass]="{hide: !mode.admin}">{{email|json}} - {{user|json}}</pre>
+		</form>
+	</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- authenticated menu -->
+<div class="drop-content p1em account-menu" id="login-form" *ngIf="mode.auth && user">
+	<p class="mono yellow fwb">{{user.email}}</p>
+	<div class="level">
+		<a class="level-item mono" (click)="goto('/account.php')">
+			<div><fa [name]="'fa fa-user'"></fa></div>
+			Account
+		</a>
+		<a class="level-item mono" (click)="signOut()">
+			<div><fa [name]="'fas fa-sign-out-alt'"></fa></div>
+			Sign Out
+		</a>
+	</div>
+	<pre *ngIf="mode.admin && mode.dev">{{email|json}} - {{user|json}}</pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

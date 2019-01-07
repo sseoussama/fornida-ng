@@ -1,0 +1,10 @@
+$main-dAccent: #CC5B5B;
+
+ul.inline{
+	list-style: none;
+	padding: 0;
+	li{
+		// float: left;
+		display: inline-block;
+	}
+}

@@ -1,0 +1,33 @@
+<context [zone]="'#a-'+option.key" [menu]="'anything'+option.key" *ngIf="product">
+	<div class="dark-box">
+		<div class="c" *ngIf="!loading">
+			<div class="meat">
+				<div class="img-contain">
+					 <!-- <pre>{{product.images|json}}</pre> -->
+					<!-- <img src="{{product.images[0].url_standard}}"> -->
+					<img src="https://www.viasat.com/sites/default/files/media/images/gallery/eclypt-core-encryption-g-flat.png">
+				</div>
+				<h3>{{product.name}}</h3>
+				<p class="part">{{product.sku}}</p>
+				<p class="desc">{{product.description|strip}}</p>
+			</div>
+			<div class="foot">
+				<div class="columns stats">
+					<div class="column stat">
+						<div class="val">30 Day</div>
+						<div class="key">Warranty</div>
+					</div>
+					<div class="column stat">
+						<div class="val">127k</div>
+						<div class="key">Value</div>
+					</div>
+					<div class="column stat">
+						<div class="val">1</div>
+						<div class="key">GB</div>
+					</div>
+				</div>
+			</div>
+			<div class="price-bubble"><div>{{product.calculated_price|currency}}</div></div>
+		</div>
+	</div>
+</context>

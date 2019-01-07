@@ -1,0 +1,83 @@
+<div id="zone3" class="homeify type-style-1 tac pt0">
+
+	<div class="home-sec">
+		<div class=" ">
+			<h2 class="green">Networking</h2>
+			<h3>Why our equipment<br> puts you ahead of the crowd</h3>
+		</div>
+	</div><br>
+
+	<div class="content-area" data1-rellax-speed="2">
+		
+
+		<div class="figure">
+			
+			<!-- pulse -->
+			<div class="pulse-ring">  <div class="pulse-ring__circle"></div>  <div class="pulse-ring__circle"></div>  <div class="pulse-ring__circle"></div>  </div>
+
+			<div class="columns withcopy">
+				
+
+				<!-- triggers right -->
+				<div class="cto-copy column left">
+					<a [href]="data[0].href" class="ref" (mouseover)="current=0" [ngClass]="{'active':current === 0}">
+						<div class="mobile-only image">
+							<img src="{{data[0].img}}">
+						</div>
+						<h2 class="tar">{{data[0].caption}}</h2>
+						<a class="nobox green">{{data[0].cto}}</a>
+					</a>
+					<hr>
+					<a [href]="data[1].href" class="ref" (mouseover)="current=1" [ngClass]="{'active':current === 1}">
+						<div class="mobile-only image">
+							<img src="{{data[1].img}}">
+						</div>
+						<h2 class="tar">{{data[1].caption}}</h2>
+						<a class="nobox green">{{data[1].cto}}</a>
+					</a>
+				</div>
+
+
+				<!-- main image -->
+				<div class="column images-container is-3">
+					<div class="images clearfix">
+						<img 
+							*ngFor="let item of data; let i = index" 
+							src="{{item.img}}"
+							[ngClass]="{'o1':current === i}"
+							class="centerer"
+						>
+					</div>
+				</div>
+
+
+				<!-- triggers left -->
+				<div class="cto-copy column right">
+					<a [href]="data[2].href" class="ref" (mouseover)="current=2" [ngClass]="{'active':current === 2}">
+						<div class="mobile-only image">
+							<img src="{{data[2].img}}">
+						</div>
+						<h2 class="tal">{{data[2].caption}}</h2>
+						<a class="nobox r green">{{data[2].cto}}</a>
+					</a>
+					<hr>
+					<a [href]="data[3].href" class="ref" (mouseover)="current=3" [ngClass]="{'active':current === 3}">
+						<div class="mobile-only image">
+							<img src="{{data[3].img}}">
+						</div>
+						<h2 class="tal">{{data[3].caption}}</h2>
+						<a class="nobox r green">{{data[3].cto}}</a>
+					</a>
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+
+</div>

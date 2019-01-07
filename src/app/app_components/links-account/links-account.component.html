@@ -1,0 +1,26 @@
+<ul class="account-links">
+  <!-- Authed -->
+  <ng-container *ngIf="mode.email">
+    <li><a data-icon="&#xf571;" (click)="closeNav(); goto('/account.php?action=order_status')">Orders</a></li>
+    <li><a data-icon="&#xf01c;" (click)="closeNav(); goto('/account.php?action=inbox')">Messages</a></li>
+    <li><a data-icon="&#xf2b9;" (click)="closeNav(); goto('/account.php?action=address_book')">Addresses</a></li>
+    <li><a data-icon="&#xf06e;" (click)="closeNav(); goto('/account.php?action=recent_items')">Recently Viewed</a></li>
+    <li><a data-icon="&#xf4fe;" (click)="closeNav(); goto('/account.php?action=account_details')">Account Settings</a></li>
+    <li><a data-icon="&#xf2f5;" (click)="closeNav(); out()">Logout</a></li>
+  </ng-container>
+
+
+  <!-- No User -->
+  <ng-container *ngIf="!mode.email">
+    <li><a data-icon="&#xf044;" (click)="loginModal='register'">Register</a></li>
+    <li><a data-icon="&#xf0a4;" (click)="loginModal='login'">Sign In</a></li>
+  </ng-container>
+
+</ul>
+
+
+<modal *ngIf="loginModal" (closeModal)="loginModal=false;" [width]="'425px'">
+  <div class="box blue-g">
+    <app-mini-user [active]="loginModal"></app-mini-user>
+  </div>
+</modal>

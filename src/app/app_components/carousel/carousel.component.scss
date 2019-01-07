@@ -1,0 +1,90 @@
+@import "../../../assets/scss/inc/mixins";
+@import "../../../assets/scss/inc/animate";
+@import "../../../assets/scss/inc/responsive";
+
+.carousel{
+	// background-image: url("assets/img/bg.png");
+	// background-size: cover;
+    // margin-top: 3vh;
+ //    .slick-list {
+	//     padding: 0 !important;
+	// }
+	img{
+    	// margin: 0 auto;
+    	padding: 0 7vh;
+    	margin-top: 1em;
+    	@include bp(S-desktop) {
+    		margin-top: -2em;
+    		max-width: 100vw;
+    		width: 66vw;
+    		padding: 0;
+    		margin-left: -1em;
+    		margin-top: 0;
+    	}
+    	@include bp(dell-laptop) {
+    		max-height: 60vh;
+    		width: auto;
+    		margin: 0 auto;
+    	}
+    	@include bp(M-tablet) {
+    		margin-top: 1em;
+    		width: 80vw;
+    		height: auto;
+    	}
+    	@include bp(L-phone) {
+			margin: 0 auto;
+			width: 100vw;
+			margin-left: -1em; // dont ask me
+    	}
+	}
+}
+
+
+.slide {
+	position: relative;
+	.img-contain {
+		img.imgg {
+			top: 0;
+			left: 0;
+			// height: 100%;
+			@include bp(L-tablet) {
+				top: -2em;
+				margin-left: 0 !important;
+				width: 100% !important;
+			}
+		}
+		&.img-front {
+			img.imgg {
+				position: absolute;
+				z-index: 2;
+			}
+		}
+		&.img-back {
+			img.imgg {
+				// @include ease(0.9s 0.3s);
+				// opacity: 0;
+				// padding: 0 9vh;
+			}
+		}
+	}
+	&.slick-active {
+		.img-front img.imgg{
+			// @include ani(0, slideInRight, 0.6s);
+		}
+		.img-back img.imgg{
+			// @include ani(0.3s, zoomIn, 0.8s);
+			// opacity: 1;
+		 //    padding: 0 7vh;
+		}
+	}
+	@include bp(S-desktop) {
+		// width: 1000vw !important;
+	}
+}
+
+
+
+
+
+
+

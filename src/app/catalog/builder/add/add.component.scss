@@ -1,0 +1,124 @@
+.animated {-webkit-animation-duration: 0.6s; animation-duration: 0.6s; -webkit-animation-fill-mode: both; animation-fill-mode: both; } @-webkit-keyframes bounceInUp {0% {opacity: 0; -webkit-transform: translateY(2000px); transform: translateY(2000px); } 60% {opacity: 1; -webkit-transform: translateY(-30px); transform: translateY(-30px); } 80% {-webkit-transform: translateY(10px); transform: translateY(10px); } 100% {-webkit-transform: translateY(0); transform: translateY(0); } } @keyframes bounceInUp {0% {opacity: 0; -webkit-transform: translateY(2000px); -ms-transform: translateY(2000px); transform: translateY(2000px); } 60% {opacity: 1; -webkit-transform: translateY(-30px); -ms-transform: translateY(-30px); transform: translateY(-30px); } 80% {-webkit-transform: translateY(10px); -ms-transform: translateY(10px); transform: translateY(10px); } 100% {-webkit-transform: translateY(0); -ms-transform: translateY(0); transform: translateY(0); } } .bounceInUp {-webkit-animation-name: bounceInUp; animation-name: bounceInUp; } .bounceInUpI {-webkit-animation-name: bounceInUp !important; animation-name: bounceInUp !important; }
+@mixin ease($speed) {-webkit-transition: all $speed ease-in-out; -moz-transition: all $speed ease-in-out; -o-transition: all $speed ease-in-out; -ms-transition: all $speed ease-in-out; transition: all $speed ease-in-out; }
+$dark: #4a4a4a;
+$light: #F5F5F5;
+$green: #07d0b9;
+$blue: #1489DD;
+$red: #FF4633;
+
+
+.form-section.pre label span{
+    top: 23%;
+}
+
+.checkbox-container{
+	padding: 0 0.75rem;
+	label{
+		background: #fff;
+		border-radius: 0;
+		position: relative;
+		text-align: left;
+		border: 1px solid #e1e1e1;
+		border-top: 0;
+		@include ease(0.15s);
+		// border-bottom: 0;
+		&:hover{
+			background: rgba($light, 0.35);
+		}
+		span{
+	        top: 38%;
+		    right: 0.8em;
+		    bottom: inherit;
+		    left: inherit;
+		}
+		input{
+			float: right;
+		}
+	}
+	p{
+		font-weight: normal !important;
+	    right: 3em;
+    	left: inherit;
+	}
+}
+
+
+p.add{
+	font-weight: bold;
+	opacity: 0.2;
+	right: 1.3em;
+}
+
+.form-head {
+	position: sticky;
+	top: -1px;
+	// bottom: -1px;
+	// background: $light;
+	color: $dark;
+	z-index: 2;
+    border: 1px solid #e1e1e1;
+    margin: 6px 0;
+    padding: 0.5em;
+    a{
+    	color: darken($green, 5%);
+     	font-weight: normal;
+     	font-size: 0.8em;
+	}
+}
+
+
+p.part{
+	opacity: 0.4;
+	font-weight: normal;
+	font-style: italic;
+	text-transform: lowercase;
+}
+
+form{
+	// background: 
+}
+
+
+.summary{
+	position: sticky;
+	width: 100%;
+	bottom: -1px;
+	left: 0;
+	z-index: 9;
+	padding: 1.5em;
+	// padding-bottom: 2.1em;
+	background: $light;
+	color: $dark;
+	@extend .animated;
+	@extend .bounceInUp;
+	border: 1px solid #e1e1e1;
+	p.total{
+		font-weight: 600;
+		font-size: 1.4em;
+		padding-top: 0.2em;
+	}
+	h4.chat{
+		padding-top: 0.3em;
+		a {
+			color: $dark;
+			&:hover{
+				color: $green;
+			}
+		}
+		fa{
+			padding-right: 0.5em;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1473 801.063">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-img-4-back);
+      }
+
+      .cls-2 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-3 {
+        fill: #29b280;
+      }
+
+      .cls-4 {
+        fill: #fff;
+        font-size: 99px;
+        font-family: HandelGothicBT-Regular, HandelGothic BT;
+        letter-spacing: -0.011em;
+      }
+
+      .cls-5 {
+        filter: url(#Ellipse_13);
+      }
+
+      .cls-6 {
+        filter: url(#Ellipse_17);
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1489dd" stop-opacity="0.255"/>
+      <stop offset="0.852" stop-color="#2491df" stop-opacity="0.047"/>
+      <stop offset="1" stop-color="#1489dd" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="Ellipse_17" x="260.974" y="-5.995" width="884.052" height="671.052" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.235"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_13" x="193" y="168.031" width="490" height="490" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.235"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-img-4-back">
+      <rect width="1473" height="801.063"/>
+    </clipPath>
+  </defs>
+  <g id="img-4-back" class="cls-1">
+    <g class="cls-6" transform="matrix(1, 0, 0, 1, 0, 0)">
+      <ellipse id="Ellipse_17-2" data-name="Ellipse 17" class="cls-2" cx="433.026" cy="326.526" rx="433.026" ry="326.526" transform="translate(269.97 3.01)"/>
+    </g>
+    <g class="cls-5" transform="matrix(1, 0, 0, 1, 0, 0)">
+      <circle id="Ellipse_13-2" data-name="Ellipse 13" class="cls-3" cx="236" cy="236" r="236" transform="translate(202 177.03)"/>
+    </g>
+    <text id="Server_Ad_Here" data-name="Server
+Ad Here" class="cls-4" transform="translate(440 390.031)"><tspan x="-163.542" y="0">Server</tspan><tspan x="-193.21" y="118">Ad Here</tspan></text>
+  </g>
+</svg>

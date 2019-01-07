@@ -1,0 +1,106 @@
+// basically repeat above
+$dark: #4a4a4a;
+$light: #F5F5F5;
+$lighter: lighten(#F5F5F5,1%);
+$lime: rgba(#00ff00,0.2);
+$green: #09ba97;
+$yellow: #eca929;
+$red: #c72e1f;
+$white: #FFFFFF;
+$black: #000000;
+$blue: #2570ea;
+$dblue: #202135;
+// $dblue: #0d112b;
+$dblue_top: #565b73;
+$purple: #460f54;
+$orange: #ed6c24;
+$dgray: #333;
+$facebook: #3B5998;
+$google: #DB4317;
+
+
+$colors:
+	"dark" $dark,
+	"light" $light,
+	"green" $green,
+	"lime" $lime,
+	"yellow" $yellow,
+	"red" $red,
+	"white" $white,
+	"black" $black,
+	"blue" $blue,
+	"dblue" $dblue,
+	"purple" $purple,
+	"orange" $orange,
+	"facebook" $facebook,
+	"google" $google,
+	"dgray" $dgray
+;
+
+
+@each $color in $colors{
+	// .btn-color
+	.btn-#{nth($color, 1)}{
+	    background: nth($color, 2);
+	    color: #fff;
+	}
+	// .color / color
+	.#{nth($color, 1)}, #{nth($color, 1)}{
+	    color: nth($color, 2) !important;
+	    a{
+	        color: nth($color, 2);
+	    }
+	}
+	// .color-bg
+	.#{nth($color, 1)}-bg {
+		background: nth($color, 2) !important;
+	}
+
+	// .color-g
+	.#{nth($color, 1)}-g {
+		background: rgb(30,87,153);
+		background: -moz-linear-gradient(top, nth($color, 2) 0%, adjust-hue(nth($color, 2),15%) 100%);
+		background: -webkit-linear-gradient(top, nth($color, 2) 0%, adjust-hue(nth($color, 2),15%) 100%);
+		background: linear-gradient(to bottom, nth($color, 2) 0%, adjust-hue(nth($color, 2),15%) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color', endColorstr='#7db9e8',GradientType=0 );
+	}
+}
+
+
+
+
+$glow_stripe_1: rgba(29,145,63,0.10) 0%;
+$glow_stripe_2: rgba(29,145,63,0.10) 20%;
+
+
+
+
+
+
+
+
+@mixin grad($deg, $c1, $c2, $fixed) {
+	background-image: -webkit-linear-gradient($deg, $c1, $c2) !important;
+	background-image: linear-gradient($deg, $c1, $c2) !important;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: $fixed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

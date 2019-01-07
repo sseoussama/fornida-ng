@@ -1,0 +1,243 @@
+@import "../../../../assets/scss/inc/_colors.scss";
+@import "../../../../assets/scss/inc/_mixins.scss";
+@import "../../../../assets/scss/inc/_responsive.scss";
+
+$border: 1px solid darken($light,4%);
+$tb_height: 40px;
+#clean2 {
+  cursor: pointer;
+  font-style: italic;
+  opacity: 0.5;
+}
+#grid-search {
+	align-items: center;
+	// background: $light;
+	border-radius: 0px;
+	display: flex;
+	justify-content: space-between;
+	margin: 0;
+	padding: 0.35em;
+	transition: all 0.5s;
+  // transition: all 0.3s cubic-bezier(0.68, -0.30, 0.265, 1.30);
+	width: 2.5em;
+	color: $dark;
+	padding-left: 0;
+	font-size: 0.75em;
+  position: relative;
+  &.loading {
+    .clean {
+      display: none;
+    }
+  }
+  .clean {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0.5em;
+    color: $green;
+    display: none;
+    opacity: 0.4;
+    &:hover { opacity: 1; }
+    &:active { color: $dark; }
+  }
+}
+#grid-search.active, {
+  background: lighten($light, 1%);
+  width: 15em;
+  padding-left: inherit;
+  color: #000;
+  .clean{display: block;}
+}
+#grid-search button,
+#grid-search input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+}
+#grid-search button {
+  cursor: pointer;
+  // padding: 0 0.25em;
+}
+#grid-search input {
+  flex: 1;
+  width: 100%;
+  padding-left: 0.3em;
+}
+#grid-search input::-webkit-input-placeholder {
+  color: #fff;
+}
+#grid-search input:-ms-input-placeholder {
+  color: #fff;
+}
+#grid-search input::-ms-input-placeholder {
+  color: #fff;
+}
+#grid-search input::placeholder {
+  color: #fff;
+}
+#grid-search .spinner {
+  -webkit-animation: spinner 1s infinite linear;
+          animation: spinner 1s infinite linear;
+  display: none;
+  padding: 0 0.25em;
+  position: relative;
+  z-index: 2;
+  background: $light;
+}
+
+#grid-search.loading button {
+  display: none;
+}
+#grid-search.loading .spinner {
+  display: block;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.direction {
+  border-right: $border;
+  height: $tb_height;
+  padding: 0 0.5em;
+  padding-right: 1em;
+  cursor: pointer;
+  fa {
+    transition: all 0.3s cubic-bezier(0.68, -0.30, 0.265, 1.30);
+    @include rotate(0deg);
+    display: block;
+    cursor: pointer;
+  }
+  &.false {
+    fa {
+      @include rotate(180deg);
+    }
+  }
+}
+
+.side-title {
+
+}
+
+
+
+#grid-toolbar {
+  border-bottom: $border;
+  border-right: $border;
+  margin-bottom: 1em;
+  padding: 0;
+  padding-right: 0.5em;
+  margin-left: -1rem;
+  position: sticky;
+  top: -1px;
+  background: #fff;
+  z-index: 8;
+  height: $tb_height;
+}
+
+.rightside {
+  border-left: $border;
+  padding-left: 0.5em;
+}
+
+// select
+.select {
+  font-size: 0.8em;
+  height: $tb_height;
+  border-right: $border;
+  position: relative;
+  // min-width: 5em;
+  &.sorter {
+    min-width: 15em;
+    border-right: $border;
+    select {
+      padding-left: 0.5em !important;
+    }
+  }
+  &.per { min-width: 5em; }
+  select {
+      padding: 0;
+      padding-right: 2.5em;
+      border: 0;
+      width: 100%;
+      box-shadow: 0 0 0 !important;
+      @include centerer;
+      &::after {
+        right: 0.5em !important;
+      }
+	}
+  &:first-child {
+    // border-left: $border;
+  }
+  @include bp(L-phone) {
+    border: 0;
+  }
+}
+
+
+
+
+
+
+.pointer {cursor: pointer;}
+nav.pages {
+  font-weight: 100;
+  font-style: italic;
+  ul {
+    padding: 0 1em;
+    li {
+      padding: 0.3em;
+      @extend .pointer;
+      color: rgba(#000,0.15);
+      font-weight: bold;
+      // @include ease(0.2s);
+      &:hover { color: rgba(#000,0.6) }
+      &:active { opacity: 1; color: #000; }
+      &.active {
+        color: #000;
+        font-size: 1.05em;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

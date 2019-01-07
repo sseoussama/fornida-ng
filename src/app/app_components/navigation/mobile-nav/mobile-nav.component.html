@@ -1,0 +1,46 @@
+<div class="mobile-nav">
+  <div class="inner forunderlines">
+    
+    
+    
+    <!-- tabs -->
+    <div class="wz-tabs">
+      <div class="wz-list">
+        <div (click)="onTab($event,'catalog')" class="wz-itm">Catalog</div>
+        <div (click)="onTab($event,'account')" class="wz-itm">Account</div>
+        <div (click)="onTab($event,'info')" class="wz-itm">Info</div>
+      </div>
+      <div class="underline"></div>
+    </div>
+    
+    
+    <div class="content-showing mobile-list">
+      
+      
+      <!-- catalog -->
+      <ul [hidden]="showing!=='catalog'">
+        <links-category></links-category>
+      </ul>
+      
+      <!-- account -->
+      <div [hidden]="showing!=='account'">
+        <links-account [mode]="mode"></links-account>
+      </div>
+      
+      <!-- info -->
+      <div [hidden]="showing!=='info'">
+        <!-- support -->
+        <div *ngIf="s_topics">
+          <ul>
+            <li *ngFor="let item of s_topics" (click)="closeNav()">
+              <a data-icon="&#xf101;" routerLink="{{item.link}}">{{item.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      
+    </div>
+    
+  </div>
+</div>

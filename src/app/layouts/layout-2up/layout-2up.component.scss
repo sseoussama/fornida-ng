@@ -1,0 +1,65 @@
+@import "../../../assets/scss/inc/colors";
+// @import "../../../assets/scss/inc/mixins";
+// @import "../../../assets/scss/inc/animate";
+@import "../../../assets/scss/inc/responsive";
+
+@mixin ease($speed) {
+-webkit-transition: all $speed ease-in-out;
+   -moz-transition: all $speed ease-in-out;
+     -o-transition: all $speed ease-in-out;
+    -ms-transition: all $speed ease-in-out;
+        transition: all $speed ease-in-out;
+}
+
+
+#zone2 {
+    .cols {
+        text-align: center;
+        .zone-item{
+            @include ease(0.2s);
+            &:last-child {}
+            &:hover {
+                width: 52%;
+            }
+            // display: none;
+            // @extend .animated;
+            &.sn-viewport-in.item-left {
+                display: block;
+                // @extend .fadeInRight;
+            }
+            &.sn-viewport-in.item-right {
+                display: block;
+                // @extend .fadeInLeft;
+            }
+            .inner-cols {
+                .col-img {}
+                .col-copy {
+                    // margin-left: -5em;
+                    text-align: left;
+                    .centerer {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    @include bp(M-tablet) {
+        h3 { margin-bottom: 1em; }
+    }
+    @include bp(L-phone) {
+        .cols {
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-top: 2em;
+        }
+        .zone-item {
+            width: 100%;
+        }
+        .col-copy {
+            margin-left: -1em !important;
+        }
+        .col-img {
+            margin-left: -1em !important;   
+        }
+    }
+}

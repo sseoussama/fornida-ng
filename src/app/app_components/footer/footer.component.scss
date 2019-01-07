@@ -1,0 +1,18 @@
+$dblue_top: #565b73;
+.mono, small {
+    color: $dblue_top;
+    a {
+        color: $dblue_top !important;
+    }
+}
+
+hr {
+    background-color: $dblue_top !important;
+}
+
+a {
+    font-size: 11px;
+    &:hover {
+        text-decoration: underline !important;
+    }
+}

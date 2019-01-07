@@ -1,0 +1,115 @@
+@import '../../../assets/scss/inc/colors';
+@import '../../../assets/scss/inc/fonts';
+@import '../../../assets/scss/inc/mixins';
+@import '../../../assets/scss/inc/responsive';
+
+.disable{pointer-events: none; cursor: not-allowed !important; opacity: 0.5;}
+
+.compare .img {
+	// .slick-slide {
+	    height: 200px;
+		img {
+			position: static !important;
+		    top: unset !important;
+		    left: unset !important;
+		    transform: translate(0,0) !important;
+		}
+	// }
+	.slick-dots {
+	    bottom: -9px;
+	    background: #fff;
+	}
+	product-image {
+	    display: block;
+	    height: 200px;
+	}
+}
+
+.compare .slide {
+    position: relative;
+    height: 220px;
+}
+
+
+.config-wizard {
+	margin-top: 2em;
+	.wz-tabs {
+		.wz-list {
+			text-align: center;
+			.wz-itm {
+				color: $dark;
+				cursor: pointer;
+				padding: 0.25em 2em;
+				display: inline-block;
+				@extend .disable;
+				&.active {
+					color: $blue;
+					opacity: 1;
+				}&.done {
+					opacity: 1;
+					pointer-events: auto !important;
+					cursor: pointer !important;
+				}
+				&:hover {
+					opacity: 1;
+				}
+			}
+		}
+		.underline {
+			height: 2px;
+			background: $blue;
+			width: 2em;
+			margin-left: 0px;
+			// transition: margin-left .5s ease-in-out .1s,width .4s ease-in-out 0s;
+			transition: all 0.3s cubic-bezier(0.68, -0.30, 0.265, 1.30);
+		}
+	}
+	.wz-inner {
+		padding: 3em;
+		padding-top: 2em;
+		.wz-content {
+			.sec-head {
+				text-align: center;
+				margin-bottom: 2.5em;
+				h2 {
+					text-align: center;
+					font-size: 2em;
+					border-bottom: 0;
+					margin: 0;
+					@extend .ubuntu;
+				}
+				p.f {
+					font-size: 1.07em;
+					position: relative;
+					top: -0.5em;
+					font-weight: 400;
+					max-width: 500px;
+					text-align: center;
+					margin: 0 auto;
+					color: rgba($dark, 0.7);
+				}
+			}
+			&.servers {
+				h3 {
+					font-size: 0.9em;
+					margin-top: 0.25em;
+				}
+			}
+		}
+		@include bp(XL-tablet) {
+			padding: 0;
+			.is-3 {
+			    width: 33%; // .is-4
+			}
+			.sec-head {
+				margin-top: 4em;
+			}
+		}
+	}
+}
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+.loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	img {
+	    width: 3em !important;
+    	position: relative !important;
+	}
+}
+
+.slide {
+    position: relative;
+    // height: 220px;
+}

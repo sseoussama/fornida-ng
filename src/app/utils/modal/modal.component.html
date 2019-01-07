@@ -1,0 +1,7 @@
+<div class="modal is-active animated fadeIn">
+	<div class="modal-background" (click)="onCloseModal()"></div>
+	<div class="modal-content" [style.width]="width">
+		<ng-content></ng-content>
+	</div>
+	<button class="modal-close is-large" (click)="onCloseModal()"></button>
+</div>

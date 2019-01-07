@@ -1,0 +1,43 @@
+
+
+<div class="widget side-navi">
+	<div class="side-title"><div>Navigation</div></div>
+	<ul>
+		<li *ngFor="let parent of categoryTree| isvisible" class="open-{{isActive(parent)}}">
+			
+			<!-- parent name -->
+			<a [ngClass]="{'active': isActive(parent)}" (click)="parentClick(parent)">{{parent.name}}</a>
+
+			<!-- children ul-->
+			<ul class="children" [hidden]="!isActive(parent) && parent.children.length">
+				<!-- children loop -->
+				<li *ngFor="let child of parent.children| isvisible">
+					<a
+						id="category-{{child.id}}"
+						routerLink="/category{{child.url}}"
+						routerLinkActive="active"
+						[attr.parent_id]="parent.id"
+					>{{child.name}}</a>
+				</li>
+			</ul>
+			
+		</li>
+	</ul>
+</div>
+
+
+
+
+<div class="widget">
+	<div class="side-title"><div>Brands</div></div>
+	<!-- <pre>{{i40}}</pre> -->
+	<checkbox
+		*ngFor="let brand of brands"
+		[id]="'i'+brand.id"
+		(fieldChanged)="onBrand($event,brand.id)"
+		[label]="brand.name"
+		[name]="'brand'"
+		[type]="'radio'"
+		[state]="det(brand.id)"
+	></checkbox>
+</div>

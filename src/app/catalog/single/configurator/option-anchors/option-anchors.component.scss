@@ -1,0 +1,35 @@
+@mixin ease($speed) {-webkit-transition: all $speed ease-in-out; -moz-transition: all $speed ease-in-out; -o-transition: all $speed ease-in-out; -ms-transition: all $speed ease-in-out; transition: all $speed ease-in-out; }
+$light: #F5F5F5;
+$dark: #4a4a4a;
+$red: #c72e1f;
+$dblue: #202135;
+
+.anchor-menu {
+	top: -1em;
+	position: sticky;
+	// background: rgba(#fff,0.94);
+	background: #fff;
+	z-index: 10;
+	font-size: 0.85em;
+	.inner{
+		border-bottom: 1px solid darken($light,4%);
+		padding-top: 1em;
+		a {
+			padding: 1em 0;
+			color: rgba($dark, 0.6);
+			text-transform: capitalize;
+			// font-weight: bold;
+			@include ease(0.2s);
+			border-bottom: 2px solid rgba($red, 0);
+			&:hover{
+				color: $dark;
+			}
+			&.active{
+				color: $red;
+				border-bottom: 2px solid rgba($red, 1);
+			}
+			&:last-child { padding-right: 0; }
+			&:first-child { padding-left: 0; }
+		}
+	}
+}

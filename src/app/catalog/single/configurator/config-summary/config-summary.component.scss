@@ -1,0 +1,255 @@
+@mixin ease($speed) {-webkit-transition: all $speed ease-in-out; -moz-transition: all $speed ease-in-out; -o-transition: all $speed ease-in-out; -ms-transition: all $speed ease-in-out; transition: all $speed ease-in-out; }
+@import '../../../../../assets/scss/inc/colors';
+@import '../../../../../assets/scss/inc/responsive';
+$yellow: #FFBB3B;.pointer {cursor: pointer;}
+:host {
+	// display: block;
+	// height: 100%;
+}
+
+.scrollable-area {
+    max-height: 53vh;
+	overflow: auto;
+}
+
+// final table
+.final{
+	// background: $blue;
+	padding: 1em;
+	color: #fff;
+	border-radius: 0.3em;
+    // position: sticky;
+    // top: 0.5em;
+    // z-index: 1;
+	a{
+		color: #fff;
+	}
+	table{
+		background: transparent;
+		color: #fff;
+		tr { 
+			background: transparent;
+			&:hover{
+				&:not(.is-selected){
+					background: rgba(#fff,0.1);
+				}
+			}
+			td{
+				opacity: 1 !important;
+				padding-left: 0;
+				padding: 0.5em;
+				&.close {
+					width: 0% !important;
+					cursor: pointer;
+					i {
+						opacity: 0.3;
+						&:hover {opacity: 1;}
+					}
+				}
+				&.detail{
+					width: 100% !important;
+					.part{
+						font-weight: 500;
+					}
+					.name{
+						// @extend p.b;
+						color: #fff;
+						opacity: 0.6;
+					}
+				}
+				&.add{
+					text-align: right;
+					font-weight: bold;
+				}
+				&.qty {
+					font-size: 1.2em;
+					font-weight: bold;
+					.btn {
+						font-size: 0.8em;
+						// opacity: 0;
+						padding: 0 1em;
+						@extend .pointer;
+						&:hover {
+							opacity: 1 !important;
+							color: $yellow;
+						}
+						&:active { color: #000; }
+					}
+					&:hover .btn {
+						opacity: 0.5;
+					}
+				}
+			}
+		}
+	}
+	h2{
+		position: relative;
+		font-size: 1em;
+		span.price{
+			position: absolute;
+			right: 0;
+		}
+	}
+	.summary-footer {
+		text-align: right;
+	    position: relative;
+    	top: -1.2em;
+		span {
+			padding-right: 1em;
+			opacity: 0.5;
+		}
+		h3 {
+			font-size: 1em;
+			// font-weight: 500;
+			padding-right: 0.75rem;
+		}
+		span.qty{
+			padding: 0;
+		}
+		.total-table {
+			font-weight: bold;
+		    text-align: right !important;
+    		width: 45% !important;
+    		display: inline;
+			tr {
+    			display: table-row;
+				td {
+		    		text-align: right !important;
+				}
+				td.key {
+					opacity: 0.5 !important;
+				}
+			}
+		}
+	}
+	.sorters {
+		span.select {
+			font-size: 0.8em;
+			select {
+				background: rgba(#000, 0.1);
+				color: rgba(#fff, 0.5);
+				border: 0;
+			}
+		}
+		.dir-icon {
+			padding-left: 0.5em;
+			.bouncey {
+				color: rgba(#fff, 0.5);
+				cursor: pointer;
+				&:hover {
+					color: $yellow;
+				}
+			}
+		}
+		p.b {
+			cursor: pointer;
+			color: rgba(#fff, 0.5);
+			&:hover { color: $yellow; }
+		}
+	}
+}
+
+.edit-actions {
+	.nw {
+		cursor: pointer;
+		opacity: 0.4;
+		font-style: italic;
+		margin-top: 0.25em;
+		font-size: 0.8em; 
+		&:hover {
+			opacity: 1;
+			font-weight: bold;
+		}
+	}
+}
+
+
+
+.collab_info {
+	margin-bottom: 0.5em;
+	a{
+		color: $blue;
+		text-decoration: underline !important;
+	}
+	.badge1 {
+		border-radius: 100%;
+		background: $dark;
+		color: #fff;
+		height: 2.5em;		
+		width: 2.5em;
+		position: relative;
+		text-align: center;
+		font-weight: bold;
+		font-size: 1.2em;
+		margin-left: 5px;
+		span {
+			// margin-top: 2px;
+			text-transform: uppercase;
+		}
+	}
+}
+.no_configs {
+    font-style: italic;
+    padding: 1em 0;
+    text-align: center;
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.actions {
+	text-align: right;
+	.button.d {
+		margin-left: 4px;
+		padding: 0.7em 1.3em;
+		text-align: center;
+		background: rgba(#000, 0.25);
+		span {
+			width: 0%;
+			overflow: hidden;
+			// transition: all 0.3s cubic-bezier(0.68, -0.30, 0.265, 1.30);
+			@include ease(0.2s);
+			opacity: 0;
+		    padding-left: 0.2em;
+		}
+		i {
+			text-align: center;
+			position: relative;
+			// margin-right: -2px;
+			left: 0px;
+			@include ease(0.2s);
+		}
+		&:hover {
+			opacity: 1;
+			background: rgba(#000, 0.3);
+			i {
+				color: $yellow;
+				left: -6px
+			}
+		}
+		&:hover span{
+			width: 100%;
+			opacity: 1;
+		}
+		@include bp(XL-tablet) {
+			padding: 0.7em 0.8em;
+		}
+	}
+	.button.add {
+		@extend .green-g;
+	}
+}
+
+
+
+.collab-item {
+	font-size: 0.85em;
+}
+
+
+
+
+.dim {
+	p {
+		background: #ccc !important;
+	}
+}

@@ -1,0 +1,55 @@
+<div class="drop-content" id="mini-search" >
+
+
+	<!-- drop-head -->
+	<div class="drop-head level">
+		<form action="" id="search">
+			<Field 
+				[id]="'searchText'"
+				[model]="searchText"
+				[type]="'text'"
+				[label]="'search: name / sku / part number / description'"
+				[icon]="'search'"
+				(fieldChanged)="searchText=$event"
+			></Field>
+		</form>
+	</div>
+
+	
+
+
+	<!-- drop-body -->
+	<div class="drop-body">
+		<div *ngIf="Products">
+			<!-- <h1>{{Products}}</h1> -->
+			<div *ngIf="searchText" class="results mono">Results for: <span>{{searchText}}</span></div>
+			<div class="item" *ngFor="let product of Products | filter:searchText as result">
+				<a class="columns inner is-mobile" db routerLink="/product/{{product.id}}">
+					<div class="column">
+						<p class="mono" *ngIf="isConfigurable(product)">Configurable</p>
+						<h2>
+							{{product.name|slice:0:60}}
+							<span *ngIf="product.name.length>60">...</span>
+						</h2>
+						<div class="values">
+							<p class="b">{{product.sku}}</p>
+						</div>
+					</div>
+					<div class="column is-3 right-col">
+						<h3 class="price centerer">{{product.price|currency}}</h3>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div *ngIf="Products?.count<0">
+			<em>No Results</em>
+		</div>
+
+	</div>
+
+
+
+
+
+
+</div>

@@ -1,0 +1,121 @@
+@import "../../../assets/scss/inc/colors";
+@import "../../../assets/scss/inc/mixins";
+@import "../../../assets/scss/inc/animate";
+@import "../../../assets/scss/inc/responsive";
+
+$border: 1px solid darken($light,4%);
+
+.disabled{
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
+}
+.disable{
+  pointer-events: none;
+  cursor: default;
+}
+
+
+
+.columns,.column,.level {padding: 0;margin: 0;}
+
+#collection{
+	.collection-top {
+		border-bottom: $border;
+		ul.sub_collections {
+			li{
+
+				a{
+					padding: 0 1em;
+					opacity: 0.3;
+					&:first-child {padding-left: 0;}
+					&:hover { opacity: 1; }
+					&.active { opacity: 1; color: $red; }
+					h4{}
+				}
+			}
+		}
+		h4.current_name {
+			padding-right: 0.5em;
+			float: left;
+		}
+	}
+	.cols-contain{
+		.col-aside {
+		    min-width: 15vw;
+			border-right: 1px solid #ebebeb;
+			border-bottom: 1px solid #ebebeb;
+			border-left: 1px solid #ebebeb;
+			padding: 1em !important;
+			padding-top: 0 !important;
+			.widget {}
+			@include bp(M-tablet) {
+				width: 25%;
+			}
+			@include bp(L-phone) {
+				display: none;
+			}
+		}
+		.col-main {
+			padding: 1em;
+			padding-top: 0;
+			padding-right: 0;
+			@include bp(L-phone) {
+				padding: 0 !important;
+			}
+		}
+	}
+
+	// sub_collections
+	.sub_collections {
+		@include ani(0, fadeIn, 0.7s);
+	}
+
+	
+}
+
+.col-main{
+	position: relative;
+	.Loader {
+	    position: absolute;
+	    z-index: 99;
+	    background: #fff;
+	    width: 100%;
+	    left: 0;
+	    right: 0;
+	    top: 0;
+	    bottom: 0;
+	    display: none;
+	    // background: $light;
+        text-align: center;
+	    @include ani(0, fadeIn, 0.4s);
+        height: 75vh;
+		&:after {
+		    content: " ";
+		    background: url(/assets/img/load.svg) no-repeat;
+		    background-size: 100%;
+		    width: 70px;
+		    height: 70px;
+		    z-index: 999999;
+		    @include centerer;
+		}
+		&.loading{ display: block; }
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

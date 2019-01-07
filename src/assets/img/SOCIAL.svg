@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-2408 2164 25 109">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-SOCIAL);
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke: rgba(0,0,0,0);
+        font-size: 11px;
+        font-family: ProximaNova-Light, Proxima Nova;
+        font-weight: 300;
+        letter-spacing: 0.43em;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #fff;
+      }
+    </style>
+    <clipPath id="clip-SOCIAL">
+      <rect x="-2408" y="2164" width="25" height="109"/>
+    </clipPath>
+  </defs>
+  <g id="SOCIAL" class="cls-1">
+    <g id="Group_502" data-name="Group 502" transform="translate(-2402.086 2151)">
+      <text id="SOCIAL-2" data-name="SOCIAL" class="cls-2" transform="translate(11.086 74) rotate(-90)"><tspan x="0" y="0">SOCIAL</tspan></text>
+      <line id="Line_18" data-name="Line 18" class="cls-3" y1="39" transform="translate(6.586 85.5)"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,311 @@
+.animated {-webkit-animation-duration: 0.6s; animation-duration: 0.6s; -webkit-animation-fill-mode: both; animation-fill-mode: both; } @-webkit-keyframes bounceInUp {0% {opacity: 0; -webkit-transform: translateY(2000px); transform: translateY(2000px); } 60% {opacity: 1; -webkit-transform: translateY(-30px); transform: translateY(-30px); } 80% {-webkit-transform: translateY(10px); transform: translateY(10px); } 100% {-webkit-transform: translateY(0); transform: translateY(0); } } @keyframes bounceInUp {0% {opacity: 0; -webkit-transform: translateY(2000px); -ms-transform: translateY(2000px); transform: translateY(2000px); } 60% {opacity: 1; -webkit-transform: translateY(-30px); -ms-transform: translateY(-30px); transform: translateY(-30px); } 80% {-webkit-transform: translateY(10px); -ms-transform: translateY(10px); transform: translateY(10px); } 100% {-webkit-transform: translateY(0); -ms-transform: translateY(0); transform: translateY(0); } } .bounceInUp {-webkit-animation-name: bounceInUp; animation-name: bounceInUp; } .bounceInUpI {-webkit-animation-name: bounceInUp !important; animation-name: bounceInUp !important; }
+@mixin ease($speed) {-webkit-transition: all $speed ease-in-out; -moz-transition: all $speed ease-in-out; -o-transition: all $speed ease-in-out; -ms-transition: all $speed ease-in-out; transition: all $speed ease-in-out; }
+@import '../../../../../assets/scss/inc/colors';
+
+
+.form-section.pre label span{
+    // top: 23%;
+}
+
+.rmSet {
+	color: $dark !important;
+	opacity: 0.3;
+	&:hover {
+		color: $red !important;
+		opacity: 1;
+	}
+}
+.checkbox-container.x{
+	padding: 0 0.75rem;
+	position: relative;
+	z-index: 0;
+	// position: static !important; // removed for info icon
+	label {
+		background: #fff;
+		// background: rgba($light,0.85);
+		border-radius: 0;
+		position: relative;
+		text-align: left;
+		border: 3px solid $light;
+		/* border-top: 0; */
+		padding: 0.8em;
+		margin: 0.25em 0;
+		border-radius: 0.35em;
+		@include ease(0.15s);
+		// border-bottom: 0;
+		&:hover{
+			// background: rgba($light, 0.45);
+			border: 3px solid darken($light,5%);
+		}
+		input{
+			float: right;
+		}
+	}
+	&.chosen {
+		label {
+			border: 3px solid darken($blue,0%);
+			// background: $blue;
+			// color: #fff;
+			p{
+				// color: #fff;
+				&.b, &.add{
+					// color: rgba(#fff, 0.4);
+				}
+			}
+			&:hover {
+				// @extend .light-bg;
+			}
+		}
+	}
+	&:hover .unsetOption {display: block;}
+	.unsetOption {
+		position: absolute;
+		left: -2em;
+		top: 0;
+		padding: 1em;
+		display: none;
+		opacity: 0.2;
+		z-index: 3;
+		&:hover {
+			opacity: 1;
+			color: $red;
+		}
+	}
+	p{
+		font-weight: normal;
+	    right: 1em;
+		left: inherit;
+		font-size: 0.8em;
+	}
+	.columns,.column {
+		padding: 0;
+		margin: 0;
+	}
+	.L,.R {
+		// padding: 0;
+	}
+	.name {
+		font-weight: 500;
+	}
+	&:hover a.details-trigger {display: block;}
+}
+
+
+p.add{
+    font-weight: bold;
+    right: 1.3em;
+    -webkit-transform: translate(0%, -50%);
+    transform: translate(0%, -50%);
+    top: 51%;
+    color: rgba($dark, 0.25);
+}
+a.details-trigger {
+    position: absolute;
+    top: 15%;
+    left: 100%;
+    z-index: 1;
+    padding: 1em;
+    display: none;
+    cursor: pointer;
+	i {
+		color: rgba($dark, 0.25) !important;
+		cursor: pointer;
+		&:active i{
+			margin-bottom: -1px;
+		}
+		&:hover {
+			color: $blue !important;
+		}
+		&.fa-trash:hover {
+			color: $red !important;
+		}
+		&.fa-pencil:hover {
+			color: $green !important;
+		}
+	}
+}
+
+p.desc {
+	color: rgba(#000, 0.6);
+	// font-style: italic;
+}
+
+.form-section {
+	margin: 6px 0;
+	.inner-form-section{
+    	// border: 1px solid #efefef;
+	}
+}
+
+.form-head {
+	// position: sticky;
+	top: -1px;
+	color: $dark;
+	z-index: 1;
+    cursor: pointer;
+    background: transparent;
+    padding-top: 4em;
+    padding-bottom: 0.5em;
+	background: #fff;
+	position: sticky;
+    top: 0;
+    // border-bottom: 1px solid #efefef;
+    font-size: 0.72em;
+    color: #eee;
+    a{
+    	color: darken($green, 5%);
+     	font-weight: normal;
+     	font-size: 0.8em;
+	}
+	h3 {
+		text-transform: capitalize;
+		font-size: 1.1em;
+		color: $dark;
+		i {
+			padding-right: 0.9em;
+			color: #ccc;
+			font-size: 0.9em;
+			display: none;
+		}
+	}
+	p.b {
+		// font-style: italic;
+		// font-weight: 400;
+		// color: rgba($dark,0.5);
+		// font-size: 0.70em;
+		// padding-top: 0.25em;
+		// position: absolute;
+  //   	right: 6%;
+  //   	top: 35%;
+	}
+	i.cl {
+		position: absolute;
+		right: 1em;
+		top: 32%;
+		color: #ccc;
+		display: none;
+	}
+	&:hover i.cl {
+		display: block;
+		color: $blue;
+	}
+}
+
+
+p.part{
+	opacity: 0.4;
+	font-weight: normal;
+	font-style: italic;
+	text-transform: lowercase;
+	// @extend p.b;
+}
+
+form{
+	// background: 
+}
+
+.addComponentForm {
+	z-index: 2;
+	.ng-arrow-wrapper {
+		display: none;
+	}
+}
+
+.ng-input {
+	input {
+		opacity: 1;
+		padding: 0 !important;
+	}
+}
+
+.ng-select .ng-select-container {
+    margin-top: 5px;
+    border: 1px solid #efeeee;
+}
+
+.summary{
+	position: sticky;
+	width: 100%;
+	bottom: -1px;
+	left: 0;
+	z-index: 9;
+	padding: 1.5em;
+	// padding-bottom: 2.1em;
+	background: $light;
+	color: $dark;
+	@extend .animated;
+	@extend .bounceInUp;
+	border: 1px solid darken(#efefef,3%);
+	p.total{
+		font-weight: 600;
+		font-size: 1.4em;
+		padding-top: 0.2em;
+	}
+	h4.chat{
+		padding-top: 0.3em;
+		a {
+			color: $dark;
+			&:hover{
+				color: $green;
+			}
+		}
+		fa{
+			padding-right: 0.5em;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(#000, 0.3);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(#000, 0.3);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(#000, 0.3);
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: rgba(#000, 0.3);
+}
+
+
+
+.admin-add-set, .admin-add-item {
+	width: 100%;
+	input, select {
+		width: 100%;
+		height: 100%;
+		// padding: 1em;
+	}
+	input {
+		padding: 1em;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

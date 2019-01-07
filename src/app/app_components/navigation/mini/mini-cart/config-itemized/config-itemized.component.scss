@@ -1,0 +1,108 @@
+@import "../../../../../../assets/scss/inc/colors";
+$op: 0.25;
+
+p.b{
+    font-weight: 400;
+    color: rgba(74, 74, 74, 0.5);
+    font-size: 0.80em;
+    padding-top: 0.25em;
+}
+
+
+
+.configs-list {
+	margin: 1em 0;
+	// display: none;
+	max-height: 0em;
+	transition: all 0.3s cubic-bezier(0.68, -0.30, 0.265, 1.30);
+	overflow: auto;
+    background: $light;
+	&.show {
+    	margin: 1em !important;
+    	margin-bottom: 1.4em !important;
+    	padding: 1em;
+		max-height: 35em;
+		// display: block;
+	}
+	.table {
+	    background-color: rgba(#000,0);
+	    td, th {
+	    	// color: #fff;
+	    	border: 1px solid rgba(#fff,0.15);
+	    	font-size: 0.9em;
+			padding: 0.45em;
+			vertical-align: middle !important;
+	    }
+	    th {
+	    	@extend p.b;
+	    }
+		tr {
+			a { }
+			td {
+				&.name {
+					font-weight: bold;
+					a {
+
+					}
+				}
+				.sku {
+					// opacity: $op;
+					// display: none;
+				}
+				&:hover {
+					// .sku { display: block; }
+				}
+			}
+			&:hover {
+				background: $light;
+			}
+		}
+	}
+	.p1em {
+		padding: 0.5em !important;
+	}
+	.toggler {
+		display: inline-block;
+	    margin-top: -1em;
+	}
+	.tgl-light + .tgl-btn {
+		background: rgba(#000,0.1);
+	    padding: 4px;
+	}
+	.tgl-light:checked + .tgl-btn {
+	    background: $green;
+	}
+	.tgl:checked + .tgl-btn:after {
+	    left: 74%;
+	}
+	.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+	    width: 1em;
+	    height: 1em;
+	}
+	.tgl + .tgl-btn {
+	    height: inherit;
+	}
+	[data-placement="right"]::after {
+	    top: 36% !important;
+	}
+
+	p.tot {
+		font-weight: bold;
+	    text-align: right;
+    	margin-top: -1em;
+    	font-size: 0.85em;
+    	color: $yellow;
+    	opacity: 0.95;
+    	float: right;
+		strong {
+			// color: #fff;
+			padding-right: 0.25em;
+			// opacity: $op;
+		}
+	}
+}
+
+
+
+
+

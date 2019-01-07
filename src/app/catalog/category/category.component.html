@@ -1,0 +1,38 @@
+
+<div class="p1em"></div>
+<div id="collection" class="container">
+	
+
+	<!-- collection-top -->
+	<div class="collection-top level">
+		<div class="level-left">
+			<breadcrumbs [active_parent]="active_parent" [child_slug]="child_slug"></breadcrumbs>
+		</div>
+		<div class="level-right">
+		</div>
+	</div>
+	
+	<!-- content columns -->
+	<div class="columns cols-contain m0" style="overflow: hidden;" >
+		<!-- col-aside -->
+		<div class="column col-aside is-2 p0">
+			<category-aside [categoryTree]="categoryTree" [active_parent_id]="active_parent_id"></category-aside>
+		</div>
+		
+		<!-- col-main -->
+		<div class="column col-main">
+			<div class="Loader"></div>
+			<category-toolbar
+			></category-toolbar>
+			<app-grid 
+				*ngIf="Products" 
+				[active_cat_id]="active_cat_id"
+				[Products]="Products"
+			></app-grid>
+		</div>
+	</div>
+
+
+</div>
+
+<div class="p2em"></div>

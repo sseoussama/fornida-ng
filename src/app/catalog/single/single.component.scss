@@ -1,0 +1,152 @@
+.animated {-webkit-animation-duration: 0.6s; animation-duration: 0.6s; -webkit-animation-fill-mode: both; animation-fill-mode: both; } @-webkit-keyframes bounceInUp {0% {opacity: 0; -webkit-transform: translateY(2000px); transform: translateY(2000px); } 60% {opacity: 1; -webkit-transform: translateY(-30px); transform: translateY(-30px); } 80% {-webkit-transform: translateY(10px); transform: translateY(10px); } 100% {-webkit-transform: translateY(0); transform: translateY(0); } } @keyframes bounceInUp {0% {opacity: 0; -webkit-transform: translateY(2000px); -ms-transform: translateY(2000px); transform: translateY(2000px); } 60% {opacity: 1; -webkit-transform: translateY(-30px); -ms-transform: translateY(-30px); transform: translateY(-30px); } 80% {-webkit-transform: translateY(10px); -ms-transform: translateY(10px); transform: translateY(10px); } 100% {-webkit-transform: translateY(0); -ms-transform: translateY(0); transform: translateY(0); } } .bounceInUp {-webkit-animation-name: bounceInUp; animation-name: bounceInUp; } .bounceInUpI {-webkit-animation-name: bounceInUp !important; animation-name: bounceInUp !important; }
+@mixin ease($speed) {-webkit-transition: all $speed ease-in-out; -moz-transition: all $speed ease-in-out; -o-transition: all $speed ease-in-out; -ms-transition: all $speed ease-in-out; transition: all $speed ease-in-out; }
+@import "../../../assets/scss/inc/colors";
+@import "../../../assets/scss/inc/responsive";
+product-image{
+	position: relative;
+	height: 100%;
+}
+
+
+h1{
+	// padding-bottom: 0;
+}
+
+small{
+	// padding-bottom: 2em;
+	font-size: 0.85em;
+}
+
+.admin-only {
+	background: $light;
+	padding: 1em;
+	display: block;
+	margin-top: 0.5em;
+	h2 { font-size: 1em; }
+	a{
+		display: block;
+		padding: 0.2em;
+		opacity: 0.5;
+		&:before{
+			font-family: FontAwesome;
+			content: "\f0c1";
+			padding-right: 0.4em;
+		}
+		&:hover {
+			opacity: 1;
+			&:before{
+				color: $blue;
+			}
+		}
+	}
+}
+.pointer {cursor: pointer;}
+.summary {
+	position: sticky;
+	width: 100%;
+	bottom: -1px;
+	left: 0;
+	z-index: 8 !important;
+	padding: 1em 1.5em;
+	// padding-bottom: 2.1em;
+	background: $light;
+	color: $dark;
+	// @extend .animated;
+	// @extend .bounceInUp;
+	border: 1px solid #e1e1e1;
+	border-top: 1.5px solid #e1e1e1;
+	p.total{
+		font-weight: 600;
+		font-size: 1.4em;
+		// padding-top: 0.2em;
+	}
+	h4.chat{
+		a {
+			color: $dark;
+			display: block;
+			font-weight: normal;
+			font-size: 1em;
+			@extend .pointer;
+			&:hover {
+				color: $green;
+				font-weight: bold;
+			}
+		}
+		fa{
+			padding-right: 0.5em;
+		}
+	}
+}
+
+
+
+#specs {
+	margin-top: 2em;
+	color: #333;
+    position: sticky;
+    top: 3.5em;
+	z-index: 1;
+	font-size: 0.85em;
+	table{
+		width: 100%;
+		td{
+			border: 0;
+			font-size: 0.9em;
+			opacity: 0.8;
+			width: 50%;
+			&:hover {
+				i {opacity: 1;}
+			}
+			&.key{
+				font-weight: bold;
+				padding-left: 0;
+				&:after{
+					content: ":";
+				}
+			}
+			&.value{}
+			i {
+				opacity: 0.2;
+
+			}
+		}
+	}
+}
+.x.gallery {
+    position: relative;
+    z-index: 1;  /// need to put this below header nav when opened
+    border-right: 1px solid darken($light,4%);
+    padding: 4em;
+	padding-left: 2em;
+    &.narrow {
+    	width: 50% !important;
+    }
+    @include bp(XL-tablet) {
+    	width: 55% !important;
+    }
+}
+
+.details {
+	padding: 4em;
+	padding-right: 0em;
+	padding-top: 2em;
+}
+
+
+.submit number-field {
+	position: relative;
+	top: -0.7em;
+	right: 0.5em;
+}
+
+
+
+
+
+
+
+
+
+
+
+

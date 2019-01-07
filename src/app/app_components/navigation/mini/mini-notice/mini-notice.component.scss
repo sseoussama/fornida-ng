@@ -1,0 +1,36 @@
+@import "../../../../../assets/scss/inc/colors";
+#activity-list{
+	.ahead {
+		border-bottom: 1px solid rgba(#ccc,.7);
+	}
+	.scroll {
+		max-height: 63vh;
+	}
+	.activity-item {
+		overflow: hidden;
+		// no more styles here. use .inner.
+		.inner{
+			padding: 1em;
+			border-top: 1px solid rgba(#ccc,.5);
+			display: block;
+			border-right: 3px solid transparent;
+			&:hover p{
+				border-right: 3px solid $blue;
+			}
+			p.category {
+				font-size: 0.70em;
+				font-weight: bold;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+			}
+			p.date {
+				font-size: 0.70em;
+				// font-weight: bold;
+				padding-top: 0.5em;
+			}
+		}
+		&.seen {
+			background: $light;
+		}
+	}
+}

@@ -1,0 +1,54 @@
+<div class="form-section saved-configs pre">
+	<div class="inner-form-section">
+		<div class="form-head" id="set-pre_configs" (click)="set.open=!set.open">
+			<h3><i class="fa fa-star"></i> Saved Configurations</h3>
+			<p [ngClass]="{hide: set.open}" class="b fadeIn animated">Save configurations for later.</p>
+			<i [ngClass]="{green: set.open}" class="cl fa fa-ellipsis-v"></i>
+		</div>
+		<div class="columns m0 is-multiline" [ngClass]="{hide: set.open}">
+			<div *ngFor="let saved of savedConfigs"  class="checkbox-container x column p0 preconfigs is-12">
+
+				<ng-container *ngIf="saved.name">
+					<label class="" for="{{saved.name}}" id="a-{{saved.name}}">
+							<!-- <fa *ngIf="saved.icon" [name]="saved.icon"></fa>
+							<p class="strong">{{saved.name}}</p>
+							<p class="b">{{saved.desc}}</p> -->
+							<!-- <p class="pull-right">{{saved.saved_by}}</p> -->
+							<input class="preconfig" (change)="onPreConfig($event, saved)" name="testt" id="{{saved.name}}" type="radio"> 
+
+							<div class="columns">
+								<div class="column L">
+									<div class="inner-left">
+										<p class="name">{{saved.name}}</p>
+										<p class="b">{{saved.desc}}</p>
+									</div>
+								</div>
+								<div class="column R is-2">
+									<p class="add centerer tar">
+										<small *ngIf="saved.saved_by">By {{saved.saved_by}}<br></small>
+										{{saved.created|date:'MM/dd/yyyy'}}
+									</p>
+
+								</div>
+							</div>
+							<span></span> 
+
+					</label>
+					<div class="unsetOption" (click)="onDeck=saved; modal=true;">
+						<i class="fa fa-trash"></i>
+					</div>
+				</ng-container>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Are you sure modal -->
+<modal  *ngIf="modal" (closeModal)="modal=false">
+	<div class="box sure">
+		<h2>Are you sure you want to delete <pre>{{onDeck.name |json}}</pre></h2>
+		<a class="button red-g" (click)="removeSavedConfig(onDeck.name); loading($event,2000);">Delete</a>
+		<a class="button light-bg dark" (click)="modal=false">Nevermind</a>
+	</div>
+</modal>

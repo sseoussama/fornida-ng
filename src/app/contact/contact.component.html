@@ -1,0 +1,196 @@
+
+<div class="container" id="contact" *ngIf="!success">
+		
+	<div class="p1em hide-on-mobile"></div>
+
+	<div id="contact_subject" *ngIf="topics" class="animated fadeInUp">
+		<h2 class="form-title">
+			What can we help you with?
+			<span>01</span>
+			<a *ngIf="mode.edit" href="https://app.flamelink.io/content/collection/contactTopics" class="blue" target="_blank"><fa [name]="'fas fa-pencil-alt'"></fa></a>
+		</h2>
+		<div class="columns is-multiline options">
+			<div *ngFor="let itm of topics | valSort:'order'" class="checkbox-container column is-4">
+				<label [ngClass]="{active: reason === itm.slug}" for="{{itm.name}}" (click)="setReason(itm);smooth('next')">
+					<fa [name]="itm.icon"></fa>
+					<p>{{itm.name}} <a *ngIf="mode.edit" href="https://app.flamelink.io/content/collection/contactTopics/{{itm.id}}" class="blue" target="_blank"><fa [name]="'fas fa-pencil-alt'"></fa></a></p> 
+					<input name="{{itm.name}}" id="{{itm.name}}" type="checkbox"> 
+					<span></span> 
+				</label>
+			</div>
+		</div>
+	</div>
+	<div id="next"></div>
+
+
+
+	
+	
+
+	<!-- related-faqs -->
+	<div id="related-faqs" *ngIf="related.length" class="animated fadeInUp d5">
+		<h2 class="form-title">
+			Have you seen these FAQs?
+			<span>02</span>
+			<a *ngIf="mode.edit" href="https://app.flamelink.io/content/collection/faQs" class="blue" target="_blank"><fa [name]="'fas fa-pencil-alt'"></fa></a>
+		</h2>
+		<div class="faq-container">
+			<div class="faq-item" *ngFor="let faq of related" [ngClass]="{opened: faq.open}" [hidden]="!faq.visible">
+				<a class="question"  (click)="faq.open = !faq.open">
+					{{faq.question}}
+					<a *ngIf="mode.edit" href="https://app.flamelink.io/content/collection/faQs/{{faq.id}}" class="blue" target="_blank"><fa [name]="'fas fa-pencil-alt'"></fa></a>
+					<div class="close"><i class="fa fa-ellipsis-v"></i></div>
+				</a>
+				<div [hidden]="!faq.open" [innerHTML]="faq.answer" class="answer"></div>
+			</div>
+		</div>
+		<div class="p1em"></div>
+		<a class="button" (click)="faqs_seen=true;smooth('cForm');inputStyle();">Next</a>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="p1em"></div>
+	<form [formGroup]="theForm" (ngSubmit)="onSubmit()" novalidate id="cForm" [hidden]="!reason" *ngIf="theForm && faqs_seen || theForm && !related.length" class="animated fadeInUp d5">
+		<div class="clearfix">
+
+			<!-- date -->
+			<input class="hide" type="text" name="" formControlName="date" id="date" [value]="date | date: 'MM-dd-yyyy HH:mm:ss'">
+
+
+			<h2 class="form-title">
+				More information will help us help you.
+				<span *ngIf="related.length">03</span>
+				<span *ngIf="!related.length">02</span>
+			</h2>
+
+
+
+			<!-- allProducts -->
+			<div *ngIf="reason === 'product' || reason === 'sale'">
+		        <div class="prod" *ngFor="let item of productList">
+		        	<span *ngIf="reason === 'sale'">({{item.qty}}) - </span>
+		        	{{item.name}}
+		        	<div class="right">
+		        		<input class="q" *ngIf="reason === 'sale'" type="number" name="" [(ngModel)]="item.qty" [ngModelOptions]="{standalone: true}">
+		        		<input class="comment" *ngIf="reason === 'sale'" type="text" placeholder="comments..." [(ngModel)]="item.comments" [ngModelOptions]="{standalone: true}">
+		        		<fa (click)="rmProductToList(item)" [name]="'fa fa-trash'"></fa>
+		        	</div>
+		        </div>
+				<ng-select [items]="All"
+		           bindLabel="name"
+		           placeholder="What product[s] does this concern? (part# or name)"
+		           [clearSearchOnAdd]="true"
+		           [(ngModel)]="itemSelected"
+		           class="w100"
+		           [addTag]=true
+		           (change)="addProductToList(itemSelected);"
+		           [ngModelOptions]="{standalone: true}"
+		        ></ng-select>
+	        </div>
+
+
+
+
+			<!-- full -->
+			<div class="stylefield">
+				<label for="input">Full Name</label>
+				<input class="inpt" type='text' (focus)="flag=false" formControlName="full" id="full">
+				<span class="helper" *ngIf="!theForm.get('full').valid && theForm.get('full').touched">
+					<fa [name]="'exclamation-triangle'"></fa>
+				</span>
+			</div>
+					
+			<!-- phone -->
+			<div class="stylefield">
+				<label for="input">Phone Number</label>
+				<input class="inpt" type='tel' (focus)="flag=false" formControlName="phone" id="phone">
+				<span class="helper" *ngIf="!theForm.get('phone').valid && theForm.get('phone').touched">
+					<fa [name]="'exclamation-triangle'"></fa>
+				</span>
+			</div>
+			
+			<!-- email -->
+			<div class="stylefield">
+				<label for="input">Email</label>
+				<input class="inpt" type='email' r (focus)="flag=false" formControlName="email" id="email">
+				<span class="helper" *ngIf="!theForm.get('email').valid && theForm.get('email').touched">
+					<fa [name]="'exclamation-triangle'"></fa>
+				</span>
+			</div>
+
+			<!-- company -->
+			<div class="stylefield">
+				<label for="input">Company Name</label>
+				<input class="inpt" type='text' (focus)="flag=false" formControlName="company" id="company">
+				<span class="helper" *ngIf="!theForm.get('company').valid && theForm.get('company').touched">
+					<fa [name]="'exclamation-triangle'"></fa>
+				</span>
+			</div>
+
+			<!-- desc -->
+			<div class="stylefield area">
+				<label for="textarea">Message</label>
+				<textarea class="inpt" type='text' (focus)="flag=false" formControlName="desc" id="desc"></textarea>
+				<span class="helper" *ngIf="!theForm.get('desc').valid && theForm.get('desc').touched">
+					<fa [name]="'exclamation-triangle'"></fa>
+				</span>
+			</div>
+
+
+			<!-- Order ID -->
+			<div class="stylefield w100" *ngIf="reason === 'order'||reason === 'return'">
+				<label for="input">Order#</label>
+				<input class="inpt" type='text' (focus)="flag=false" formControlName="order" id="order">
+				<span class="helper" *ngIf="!theForm.get('order').valid && theForm.get('order').touched">
+					<fa [name]="'exclamation-triangle'"></fa>
+				</span>
+			</div>
+
+
+
+			<div class="form-flag" *ngIf="flag">
+				<fa [name]="'exclamation-triangle'"></fa>
+				form incomplete
+			</div>
+			<!-- submit -->
+			<div class="db">
+				<input type="submit" value="Send Message" class="button sub">
+			</div>
+			
+		</div>
+	</form>
+	<!-- <a (click)="testSlack()" class="button">Test Slack</a> -->
+
+	<div class="p2em"></div>
+	<div class="p2em"></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="narrow-container centerer tac animated fadeIn" id="s" *ngIf="success">
+	<p class="curl" style="font-size:3em;">We received your info. One of us will be in touch soon...</p><br>
+	<!-- <p class="mono dark bold">If this is an emergency call 911</p> -->
+</div>
+
+
+
+
+
+

@@ -1,0 +1,372 @@
+<div class="p2em"></div>
+
+<div class="cart-page">
+
+	<div class="cart-container container" *ngIf="cart">
+
+		<h1 class="b0">Shopping Cart ({{cart.line_items.physical_items.length}})
+			<i (click)="refresh(); loading($event,2000)" class="fas fa-sync-alt"></i>
+		</h1>
+		
+		<!-- dev-only-json -->
+		<button *ngIf="mode.dev && checkout" (click)="editorContent=checkout">checkout json</button>
+		<button *ngIf="mode.dev" (click)="editorContent=cart">cart json</button>
+
+		<div class="columns m0">
+
+
+
+			<!-- Loading Message -->
+			<p class="tac b p2em" *ngIf="!ui_ready && !delete_msg">{{ui_loading}}</p>
+			<p class="tal b p2em" *ngIf="!ui_ready && delete_msg">{{delete_msg}}</p>
+			
+			
+			<!-- .cart-table -->
+			<div class="cart-table column pr pl0">
+				<div class="cart_hide" *ngIf="!ui_ready"></div>
+				<div class="table-inner">
+
+					<!-- loop -->
+					<div class="cart-item cart_item {{item.id}}" *ngFor="let item of cart.line_items.physical_items">
+						
+						<!-- dev-only-json -->
+						<button *ngIf="mode.dev" (click)="editorContent=item">JSON Viewer</button>
+
+						<div class="level m0">
+							
+							<!-- img -->
+							<div class="level-item cart-img">
+								<a routerLink="/product/{{item.product_id}}">
+									<img src="{{item.image_url}}" alt="">
+								</a>
+							</div>
+							
+							<!-- title/desc -->
+							<div class="level-item cart-title">
+								<i *ngIf="item.build_id" class="reveal-items fa fa-list" (click)="item.show=!item.show"></i>
+								<div>
+									<a routerLink="/product/{{item.product_id}}">
+										<p class="name">{{item.name| slice:0:80}}
+										<span *ngIf="item.name.length>80">...</span></p>
+										<p class="b">{{item.sku}}</p>
+									</a>
+									<ul class="options">
+										<li 
+											*ngFor="let o of item.options"
+											[attr.data-option-name]="o.name"
+											[attr.data-option-value]="o.value"
+										>
+											<p class="b"><strong>{{o.name}}</strong>: {{o.value}}</p>
+										</li>
+									</ul>
+								</div>
+							</div>
+							
+							<!-- qty -->
+							<div class="level-item cart-qty-adjuster" (mouseleave)="save(item)">
+								<!-- <h1>{{item.quantity}}</h1> -->
+								<number-field
+					        		[model]="item.quantity"
+					        		[onLightBg]="true"
+									(valChange)="change(item,$event);"
+									(blurred)="item.quantity=$event; save(item)"
+					        		*ngIf="!item.build_id"
+					        	></number-field>
+					        	<div *ngIf="item.build_id" class="build-qty">{{item.buildQty}}</div>
+							</div>
+
+							<!-- price -->
+							<div class="level-item cart-price">
+								<div>
+
+									<!-- sku pricing -->
+									<div *ngIf="!item.build_id" class="price">{{item.sale_price|currency}}</div>
+									<div *ngIf="!item.build_id" class="lineprice eprice">{{item.extended_sale_price|currency}}</div>
+									
+									<!-- build pricing -->
+									<div *ngIf="item.build_id" class="price">{{item.per_total|currency}}</div>
+									<div *ngIf="item.build_id" class="lineprice mono_ build-price">{{item.total|currency}}</div>
+
+								</div>
+							</div>
+
+							<!-- actions -->
+							<div class="level-item cart-actions">
+
+								<!-- edit_build -->
+								<a data-edit_build *ngIf="item.build_id" class="rm con"><fa [name]="'fas fa-pencil-alt'" routerLink="/product/{{item.product_id}}" [queryParams]="{ editing: item.options[0].value }"></fa></a>
+								
+								<!-- delete_item -->
+								<a data-delete_item *ngIf="!item.build_id" class="rm con" (click)="delete_item(item)"><fa [name]="'fa fa-trash'"></fa></a>
+
+								<!-- delete_build -->
+								<a data-delete_build *ngIf="item.build_id" class="rm con" (click)="delete_build(item)"><fa [name]="'fa fa-trash'"></fa></a>
+
+							</div>
+
+						</div>
+						<itemized
+							*ngIf="item.build_id"
+							[product]='item'
+							[show]='item.show'
+						></itemized>
+					</div>
+
+					<!-- cart-bottom -->
+					<div class="cart-bottom">
+						<div class="level">
+							<div class="level-left">
+								<a class="back" (click)="lastPage();">
+									<fa [name]="'fas fa-long-arrow-alt-left'"></fa>
+									Back
+								</a>
+							</div>
+							<div class="level-right">
+								<a class="back" (click)="shareModal=true;">
+									Share
+									<fa [name]="'fas fa-share'"></fa>
+								</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div> <!-- table column -->
+
+
+
+
+
+
+
+
+
+
+
+			<!-- cart-aside -->
+			<div class="cart-aside column is-3">
+				<div class="p2em">
+					
+					<!-- Load CartID -->
+					<div class="field has-addons">
+						<div class="control i">
+							<input [disabled]="loaded" class="input" [(ngModel)]="loadedCartId" name="loadedcartid" type="text" placeholder="Load Cart by ID">
+						</div>
+						<div class="control">
+							<!-- add -->
+							<a
+								class="button blue-bg is-info"
+								*ngIf="!loaded"
+								(click)="loadCartId(loadedCartId);loading($event,2000);loadedCartId=''"
+							>
+								<fa [name]="'fas fa-long-arrow-alt-right'"></fa>
+							</a>
+							<!-- remove -->
+							<a
+								class="button red-bg is-info"
+								*ngIf="loaded"
+								(click)="loadCartIdRm();loading($event,2000);loadedCartId=''"
+							>
+								<fa [name]="'fas fa-times'"></fa>
+							</a>
+						</div>
+					</div>
+
+					<!-- add/ remove coupon -->
+					<div class="field has-addons">
+						<div class="control i">
+							<input class="input" [(ngModel)]="couponcode" name="couponcode" type="text" placeholder="Add Coupon Code">
+						</div>
+						<div class="control">
+							<a
+								class="button blue-bg is-info"
+								(click)="addCoupon(cart.id, couponcode);loading($event,2000);couponcode=''"
+							>
+								<fa [name]="'fas fa-long-arrow-alt-right'"></fa>
+							</a>
+						</div>
+					</div>
+
+					<!-- couponList -->
+					<div class="couponList" *ngIf='cart.coupons[0]'>
+						<div class="a-coupon level" *ngFor="let c of cart.coupons">
+							<div class="level-left">
+								<div>
+									<div class="c-name">{{c.name}}</div>
+									<p class="b c-code">{{c.code}}</p>
+								</div>
+							</div>
+							<div class="level-left">
+								<div class="c-price">{{c.discounted_amount|currency}}</div>
+								<fa (click)="removeCoupon(cart.id, c.code)" [name]="'fa fa-times'"></fa>
+							</div>
+						</div>
+					</div>
+
+					<!-- add/ remove giftCertificate -->
+					<div class="field has-addons">
+						<div class="control i">
+							<input class="input" [(ngModel)]="giftCertificate" name="Gift Certificate" type="text" placeholder="Add Gift Certificate">
+						</div>
+						<div class="control">
+							<a
+								class="button blue-bg is-info"
+								(click)="loading($event,2000);"
+							>
+								<fa [name]="'fas fa-long-arrow-alt-right'"></fa>
+							</a>
+						</div>
+					</div>
+
+					<!-- shippingOptions -->
+					<div class="control" *ngIf="shippingOptions?.length" id="ship-options">
+						<br>
+						<button *ngIf="mode.dev" (click)="editorContent=shippingOptions">shippingOptions json</button>
+						<h3>Estimate Shipping</h3>
+						<p class="b">Choose a Shipping Option <a (click)="estimateModal=true;">Change Address</a></p>
+						<br>
+						<div *ngFor="let option of shippingOptions" class="radio" [ngClass]="{'chosen': chosen===option.id}" (click)="estimateClick(option.id)">
+							{{option.description}} {{option.cost | currency}}
+						</div>
+						<!-- <div class="radio" [ngClass]="{'chosen': chosen==='free'}" (click)="chosen='free'">
+							free
+						</div> -->
+					</div>
+
+				</div>
+
+				<!-- totals / CTA -->
+				<div class="bottom">
+					<div class="cart-totals">
+						<div class="itm level">
+							<div class="key">Subtotal:</div>
+							<div class="val">{{cart.base_amount|currency}}</div>
+						</div>
+						<div class="itm level" *ngIf="discountsum()">
+							<div class="key">Discount:</div>
+							<div class="val"><span>-</span> {{discountsum()|currency}}</div>
+						</div>
+						<div class="itm level" *ngIf="chosen">
+							<div class="key">Shipping:</div>
+							<div class="val"><span>+</span> {{chosenVal()|currency}}</div>
+						</div>
+						<div class="itm level" *ngIf="checkout">
+							<div class="key">Taxes:</div>
+							<div class="val"><span>+</span> {{checkout.tax_total|currency}}</div>
+						</div>
+						<div class="itm level">
+							<div class="key">Estimated Total:</div>
+							<ng-container *ngIf="!checkout">
+								<div *ngIf="!chosen" class="val">{{cart.cart_amount|currency}}</div>
+								<div *ngIf="chosen" class="val">{{cart.cart_amount+chosenVal()|currency}}</div>
+							</ng-container>
+							<ng-container *ngIf="checkout">
+								<div *ngIf="!chosen" class="val">{{checkout.grand_total|currency}}</div>
+								<div *ngIf="chosen" class="val">{{checkout.grand_total+chosenVal()|currency}}</div>
+							</ng-container>
+						</div>
+					</div>
+					<a class="checkout button" (click)="gotocheckout();loading($event,2000);">Checkout</a>
+					<p class="b white"><a (click)="estimateModal=true;">Get Shipping Quote</a></p>
+					<!-- <p class="b white"><a (click)="gotocart()">Get Shipping Quote</a></p> -->
+				</div>
+			</div>
+
+
+
+
+
+
+		</div> <!-- .columns -->
+		
+
+
+
+
+
+	</div>
+	<div *ngIf="!cart" class="p1em tac mono">
+		{{no_data_msg}}
+		<!-- Load CartID -->
+		<div class="p1em"></div>
+		<div class="field has-addons" style="    justify-content: center;">
+			<div class="control i">
+				<input class="input" [(ngModel)]="loadedCartId" name="loadedCartId" type="text" placeholder="Load Cart by ID">
+			</div>
+			<div class="control">
+				<!-- add -->
+				<a class="button blue-bg is-info" *ngIf="!loaded" (click)="loadCartId(loadedCartId);loading($event,2000);loadedCartId=''">
+					<fa [name]="'fas fa-long-arrow-alt-right'"></fa>
+				</a>
+				<!-- remove -->
+				<a class="button red-bg is-info" *ngIf="loaded" (click)="loadCartIdRm();loading($event,2000);loadedCartId=''">
+					<fa [name]="'fas fa-times'"></fa>
+				</a>
+			</div>
+		</div>
+	</div>
+</div> 
+<div class="p2em"></div>
+<div class="p2em"></div>
+
+
+
+
+
+
+
+
+
+
+
+<json-viewer 
+	*ngIf="editorContent"
+	(closeModal)="editorContent=null"
+	[data]="editorContent"
+></json-viewer>
+
+
+
+<modal *ngIf="estimateModal && cart"
+	(closeModal)="estimateModal=false;"
+	[width]="'425px'"
+	
+>
+	<div class="box p1em">
+		<app-estimate
+			(closeModal)="estimateModal=false;" 
+			(shippingOptions)="setCheckout($event);" 
+			[cart]="cart"
+		></app-estimate>
+	</div>
+</modal>
+
+
+<modal *ngIf="shareModal"
+	(closeModal)="shareModal=false;"
+	[width]="'500px'"
+>
+	<div class="box p1em shareModal">
+		<h3>Share this cart</h3>
+		<p class="b">Share your cart ID with others so they can load your cart.</p>
+		<pre>{{cart.id}}</pre>
+	</div>
+</modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

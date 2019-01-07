@@ -1,0 +1,64 @@
+@import "../../../assets/scss/inc/responsive";
+
+$green: #07d0b9;
+$blue: #1489DD;
+
+#head {
+	.logo{
+	    width: 11em;
+		img{
+			width: 100%;
+		}
+	}
+    .topcons {
+        padding-left: 1em;
+        li a{
+            padding: 1em 0.4em;
+            display: block;
+            position: relative;
+            transition: all 0.2s ease-in-out;
+            &:hover{
+                color: rgba(#fff, 0.8);
+                color: $green;
+            }
+        }
+    // auth
+        &.auth.active-notice {
+            .drop{
+                &:after {
+                    right: 2.5em !important;
+                }
+            }
+        }&.auth.active-user {
+            .drop{
+                &:after {
+                    right: 4.5em !important;
+                }
+            }
+        }&.auth.active-search {
+            .drop{
+                &:after {
+                    right: 6.5em !important;
+                }
+            }
+        }
+    // not auth
+        &.active-user {
+            .drop{
+                &:after {
+                    right: 2.5em !important;
+                }
+            }
+        }&.active-search {
+            .drop{
+                &:after {
+                    right: 4.5em !important;
+                }
+            }
+        }
+    }
+    @include bp(S-desktop) {
+        padding: 1em 0;
+    }
+}
+

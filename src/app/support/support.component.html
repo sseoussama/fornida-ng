@@ -1,0 +1,82 @@
+
+
+<div id="support" class="" *ngIf="topics">
+	
+
+	<!-- support-header -->
+	<div class="support-header">
+		<div class="hcontainer">
+			<h1>
+				<ng-container *ngIf="user">
+					Hello <span>{{user.first_name}}</span>,&nbsp;
+				</ng-container>
+				How can we help?
+			</h1>
+			<div class="support-search hide">
+				<div class="field">
+				  <p class="control has-icons-left has-icons-right">
+				    <input class="input" type="search" placeholder="Search FAQs" [(ngModel)]="supportQuery">
+				    <span class="icon is-small is-right">
+				      <i class="fa fa-search"></i>
+				    </span>
+				  </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="p2em"></div>
+	<!-- <pre> {{mode|json}} </pre> -->
+
+	<!-- support-body -->
+	<div class="support-body">
+		<div class="container">
+				
+			<div class="columns">
+				<!-- support-aside -->
+				<div class="column support-aside is-3">
+					<h2>Support Links</h2>
+					<ul>
+						<li *ngFor="let link of links">
+							<a routerLink="{{link.link}}">{{link.name}}</a>
+						</li>
+					</ul>
+				</div>
+				
+				<!-- support-main -->
+				<div class="column support-main icon-list">
+					<h2>Featured Topics <a *ngIf="mode.edit" href="https://app.flamelink.io/content/collection/supportTopics" class="blue" target="_blank"><fa [name]="'fas fa-pencil-alt'"></fa></a></h2>
+					<div class="columns is-multiline">
+						<div class="column item is-4" *ngFor="let topic of topics | valSort:'order'">
+							<a class="inner" routerLink="{{topic.link}}">
+								<img src="{{topic.iconPath}}">
+								<h3>{{topic.name}} <a *ngIf="mode.edit" href="https://app.flamelink.io/content/collection/supportTopics/{{topic.id}}" class="blue" target="_blank"><fa [name]="'fas fa-pencil-alt'"></fa></a></h3>
+								<p class="b">{{topic.excerpt}}</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<app-faqs *ngIf="mode" [mode]="mode"></app-faqs>
+
+			
+
+
+			
+
+		</div>
+	</div>
+
+</div>
+
+
+<div class="p2em"></div>
+<div class="p2em"></div>
+<div class="p2em"></div>
+
+
+
+
+
+

@@ -1,0 +1,109 @@
+<div id="itemized" *ngIf="build">
+
+	<div class="i-header level">
+		<div class="level-left">
+			<h3><span class="mono">{{build.build_id}}</span></h3>
+		</div>
+		<div class="level-right">
+			<div class="select">
+				<select [(ngModel)]="build.status" (ngModelChange)="onBuildStatus(build.status)" class="{{build.status_bg}} {{build.status_color}}">
+					<option *ngFor="let status of build_stats"  [ngValue]="status.val">{{status.val}}</option>
+				</select>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+	<h4>Components</h4>
+
+	<table class="table is-bordered is-hoverable smooth-table" *ngIf="components">
+		<thead>
+			<tr>
+				<th><i class="fas fa-adjust"></i></th>
+				<th>bc_id</th>
+				<th>SKU</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Qty</th>
+				<th>Total</th>
+				<th>Status</th>
+				<!-- <th><fa [name]="'fas fa-trash'"></fa></th> -->
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of components">
+				<td class="{{build.status_bg}}"></td>
+		      	<td>
+		      		<a target="_blank" href="https://store-2bihpr2wvz.mybigcommerce.com/manage/products/{{item.id}}/edit">{{item.id}}</a>
+		      	</td>
+				<td>{{item.sku}}</td>
+				<td>{{item.name}}</td>
+				<td *ngIf="item.set">{{item.set.name}}</td>
+				<td>{{item.quantity}}</td>
+				<td>{{build.buildQty*item.quantity}}</td>
+				<td *ngIf="!item.set">Server</td>
+				<td class="{{item.status_bg}}">
+					<div class="select">
+						<select [(ngModel)]="item.status" (ngModelChange)="saveItem(item)" class=" {{item.status_color}}">
+							<option *ngFor="let status of statuses" [ngValue]="status.val">{{status.val}}</option>
+						</select>
+					</div>
+				</td>
+				<!-- <td class="rm">
+			        <fa (dblclick)="rmBuild(build)" [name]="'fas fa-trash'"></fa>
+		      	</td> -->
+			</tr>
+		</tbody>
+	</table>
+
+
+	<div class="comments">
+
+		<hr><h4>
+			Comments
+			<i (click)="editMode=!editMode" class="fas fa-pencil-alt ponter"></i>
+		</h4><br>
+
+		<!-- view only comments -->
+		<div class="buildComments" [innerHTML]="build.comments"></div>
+		<br *ngIf="editMode">
+
+		<!-- editor -->
+		<ngx-wig 
+			[(ngModel)]="build.comments"
+			*ngIf="editMode"
+			[placeholder]="'Comments about this build...'"
+			(contentChange)="onComments()"
+		></ngx-wig>
+		<br>
+		<a class="button" *ngIf="edits" (click)="saveBuild();">Save Comments</a>
+	</div>
+
+	<div class="orderid">
+		<hr>
+		<h4>Order ID</h4>
+		<p class="b">Assign an order_id to this build. It will be searchable in the builds list. All builds without order ids will be deleted in 2 weeks.</p>
+		<div class="field has-addons">
+		  <div class="control">
+		    <input [(ngModel)]="build.order_id" class="input" type="text" placeholder="Order ID">
+		  </div>
+		  <div class="control">
+		    <a class="button" (click)="saveBuild();">
+		      Save
+		    </a>
+		  </div>
+		</div>
+	</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+

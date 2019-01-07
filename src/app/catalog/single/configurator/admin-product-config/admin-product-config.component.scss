@@ -1,0 +1,29 @@
+// @import '../../../../../assets/js/jsoneditor/jsoneditor.min';
+// colors
+$dark: #4a4a4a; $light: #F5F5F5; $lime: rgba(#00ff00,0.2); $green: #09ba97; $yellow: #FFBB3B; $red: #c72e1f; $white: #FFFFFF; $black: #000000; $blue: #1489DD; $dblue: #202135; $purple: #460f54; $orange: #ed6c24; $dgray: #333; $facebook: #3B5998; $google: #DB4317;
+
+
+
+
+
+
+.admin-config {
+	h2 {
+		border: 0;
+		padding: 0;
+		margin: 0;
+	}
+	.head,
+	.bod,
+	.fot, {
+		padding: 1em;
+		border-bottom: 1px solid $light;
+	}
+	.fot {
+		text-align: right;
+		border-bottom: 0;
+	}
+	a.button {
+		margin-left: 5px;
+	}
+}

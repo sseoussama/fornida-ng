@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 936 936">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-notice-trash);
+      }
+
+      .cls-2 {
+        fill: #0078d7;
+      }
+
+      .cls-3 {
+        fill: #fff;
+        font-size: 253px;
+        font-family: FontAwesome5FreeSolid, "Font Awesome 5 Free";
+      }
+
+      .cls-4 {
+        filter: url(#Ellipse_33);
+      }
+    </style>
+    <filter id="Ellipse_33" x="53.349" y="76.349" width="790.303" height="790.303" filterUnits="userSpaceOnUse">
+      <feOffset dx="-20" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="49.5" result="blur"/>
+      <feFlood flood-opacity="0.251"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-notice-trash">
+      <rect width="936" height="936"/>
+    </clipPath>
+  </defs>
+  <g id="notice-trash" class="cls-1">
+    <g class="cls-4" transform="matrix(1, 0, 0, 1, 0, 0)">
+      <circle id="Ellipse_33-2" data-name="Ellipse 33" class="cls-2" cx="246.651" cy="246.651" r="246.651" transform="translate(221.85 221.85)"/>
+    </g>
+    <text id="_" data-name="" class="cls-3" transform="translate(357 563)"><tspan x="0" y="0"></tspan></text>
+  </g>
+</svg>

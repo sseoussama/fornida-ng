@@ -1,0 +1,76 @@
+<div class="p2em"></div>
+
+<div id="zone1" class="homeify full-width">
+	<div class="home-sec-full">
+
+		<div class="type-style-1 tac home-sec">
+			<h2 class="red">The Fornida Server Configurator <span class="badge in">BETA</span></h2>
+			<h3>Easy to Build and Collaborate!</h3>
+		</div>
+
+		<div class="home-sec _tabs">
+			<!-- triggers -->
+			<div class="h-triggers">
+				<div class="columns is-centered m0 top">
+					<a 
+						class="trigger-item column"
+						[ngClass]="{'active':current === i}"
+						*ngFor="let item of data; let i = index"
+						[attr.data-index]="i"
+						id="{{item.id}}"
+						(click)="tabChange($event, i);setActive($event)"
+						(mouseover)="over($event)"
+						(mouseleave)="leave()"
+					>
+						<div class="i-contain" >
+							<figure>
+								<img *ngIf="item.image_icon" class="trigger-image" src="{{item.image_icon}}">
+								<i *ngIf="!item.image_icon" class="{{item.icon}} trigger-icon"></i>
+							</figure>
+							<p class="trigger-label mono">{{item.label}}</p>
+						</div>
+					</a>
+				</div>
+				<div class="underline"></div>
+				<div class="underline-b"></div>
+			</div>
+		</div>
+
+		<div class="columns type-style-1 tab-cont" style="position: relative; right: -8em;">
+			<div class="column ll is-4">
+				<div class="p1em"></div>
+				<div class="tal home-sec sm">
+					<div class="arrows">
+						<i (click)="prev()" class="fa fa-chevron-left l"></i>
+						<i (click)="next()" class="fa fa-chevron-right r"></i>
+					</div>
+					<h2>{{data[current].excerpt}}</h2>
+					<p class="w100">{{data[current].caption}}</p>
+					<button routerLink="/configurable" class="button">Build A Server</button>
+				</div>
+			</div>
+			<div class="column rr">
+				<div class="tab-imgg">
+					<img 
+						*ngFor="let item of data; let i = index" 
+						src="{{item.image}}"
+						[ngClass]="{'o1':current === i}"
+						class="centerer"
+					>
+				</div>
+			</div>
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+	</div>
+</div>
+

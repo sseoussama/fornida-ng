@@ -1,0 +1,32 @@
+
+<div *ngFor="let parent of categoryTree | isvisible" class="open-{{parent.childOpen}} catalog-links">
+  
+  <!-- parent name -->
+  <h3 *ngIf="parent.name !== 'Shop All'" routerLink="/category{{parent.url}}/all" (click)="closeNav()" class="test" #test><a>{{parent.name}}</a></h3>
+
+  <!-- children ul-->
+  <div class="scroll-horz">
+    <div class="children columns m0p0" *ngIf="parent.children.length">
+      <!-- children loop -->
+      <div *ngFor="let child of parent.children| isvisible" class="column m0p0 child-item">
+        <a id="category-{{child.id}}" routerLink="/category{{child.url}}" routerLinkActive="active" [attr.parent_id]="parent.id" class="level m0p0 is-mobile" (click)="closeNav()">
+          <div class="level-item child-image">
+            <div class="img-container" *ngIf="categories[child.id]">
+              <img src="{{categories[child.id].image_url || 'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}}">
+            </div>
+          </div>
+
+          <div class="level-item child-name">
+            <div class="child_name">
+              <span>{{child.name}}</span>
+            </div>
+          </div>
+
+        </a>
+      </div>
+<div class="last-child child-item"></div>
+    </div>
+  </div>
+  
+</div>
+<div class="p2em"></div>

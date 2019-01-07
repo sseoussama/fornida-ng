@@ -1,0 +1,46 @@
+.number-field {
+	padding-top: 1.5em;
+	input {
+		text-align: center;
+		max-width: 4em;
+		width: 3em;
+		// background: rgba(#fff,0.5);
+		box-shadow: 0 0 0;
+		border: 0;
+		font-weight: bold;
+		font-style: italic;
+		font-size: 0.9em;
+		color: #fff;
+		background: rgba(#000, 0.1);
+	}
+	.button {
+		box-shadow: 0 0 0;
+		background: rgba(#000, 0.2);
+		border: 0;
+		// @extend .light-g;
+		padding: 0 1em;
+		&:hover {
+			opacity: 1;
+			i{ color: #fff; }
+		}
+		i {
+			color: rgba(#fff, 0.5)
+		}
+	}
+	.field.has-addons .control:not(:last-child) {margin: 0;}
+	&.onLightBg {
+		input {
+			color: #000;
+			background: rgba(#fff, 1);
+		}
+		.button {
+			background: darken(#efefef,4%);
+			&:hover {
+				i{ color: #000; }
+			}
+			i {
+				color: rgba(#000, 0.5)
+			}
+		}
+	}
+}

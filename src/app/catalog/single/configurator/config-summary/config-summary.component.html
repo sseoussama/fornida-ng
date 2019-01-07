@@ -1,0 +1,228 @@
+<!-- <pre *ngIf="configs">{{configs|json}}</pre> -->
+<!-- specs -->
+<div id="specs" *ngIf="configsExist && collabsExist && all && show_builder">
+
+
+	<div class="collab_info final dark light-g animated fadeInDown" *ngIf="collabs.length>1">
+		<pre *ngIf="mode.dev">{{collabs|json}}</pre>
+		<div class="level">
+			<div class="level-left">
+				<h3><a class="db" (click)="modal=true; content='collab'">Collaborators</a></h3>
+			</div>
+			<div class="level-right">
+				<div class="collab-item" *ngFor="let collab of collabs">
+					<!-- <ng-container *ngIf="collab.email !== email"> -->
+						<div class="ease" [ngClass]="{'dim': !collab.visible}">
+							<p [attr.data-tooltip]="collab.user.first_name+': '+collab.email" data-placement="bottom" class="badge1"><span class="centerer">{{(collab.user.first_name) | slice:0:1}}{{(collab.user.last_name) | slice:0:1}}</span></p>
+						</div>
+					<!-- </ng-container> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <button class="button dark-g" (click)="modal=true; content='collab'" *ngIf="!joined && !configs.length">
+		<i class="i fa fa-users"></i>
+		Collaborate / Share / Save
+	</button> -->
+
+
+	<!-- configured specs -->
+	<div class="spec-section final st_" id="final">
+		<h2>
+			{{product.name}}
+			<span class="price">{{product.price|currency}}</span>
+		</h2>
+
+		<!-- toolbar -->
+		<div class="sorters level" *ngIf="configs.length">
+			<div class="level-left">
+				<span class="select">
+					<select [(ngModel)]="sort" id="sort-select">
+						<option value="modified">Sort By: Order Added</option>
+						<option value="order">Sort By: Hardware Name</option>
+					</select>
+				</span>
+				<div class="dir-icon" (click)="dir=!dir;">
+					<i [ngClass]="{'rotate': dir}" class="bouncey fas fa-sort-amount-up"></i>
+				</div>
+			</div>
+			<div class="level-right">
+				<p *ngIf="configs.length" (click)=" clear()" class="b">Clear All</p>
+			</div>
+		</div>
+
+
+		<table class="table is-hoverable" *ngIf="configs.length;else no_configs">
+			<div class="scrollable-area">
+				<tbody>
+					<tr class="pointer" *ngFor="let spec of configs | valSort:sort:dir" id="key-{{spec.key}}" [attr.key]="spec.key">
+
+						<ng-container *ngIf="all[spec.id];">
+							<!-- details trigger -->
+							<td
+								(click)="detailContent=all[spec.id]"
+								class="close"
+								[attr.data-tooltip]="'Component Details'"
+								data-placement="top"
+							><fa [name]="'fa fa-info-circle'"></fa></td>
+							
+							<!-- details -->
+							<td class="detail" (click)="smooth('a-'+spec.key,120)">
+								<p class="b ttc strong yellow">{{spec.set.name}}</p>
+								<div class="part">{{ (all[spec.id].name.length>90)? (all[spec.id].name | slice:0:90)+'...':(all[spec.id].name) }}</div>
+							</td>
+
+							<!-- qty -->
+							<td class="qty level">
+								<div (click)="dec(spec)" class="level-item btn"><fa [name]="'fa fa-minus'"></fa></div>
+								<div class="level-item">{{spec.quantity}}</div>
+								<div (click)="inc(spec)" class="level-item btn"><fa [name]="'fa fa-plus'"></fa></div>
+							</td>
+
+							<!-- price -->
+							<td class="add">
+								{{all[spec.id].price*spec.quantity|currency}}
+							</td>
+							
+							<!-- remove -->
+							<td 
+								class="close" 
+								(click)="removeConfig(spec)"
+								[attr.data-tooltip]="'Remove Component From Build'"
+								data-placement="left"
+							><fa [name]="'fa fa-times'"></fa></td>
+						</ng-container>
+						<ng-container *ngIf="!all[spec.id];">
+							<div class="all_incomplete">
+								<p>{{spec.key}} not found <a (click)="setAllProducts()">Reload</a></p>
+							</div>
+							<div class="p2em"></div>
+						</ng-container>
+
+					</tr>
+				</tbody>
+			</div>
+        </table>
+        <div class="summary-footer" *ngIf="configs.length">
+        	<div class="columns">
+        		<div class="column build-qty">
+		        	<!-- qty -->
+		        	<number-field
+		        		[model]="buildQty"
+		        		(valChange)="setBuildQTY($event)"
+		        	></number-field>
+				</div>
+				<div class="column">
+		        	<!-- total-table -->
+		        	<table class="total-table" *ngIf="all">
+		        		<tr class="per" *ngIf="buildQty>1" >
+		        			<td class="key">Per Build</td>
+		        			<td class="value">
+		        				{{calculate_price()|currency}}
+		        				<!-- <span *ngIf="buildQty>1" class="qty">x{{buildQty}}</span> -->
+		        			</td>
+		        		</tr>
+		        		<tr class="total">
+		        			<td class="key">Total</td>
+		        			<td class="value">{{(calculate_price())*buildQty|currency}}</td>
+		        		</tr>
+		        	</table>
+	        	</div>
+	        </div>
+        </div>
+        <ng-template #no_configs><p class="no_configs">No Configurations Selected...</p></ng-template>
+        <div class="actions level">
+        	<div class="level-left">
+        		<a class="button d" (click)="modal=true; content='save'">
+        			<fa [name]="'fa fa-star'"></fa>
+        			<span>Save</span>
+        		</a>
+        		<a class="button d" (click)="modal=true; content='share';">
+        			<fa [name]="'fa fa-share'"></fa>
+        			<span>Share</span>
+        		</a>
+        		<a class="button d" (click)="modal=true; content='collab'">
+        			<fa [name]="'fa fa-users'"></fa>
+        			<span>Collab</span>
+        		</a>
+        	</div>
+        	<div class="level-right">
+        		<button *ngIf="!product.editing" class="button ad green-g" 
+        			(click)="addtocart();loading($event,3500);"
+        			(mouseenter)="show_errors()"
+        			(mouseleave)="hide_errors()"
+        		>
+        			add to cart
+        		</button>
+        		<div *ngIf="product.editing" class="edit-actions">
+	        		<button class="button ad yellow-bg" 
+	        			(click)="saveConfigEdits(product.editing);loading($event,50000);"
+	        			(mouseenter)="show_errors()"
+	        			(mouseleave)="hide_errors()"
+	        		>
+	        			Save Edits
+	        		</button>
+	        		<div class="nw" (click)="addtocart();loading($event,3500);">
+	        			Add As New Line Item
+	        		</div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+
+    <!-- modified -->
+   <!--  <pre>
+    	<p>modified: {{all[0].modified}}</p>
+    	<p>modified_reason: {{all[0].modified_reason}}</p>
+    </pre> -->
+
+    <button *ngIf="mode.dev" (click)="editorContent=configs">Current Config JSON</button>
+    <button *ngIf="mode.dev" (click)="editorContent=all">All Products JSON</button>
+
+	<!-- static specs -->
+	<!-- <br><pre *ngIf="mode.dev">{{sample.specs|json}}</pre>
+	<div *ngIf="sample?.specs">
+        <div class="spec-section" *ngFor="let section of sample.specs">
+			<h2>*****{{section.name}}</h2>
+			<table class="table is-hoverable">
+	          <tbody>
+	            <tr *ngFor="let spec of section.values">
+	              <td class="key">{{spec.key}}</td>
+	              <td class="value">{{spec.value}}</td>
+	            </tr>
+	          </tbody>
+	        </table>
+        </div>
+    </div> -->
+	<br>
+    <!-- <img src="assets/img/addcash.png"> -->
+
+</div>
+
+<!-- save as preconfig modal -->
+<modal  *ngIf="modal" (closeModal)="close();">
+	<div class="box p0 oh">
+		<save-config-form 
+			[product]="product"
+			[content]="content"
+			[join]="join"
+			[joined]="joined"
+			(closeModal)="close();"
+		></save-config-form>
+	</div>
+</modal>
+
+
+<json-viewer 
+	*ngIf="editorContent"
+	(closeModal)="editorContent=null"
+	[data]="editorContent"
+></json-viewer>
+
+
+<details-popout 
+	*ngIf="detailContent"
+	(closeModal)="detailContent=null"
+	[product]="detailContent"
+></details-popout>

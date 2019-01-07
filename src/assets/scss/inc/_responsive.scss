@@ -1,0 +1,169 @@
+$media-queries: true;
+
+
+
+
+
+@mixin bp($point) {
+  @if ($media-queries) {
+
+
+
+
+
+	// desktop
+     $bp-XL-desktop: 2560px; //mac 27"
+     $bp-L-desktop: 1924px;  //home monitor 27
+     $bp-M-desktop: 1500px;  //mac 15"
+     $bp-S-desktop: 1300px;  //mac 13"
+
+    @if $point == XL-desktop {
+      @media (max-width: #{$bp-XL-desktop}){
+        @content;
+      }
+    }
+
+    @if $point == L-desktop {
+      @media (max-width: #{$bp-L-desktop}){
+        @content;
+      }
+    }
+
+    @if $point == M-desktop {
+      @media (max-width: #{$bp-M-desktop}){
+        @content;
+      }
+    }
+
+    @if $point == S-desktop {
+      @media (max-width: #{$bp-S-desktop}){
+        @content;
+      }
+    }
+    
+    // dell
+    @if $point == dell-laptop {
+      @media only screen and (max-width:1366px) and (min-width:1300px) and (max-height:640px) and (min-height:620px) { 
+        @content;
+      }
+    }
+
+
+
+
+    // tablet
+    $bp-XL-tablet: 1124px;
+    $bp-L-tablet: 1024px;
+    $bp-M-tablet: 768px;
+
+    @if $point == XL-tablet {
+      @media (max-width: #{$bp-XL-tablet}){
+        @content;
+      }
+    }
+
+    @if $point == L-tablet {
+      @media (max-width: #{$bp-L-tablet}){
+        @content;
+      }
+    }
+
+    @if $point == M-tablet {
+      @media (max-width: #{$bp-M-tablet}){
+        @content;
+      }
+    }
+
+
+
+
+
+
+    // phone
+    $bp-L-phone: 678px;
+    $bp-M-phone: 480px;
+    $bp-S-phone: 320px;
+
+    @if $point == L-phone {
+      @media (max-width: #{$bp-L-phone}){
+        @content;
+      }
+    }
+
+    @if $point == M-phone {
+      @media (max-width: #{$bp-M-phone}){
+        @content;
+      }
+    }
+
+    @if $point == S-phone {
+      @media (max-width: #{$bp-S-phone}){
+        @content;
+      }
+    }
+
+
+    @if $point == L-phone-o {
+      @media (min-width: #{$bp-L-phone}){
+        @content;
+      }
+    }
+
+    @if $point == M-phone-o {
+      @media (min-width: #{$bp-M-phone}){
+        @content;
+      }
+    }
+
+    @if $point == S-phone-o {
+      @media (min-width: #{$bp-S-phone}){
+        @content;
+      }
+    }
+
+
+
+
+  }
+}
+
+
+
+
+
+
+.hide-on-mobile{
+  display: block;
+}
+
+.mobile-only{
+  display: none;
+}
+
+@include bp(L-phone){
+  .hide-on-mobile{
+    display: none;
+  }
+  .mobile-only{
+    display: block;
+  }
+}
+
+
+
+
+// zoom
+@include bp(L-phone){
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+    background: #eee;
+  }
+}

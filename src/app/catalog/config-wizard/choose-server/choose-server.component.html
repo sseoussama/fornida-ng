@@ -1,0 +1,63 @@
+<div class="sec-head">
+	<h2>Select a Server</h2>
+	<p class="f">Say something here that will assist your users in making the best choice for their needs.</p>
+</div>
+
+
+<div
+	class="columns is-multiline" 
+	*ngIf="Products?.length && !loading"
+	[ngClass]="{'is-centered': Products.length<4}"
+>
+	<div 
+		class="column option-box is-3" 
+		*ngFor="let p of Products"
+		(mouseleave)="hov = 'false'"
+	>
+		<input hidden name="product" type="radio" id="{{p.sku}}">
+		<label class="inner compare" for="{{p.sku}}">
+			<div class="img">
+				<product-image class=""
+					[carousel]="true"
+					[product_id]="p.id"
+					[images]="p.images"
+					[limit]="20"
+					[loadTime]="1000"
+				></product-image>
+			</div>
+			<p class="b red">{{p.sku}}</p>
+			<h3>{{ (p.name.length>35)? (p.name | slice:0:35)+'...':(p.name) }}</h3>
+			<div class="price hide">
+				<p class="b">Base Price</p>
+				<h6>{{p.price|currency:'USD':symbol:"1.0"}}</h6>
+			</div>
+			<div class="check">
+				<i class="fa fa-check-circle"></i>
+			</div>
+			<div class="specs">
+				<div
+					class="it level"
+					*ngFor="let spec of pSpecs(p)"
+					(mouseover)="hov = spec.key"
+					[ngClass]="{'hovered': spec.key===hov}"
+				>
+					<div class="key level-item"><p class="b">{{spec.key}}</p></div>
+					<div class="value level-item">
+						{{spec.val}}
+						<div
+							*ngIf="spec.info"
+							[attr.data-tooltip]="spec.info"
+							data-placement="top"
+							class="inf"
+						>
+							<i class="fa fa-info-circle"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="p1em"><a routerLink="/product/{{p.id}}" class="button">Configure</a></div>
+			<!-- <div class="p1em"><a (click)="chose_product($event, p)" class="button">Select</a></div> -->
+		</label>
+	</div>
+</div>
+

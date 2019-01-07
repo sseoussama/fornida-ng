@@ -1,0 +1,136 @@
+
+<!-- <ng-container *ngIf="mode.auth"> -->
+
+
+
+<div class="level tabss">
+	<div class="level-item is-narrow1" [ngClass]="{'active': content==='save'}" (click)="content='save'">
+		<a class="in">
+			<i class="fa fa-star"></i>
+			<div class="mono">save</div>
+		</a>
+	</div>
+	<div class="level-item is-narrow1" [ngClass]="{'active': content==='share'}" (click)="content='share'">
+		<a class="in">
+			<i class="fa fa-share"></i>
+			<div class="mono">share</div>
+		</a>
+	</div>
+	<div class="level-item is-narrow1" [ngClass]="{'active': content==='collab'}" (click)="content='collab'">
+		<a class="in">
+			<i class="fa fa-users"></i>
+			<div class="mono">Collaborate</div>
+		</a>
+	</div>
+</div>
+
+
+
+
+
+<div *ngIf="product && content==='share' || content==='save'" class="pr">
+
+
+	<form class="save_config" (ngSubmit)="save_config(product.sku)">
+		
+		<!-- save -->
+		<!-- <ng-container *ngIf="content==='save'"></ng-container> -->
+		<h3 *ngIf="content==='share'">Share Current Configuration</h3>
+		<p class="h33" *ngIf="content==='share'">Your recipient will see this configuration when they login at store.Fornida.com.</p>
+		<h3 *ngIf="content==='save'">Save Current Configuration</h3>
+		<p class="h33" *ngIf="content==='save'">Your saved configurations will be found here when you are logged in  at store.Fornida.com.</p>
+		
+		<div class="field">
+	  		<div class="control">
+		    	<input class="input is-name" type="text" placeholder="name this configuration">
+	  		</div>
+		</div>
+
+		<div class="field">
+	  		<div class="control">
+		    	<input class="input is-description" type="text" placeholder="configuration description">
+	  		</div>
+		</div>
+		
+		<div class="form-foot" >
+			
+			<button [ngClass]="{'red-g': error}" *ngIf="content==='save'" (click)="loading($event,2000);" type="submit" class="button" >Save Configuration</button>
+			
+			<form *ngIf="content==='share'" class="p0 save4customer" (ngSubmit)="save4customer($event.target, product.sku)">
+				<div class="field has-addons1">
+				  <div class="control">
+				    <input class="input" type="email" id="email" placeholder="email">
+				  </div>
+				</div>
+			  	<button [ngClass]="{'red-g': error}" (click)="loading($event,2000);" type="submit" class="button" >Share Configuration</button>
+			</form>
+
+		</div>
+		
+	</form>
+
+
+	<div class="adminoptions clearfix" *ngIf="mode.edit">
+		<br><p class="or"><span>Admin Options</span></p>
+		<div class="field has-addons pull-right">
+			<button (click)="save_preConfig(product.sku);loading($event,2000);" class="button  red-g">Save as Pre-Config</button>
+		</div>
+	</div>
+
+
+
+
+	<!-- not logged in -->
+	<div class="no-auth-msg" *ngIf="!mode.auth">
+		<p class="curly centerer">Please login before using this feature.</p>
+	</div>
+
+
+	<!-- no-config -->
+	<ng-container *ngIf="configs">
+		<div class="no-auth-msg actually-no-config" *ngIf="mode.auth && configs.length<1">
+			<p class="centerer dark">No Configs Selected</p>
+		</div>
+	</ng-container>
+
+
+</div>
+
+
+
+
+
+
+<div id="collab" *ngIf="content==='collab'" class="p2em pt0">
+	<h3>Your Configurator ID</h3>
+	<p class="h33">Share your configuration id with desired collaborator(s).</p>
+	<h1><pre class="blue">{{config_id}}</pre></h1>
+	<!-- <p class="or mute"><span>or</span></p> -->
+	<hr>
+	<h3>Join Another Configurator Session</h3>
+	<p class="h33">Use someone's configurator id to join their session.</p>
+	<div class="field has-addons">
+		<div class="control">
+			<input [(ngModel)]="join" name="join" class="input" type="text" placeholder="configurator ID" [ngClass]="{'disable': joined}">
+		</div>
+		<div class="control">
+			<a *ngIf="!joined" class="button is-info" routerLink="{{joinURL(join)}}" [queryParams]="{ join: join}" (click)="loading($event,2000);">
+			Join
+			</a>
+			<button *ngIf="joined" class="button red-g is-info" routerLink="./" (click)="loading($event,2000);" [queryParams]="{}">
+			clear Join
+			</button>
+		</div>
+	</div>
+	<ng-container *ngIf="!mode.auth">
+		<p class="mono fwb red" *ngIf="!joined">You will join as <em>anonymous</em> because you are not logged in.</p>
+		<p class="mono fwb red" *ngIf="joined">You are joined as <em>anonymous</em> because you are not logged in.</p>
+	</ng-container>
+</div>
+
+
+
+
+
+
+<!-- </ng-container> -->

@@ -1,0 +1,54 @@
+<!-- <form (ngSubmit)="onAddConfigurable(product,1)"> -->
+<!-- <p (click)="show_builder=!show_builder">Show</p> -->
+
+
+<ng-container *ngIf="show_builder || mode.edit || submitted else config_trigger">
+	<form>
+
+		<builder-options
+			[product]="product"
+			(optionSelected)="optionSelectedEvent($event)"
+		></builder-options>
+
+
+		<!-- add to car column -->
+		<div class="summary level hide">
+			<div class="submit level-left">
+				<h4 class="level-item chat">
+					<div class="clearfix">
+					<a>
+						<fa [name]="'comments'"></fa>
+						Have a Question?
+					</a>
+					</div>
+				</h4>
+			</div>
+			<div class="submit level-right">
+				<p class="level-item total" *ngIf="configs">{{calculate_price()|currency}}</p>
+				<a class="button add level-item" (click)="addtocart();loading($event,500);">Add to cart</a>
+			</div>
+		</div>
+
+	</form>
+</ng-container>
+
+<ng-template #config_trigger>
+	<a style="display: inline-block;" class="button add level-item" (click)="toggleBuilder(true); loading($event,500);">Configure</a>
+</ng-template>
+
+
+
+<!-- save as preconfig modal -->
+<modal  *ngIf="save_modal" (closeModal)="save_modal=false">
+	<div class="box">
+		<save-config-form 
+			[product]="product"
+		></save-config-form>
+	</div>
+</modal>
+
+
+
+
+
+

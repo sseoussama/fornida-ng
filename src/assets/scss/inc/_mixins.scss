@@ -1,0 +1,114 @@
+
+
+@mixin ease($speed) {
+-webkit-transition: all $speed ease-in-out;
+   -moz-transition: all $speed ease-in-out;
+     -o-transition: all $speed ease-in-out;
+    -ms-transition: all $speed ease-in-out;
+        transition: all $speed ease-in-out;
+}
+
+
+
+@mixin delay($delay) {
+          animation-delay:$delay;
+  -webkit-animation-delay:$delay;
+     -moz-animation-delay:$delay;
+       -o-animation-delay:$delay;
+}
+
+
+@mixin ani($delay, $name, $dur) {
+    -webkit-animation-duration: $dur;
+    animation-duration: $dur;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: $name;
+    animation-name: $name;
+          animation-delay:$delay;
+  -webkit-animation-delay:$delay;
+     -moz-animation-delay:$delay;
+       -o-animation-delay:$delay;
+}
+
+
+@mixin dur($adur) {
+        animation-duration:$adur;
+-webkit-animation-duration:$adur;
+   -moz-animation-duration:$adur;
+     -o-animation-duration:$adur;
+}
+
+@mixin blur($blur) {
+           filter: blur($blur);
+      -moz-filter: blur($blur);
+   -webkit-filter: blur($blur);
+}
+@mixin fixed_cover() {
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@mixin rotate($deg) {
+    -ms-transform: rotate($deg);
+    -webkit-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+
+
+@mixin newFont($fontName) {
+  @font-face {
+      src: url('../fonts/$fontName.eot');
+      src: url('../fonts/$fontName.eot') format('embedded-opentype'),
+           url('../fonts/$fontName.woff2') format('woff2'),
+           url('../fonts/$fontName.woff') format('woff'),
+           url('../fonts/$fontName.ttf') format('truetype'),
+           url('../fonts/$fontName.svg#$fontName') format('svg');
+  }
+}
+
+
+.imgreflect{
+  -webkit-box-reflect: below 2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(85%, transparent), to(rgba(0, 0, 0, 0.35)));
+}
+
+//-- Coverer --//
+@mixin coverer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+//-- Centerer --//
+@mixin centerer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centerer{
+  @include centerer;
+}
+
+
+
+/* Mixin */
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.v-center{
+  @include vertical-align;
+}
+/*use*/
+// .element p {
+//   @include vertical-align();
+// }

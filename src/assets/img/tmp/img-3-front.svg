@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1473 801.063">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-img-3-front);
+      }
+
+      .cls-2 {
+        fill: #1489dd;
+      }
+
+      .cls-3 {
+        fill: #fff;
+        font-size: 47px;
+        font-family: HandelGothicBT-Regular, HandelGothic BT;
+        letter-spacing: -0.011em;
+      }
+
+      .cls-4 {
+        filter: url(#Ellipse_14);
+      }
+    </style>
+    <filter id="Ellipse_14" x="212.974" y="19.005" width="244.052" height="244.052" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.235"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-img-3-front">
+      <rect width="1473" height="801.063"/>
+    </clipPath>
+  </defs>
+  <g id="img-3-front" class="cls-1">
+    <g class="cls-4" transform="matrix(1, 0, 0, 1, 0, 0)">
+      <circle id="Ellipse_14-2" data-name="Ellipse 14" class="cls-2" cx="113.026" cy="113.026" r="113.026" transform="translate(221.97 28.01)"/>
+    </g>
+    <text id="Server_Ad_Here" data-name="Server
+Ad Here" class="cls-3" transform="translate(335.089 129.518)"><tspan x="-77.641" y="0">Server</tspan><tspan x="-91.726" y="56">Ad Here</tspan></text>
+  </g>
+</svg>

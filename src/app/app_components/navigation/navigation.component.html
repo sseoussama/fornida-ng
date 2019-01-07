@@ -1,0 +1,74 @@
+<div id="navigation" >
+	<div class="level navigation-list" *ngIf="CategoryTree">
+		
+
+		<!-- parent -->
+		<a 
+			class="level-item navigation-itemm"
+			*ngFor="let parent of CategoryTree | isvisible"
+			id="category-{{parent.id}}"
+			routerLink="/category{{parent.url}}/all"
+			routerLinkActive="active"
+			(mouseenter)="childnav_open($event, parent)"
+			(mouseleave)="childnav_close($event, parent)"
+		>{{parent.name}}
+			
+			<!-- children (mega2) -->
+			<div class="children  open-{{parent.childnav1}}">
+				<div class="columns child-content is-multiline is-centered">
+					<div *ngFor="let child of parent.children| isvisible" class="child-item pr column" >
+						<a
+							*ngIf="categories[child.id]"
+							id="category-{{child.id}}"
+							routerLink="/category{{child.url}}"
+							routerLinkActive="active"
+							[attr.parent_id]="parent.id"
+						>
+							<div class="img-container">
+								<img src="{{categories[child.id].image_url || 'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}}">
+							</div><br>
+							{{child.name}}
+						</a>
+						<!-- <ng-container *ngTemplateOutlet="child_context;context:child"></ng-container> -->
+					</div>
+				</div>
+			</div>
+
+		</a>
+
+		<!-- support -->
+		<a
+			routerLink="/support"
+			routerLinkActive="active"
+			class="level-item navigation-itemm"
+		>
+			support
+		</a>
+
+
+	</div>
+</div>
+
+
+
+<!-- <ng-template #child_context let-id="id">
+<context [zone]="'.child-item'" [menu]="'child-context-'+id">
+	<form (ngSubmit)="onImgChange($event)">
+
+		<p class="form-g">
+			<label class="mono">img_url</label>
+			<input type="text" id="img_url" name="img_url" required>
+		</p>
+
+        <hr>
+        <input type="submit" value="publish" class="button green-bg white">
+
+	</form>
+</context>
+</ng-template> -->
+
+
+
+<!-- <div class="mega-contain" *ngIf="mega&&p">
+	<mega-nav [parent]="p"></mega-nav>
+</div> -->

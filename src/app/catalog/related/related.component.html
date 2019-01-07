@@ -1,0 +1,22 @@
+<div class="p2em"></div>
+
+<div id="related" *ngIf="related?.length>1">
+	<h2>Related Products</h2>
+	
+	<div class="columns scrollx is-multiline">
+		
+		<div class="column is-3" *ngFor="let p of related | slice:0:L;" [class.hide]="!dup(p.id, product.id)">
+			<product-card *ngIf="dup(p.id, product.id)" [product]='p' db></product-card>
+		</div>
+
+		<!-- extra 1 if duplicate -->
+		<ng-container [attr.hidden]="extra">
+		<div class="column is-3" *ngIf="related[L]">
+			<product-card [product]='related[L]' db></product-card>
+		</div>
+		</ng-container>
+
+	</div>
+
+</div>
+

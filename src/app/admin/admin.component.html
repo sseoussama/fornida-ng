@@ -1,0 +1,32 @@
+<div id="admin">
+	<div class="container">
+		<div class="p1em"></div>
+
+		<!-- admin-menu -->
+		<ul class="admin-menu inline">
+			<li class="item" *ngFor="let topic of topics">
+				<a class="inner" routerLink="/admin" [queryParams]="{content:topic.content}" [ngClass]="{'active': content===topic.content}">
+					{{topic.name}}
+				</a>
+			</li>
+		</ul>
+
+
+		<!-- content -->
+		<div class="admin-content">
+			
+			<!-- builds -->
+			<admin-builds
+				*ngIf="content==='builds' && stashed"
+				[builds]="stashed"
+			></admin-builds>
+
+			<!-- inbox -->
+			<admin-inbox *ngIf="content==='inbox'"></admin-inbox>
+
+		</div>
+
+
+	</div>
+</div>
+<div class="p2em"></div>

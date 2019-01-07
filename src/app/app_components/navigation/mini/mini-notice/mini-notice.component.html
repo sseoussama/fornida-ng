@@ -1,0 +1,25 @@
+<div id="activity-list">
+	<div class="p1em ahead">
+		<h3>Activity</h3>
+	</div>
+	<div class="scroll" *ngIf="activity">
+		<ng-container *ngIf="activity.length">
+			<pre *ngIf="mode.dev">{{activity|json}}</pre>
+			<div
+				class="activity-item"
+				*ngFor="let item of activity"
+				[ngClass]="{'seen': item.seen}"
+				(click)="markItemSeen(item)"
+			>
+				<a class="inner" *ngIf="item.msg" routerLink="{{item.link}}">
+					<p class="category {{item.color}}">{{item.title}}</p>
+					<p class="msg" [innerHTML]="item.msg"></p>
+					<p class="date">
+						<i class="fa fa-calendar"></i>
+						{{item.created|date:'medium'}}
+					</p>
+				</a>
+			</div>
+		</ng-container>
+	</div>
+</div>

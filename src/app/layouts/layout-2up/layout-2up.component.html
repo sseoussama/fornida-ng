@@ -1,0 +1,31 @@
+<div id="zone2" class="homeify type-style-1 tac pt0">
+
+	<div class="home-sec">
+		<div class=" ">
+			<h2 class="blue">Super cool section</h2>
+			<h3>Get exactly what<br> your company needs</h3>
+		</div>
+	</div><br>
+
+	<div class="columns cols is-centered is-mobile" data1-rellax-speed="2">
+		<a 
+			class="column pr zone-item is-6 item-{{zone.id}}"
+			*ngFor="let zone of data; let i = index"
+			id="zone2_{{i}}"
+			href="{{zone.href}}"
+		>
+			<div class="columns inner-cols light-bg m0">
+				<div class="column col-img is-8">
+					<img src="{{zone.img}}">
+				</div>
+				<div class="column col-copy pr">
+					<div class="centerer">
+						<h2 class="tal">{{zone.title}}</h2>
+						<a class="nobox blue">Check it Out</a>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+	
+</div>

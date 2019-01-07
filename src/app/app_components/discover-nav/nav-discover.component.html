@@ -1,0 +1,43 @@
+<div class="dicover-nav">
+
+<!-- discover button -->
+<a class="dicover-btn button centerer mono">
+	catelogue
+</a>
+
+<!-- nav start -->
+<div class="bb" data-sticky-class="stick" data-sticky-wrap="false">
+	<div class="content-container" id="nav">
+		<div class="nav-contain is-mobile">
+
+			<div 
+				class="nav-itemm" 
+				id="category-{{category.id}}"
+				*ngFor="let category of CategoryTree | isvisible"
+			>
+				<a
+					routerLink="/category{{category.url}}/all"
+					routerLinkActive="active"
+				>
+					<fa [name]="names.get(category.id)"></fa>
+					<p class="mono">{{category.name}}</p>
+				</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+<!-- <div id="highlights" *ngIf="!subs">
+	<ul class="inline">
+		<li><a class="mono_">Learning Center</a></li>
+		<li><a class="mono_">Discover</a></li>
+		<li><a class="mono_">Contact Us</a></li>
+		<li><a class="mono_">Account</a></li>
+		<li><a class="mono_">FAQs</a></li>
+	</ul>
+</div> -->
+</div>
+

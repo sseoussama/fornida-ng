@@ -1,0 +1,129 @@
+
+<div class="config-wizard container">
+	
+
+	
+
+	<!-- tabs -->
+	<div class="wz-tabs">
+		<div class="wz-list">
+			<div (click)="onTab($event,'brand')" class="wz-itm">Brand</div>
+			<div (click)="onTab($event,'type')" class="wz-itm">Server Type</div>
+			<div (click)="onTab($event,'server')" class="wz-itm">Server</div>
+			<div (click)="onTab($event,'configurations')" class="wz-itm">Configure</div>
+			<!-- <div (click)="onTab($event,'one')" class="wz-itm">One More</div> -->
+		</div>
+		<div class="underline"></div>
+	</div>
+	
+
+
+
+
+
+	<!-- content -->
+	<div class="wz-inner">
+		
+		
+		<!-- brand -->
+		<div class="wz-content" [hidden]="content !== 'brand'">
+			<div class="sec-head">
+				<h2>Select a Brand</h2>
+				<p class="f">Say something here that will assist your users in making the best choice for their needs.</p>
+			</div>
+			<div class="columns is-centered is-multiline">
+				<div 
+					class="column option-box is-3" 
+					*ngFor="let brand of brands"
+				>
+					<input hidden name="brand" type="radio" id="{{brand.slug}}" (change)="chose_brand($event, brand)">
+					<label class="inner" (click)="nextTab()" for="{{brand.slug}}">
+						<div class="img"><img src="{{brand.img}}"></div>
+						<h3>{{brand.label}}</h3>
+						<div class="check">
+							<i class="fa fa-check-circle"></i>
+						</div>
+					</label>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!-- server type -->
+		<div class="wz-content" [hidden]="content !== 'type'">
+			<div class="sec-head">
+				<h2>Now Choose the Server Type</h2>
+				<p class="f">Say something here that will assist your users in making the best choice for their needs.</p>
+			</div>
+			<div class="columns is-centered is-multiline">
+				<div 
+					class="column option-box is-3" 
+					*ngFor="let type of types"
+				>
+					<input hidden name="type" type="radio" id="{{type.slug}}" (change)="chose_type($event, type)">
+					<label class="inner" (click)="nextTab()" for="{{type.slug}}">
+						<div class="img"><img src="{{type.img}}"></div>
+						<h3>{{type.label}}</h3>
+						<div class="check">
+							<i class="fa fa-check-circle"></i>
+						</div>
+					</label>
+				</div>
+			</div>
+		</div>
+		
+
+		<!-- servers -->
+		<div class="wz-content servers" [hidden]="content !== 'server'">
+			<choose-server
+				[Products]="Products"
+				(selection)="chose_product($event)"
+			></choose-server>
+
+			<div class="tac">
+				<p class="b red" *ngIf="!Products?.length && !loading">No Products</p>
+				<div *ngIf="loading">
+					<p class="b">Loading...</p> <br>
+					<div class="prob" *ngIf="loadProblem">
+						<p class="b red">There Was a Problem</p><br>
+						<a class="button" (click)="getProducts(params)">Retry</a>
+					</div>
+					<!-- <div class="prob" *ngIf="no_product">
+						<p class="b">{{no_product}}</p><br>
+					</div> -->
+				</div>
+			</div>
+
+		</div>
+		
+
+		<!-- pre-configs -->
+		<div class="wz-content" [hidden]="content !== 'configurations'">
+			<div class="sec-head">
+				<h2>Pre-Configs coming...</h2>
+				<p class="f">Say something here that will assist your users in making the best choice for their needs.</p>
+			</div>
+			<a (click)="editorContent=true" class="button">JSON: Pre Configs</a>
+			<pre *ngIf="pre_configs">{{pre_configs|json}}</pre><br>
+			<pre>{{selected_product|json}}</pre>
+		</div>
+		
+	</div>
+
+
+	<!-- <pre>{{params|json}}</pre><br> -->
+
+
+	<json-viewer 
+		*ngIf="editorContent"
+		(closeModal)="editorContent=null"
+		[data]="pre_configs"
+	></json-viewer>
+	
+	<div class="p2em"></div><hr>
+	<div class="p2em"></div>
+	<div class="p2em"></div>
+	<div class="p2em"></div>
+
+
+</div>

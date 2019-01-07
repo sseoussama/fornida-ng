@@ -1,0 +1,99 @@
+@import "../../../assets/scss/inc/colors";
+@mixin ease($speed) {-webkit-transition: all $speed ease-in-out; -moz-transition: all $speed ease-in-out; -o-transition: all $speed ease-in-out; -ms-transition: all $speed ease-in-out; transition: all $speed ease-in-out; }
+@mixin centerer {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.pointer {cursor: pointer;}
+
+#zone3 {
+    .home-sec {
+        padding-bottom: 3em;
+    }
+    .content-area {
+        position: relative;
+        .figure {
+            width: 100%;
+            position: relative;
+            .pulse-ring {
+                position: absolute;
+                top: 25%;
+                left: 43%;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+            .withcopy {
+                margin: 3em auto;
+                width: 100%;
+                .images-container {
+                    width: 37%; // biggest col
+                    .images {
+                        width: 100%;
+                        position: relative;
+                        height: 100%;
+                        margin-top: 1.5em;
+                        img{
+                            width: 100%;
+                            object-fit: cover;
+                            height: auto;
+                            @include ease(0.2s);
+                            opacity: 0;
+                            &.o1 {opacity: 1;}
+                        }
+                    }
+                }
+                .cto-copy {
+                    text-align: left;
+                    &.left {
+                        text-align: right;
+                    }
+                    a.ref {
+                        display: block;
+                        &:hover {
+                            a:after {
+                                color: $dark;
+                                padding-left: 0.8em;
+                            }
+                            a:before {
+                                color: $dark;
+                                padding-right: 0.8em;
+                            }
+                        }
+                        &.active {
+                            a:after, a:before {
+                                color: $green;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+    @media (max-width: 1024px) {
+        .images-container,
+        a:before,
+        a:after {
+            display: none;
+        }
+        .columns {
+            display: inline-block;
+        }
+        .right,.left,h2 {
+            text-align: center !important;
+            width: 100% !important;
+            padding: 0;
+            hr {
+                display: none;
+            }
+            a.ref {
+                padding: 1em 0;
+                border-bottom: 1px solid #ccc;
+            }
+        }
+        .mobile-only.image {
+            padding: 0 3em;
+        }
+    }
+}
+
+
+
+

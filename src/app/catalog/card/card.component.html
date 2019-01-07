@@ -1,0 +1,33 @@
+<article class="product">
+	<div class="inner">
+		<div class="another1" id="khaled">
+			<div class="img-c" routerLink="/product/{{product.id}}">
+				<product-image class=""
+					[carousel]="false"
+					[product_id]="product.id"
+					[images]="product.images"
+					[limit]="1"
+					[image_id]="0"
+				></product-image>
+			</div>
+			<small>{{product.sku}}</small>
+			<div class="name_container">
+				<p class="b">{{ (product.name.length>45)? (product.name | slice:0:45)+'...':(product.name) }}</p>
+			</div>
+			<p class="price b">{{product.price|currency}}</p>
+			
+			<div class="fixed-tools">
+				<div class="left info"><fa [name]="'info-circle'"></fa></div>
+
+				<div class="right banner" *ngIf="isConfig;else quickAdd">
+					Configurable
+				</div>
+				<ng-template #quickAdd>
+					<div class="right qty_controls">
+						<cart-qty [product]="product"></cart-qty>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</article>

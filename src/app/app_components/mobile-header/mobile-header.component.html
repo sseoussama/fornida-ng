@@ -1,0 +1,44 @@
+<!-- header -->
+<div class="mobile-header">
+  
+  <div class="columns m0p0">
+    
+    <!-- menu icon -->
+    <div class="column m0p0">
+      <div class="m-icons-menu">
+        <ul class="inline">
+            <li><a (click)="navOpen=!navOpen">
+              <i *ngIf="!navOpen" class="fas fa-bars"></i>
+              <i *ngIf="navOpen" class="far fa-times-circle"></i>
+          </a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- logo -->
+    <div class="column m0p0 item-logo">
+      <div routerLink="/" class="m-logo" (click)="navOpen=false">
+        <img src="assets/img/logo.png" alt="" class="m-logo-img pointer">
+      </div>
+    </div>
+    
+    <!-- cart icon -->
+    <div class="column m0p0 tar">
+      <div class="m-icons-menu" (click)="navOpen=false">
+        <ul class="inline">
+          <li><a routerLink="/cart"><fa [name]="'fa fa-shopping-basket'"></fa></a></li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+  
+</div>
+
+<div class="m-ghost"></div>
+
+
+
+
+<!-- mobile nav -->
+<mobile-nav *ngIf="navOpen" [mode]="mode"></mobile-nav>

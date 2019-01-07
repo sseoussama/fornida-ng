@@ -1,0 +1,107 @@
+@import "../../../assets/scss/inc/colors";
+@import "../../../assets/scss/inc/responsive";
+
+%gradient-over {position: relative;z-index: 2;}
+%is-narrow {-webkit-box-flex: 0; -ms-flex: none; flex: none;}
+.pointer {cursor: pointer;}
+@mixin centerer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+%cover {
+	content: " ";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+$dark_mix: rgba(#000,0.6);
+$dark_mix2: rgba(darken($dblue, 0.5%),0.95);
+.layout-dark {
+	position: relative;
+	background: blue;
+	min-height: 20em;
+	margin: 5.5em 0;
+	opacity: 1;
+	transform: translate3d(0,0,0);
+	.top-content {
+	    display: block;
+	    position: relative;
+	    z-index: 1;
+	}
+	&:after {
+		@extend %cover;
+		@include grad(90deg, $dark_mix, $dark_mix, cover);
+	}
+	&.content-1 {
+		background: url("/assets/img/tmp/sekil.jpg");
+	    background-size: cover;
+	    background-attachment: fixed;
+	    // padding: 3em 0;
+	}
+	&.content-2 {
+		background: url("/assets/img/tmp/server-room.jpg");
+	    background-size: cover;
+	    background-attachment: fixed;
+	    .type-style-1 {
+	    	padding: 5em 0;
+	    	padding-bottom: 5.5em;
+	    }
+	}
+	.ll {
+		@include bp(L-tablet) {
+			width: 70%;
+		}
+		@include bp(L-tablet) {
+			width: 85%;
+			padding-left: 1em;
+		}
+	}
+}
+
+
+$badge_pad: 8em;
+.home-badges {
+	padding: $badge_pad 0;
+	padding-bottom: $badge_pad -4;
+	font-size: 0.9em;
+	h3 {
+		font-size: 2.3em;
+		text-align: left;
+	}
+	p {
+		text-align: left;
+		max-width: 95%;
+		font-size: 1.1em;
+		font-weight: 400;
+	}
+	.badge-item {
+		padding-bottom: $badge_pad -2;
+		.imgr {
+			width: 7em;
+			height: 7em;
+			@extend .light-g;
+			border-radius: 100%;
+			margin: 0 auto;
+			img {
+				padding: 1em;
+			}
+		}
+	}
+	@include bp(M-tablet) {
+		.badge-item.column {
+			width: 100%;
+			margin-bottom: 2em;
+		}
+	}
+}
+
+
+
+
+
+

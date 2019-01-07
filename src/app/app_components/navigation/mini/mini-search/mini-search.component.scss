@@ -1,0 +1,73 @@
+@import "../../../../../assets/scss/inc/colors";
+form#search {
+	width: 100%;
+}
+
+.columns, .column {
+	padding: 0;
+	margin: 0;
+}
+
+.drop-head {
+	border: 0 !important;
+}
+
+.drop-body{
+	padding: 2em;
+	padding-left: 0;
+	padding-top: 0 !important;
+	max-height: 29em;
+	overflow: scroll;
+	.item{
+		padding: 0.4em 0.2em;
+		padding-left: 0;
+		&:first-child {
+			padding-top: 0;
+		}
+		.inner{
+			background: rgba(#000,0.1);
+			border-top-right-radius: 4em;
+			border-bottom-right-radius: 4em;
+			padding: 0.5em;
+			border: 2px solid transparent;
+			cursor: pointer;
+			&:hover {
+				border: 2px solid #fff;
+				cursor: pointer;
+			}
+		}
+		h2 {
+			border: 0;
+			font-size: 0.9em;
+			font-weight: 500;
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+		p.b {
+			color: #fff;
+		}
+		p.mono {
+			color: $yellow;
+			font-weight: bold;
+		}
+		.right-col {
+			position: relative;
+			h3 {
+				font-weight: 600;
+			    // font-style: italic;
+			    font-size: 1.1em;
+			    text-align: right;
+			    font-family: 'Ubuntu Condensed', 'Roboto', 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+			}
+		}
+	}
+	.results {
+		padding: 1em;
+		span {
+			color: $yellow;
+			font-weight: bolder !important;
+		}
+	}
+	
+}
+

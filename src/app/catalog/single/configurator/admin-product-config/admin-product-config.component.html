@@ -1,0 +1,28 @@
+<div class="admin-config">
+	
+	<!-- head -->
+	<div class="head">
+		<h2>Edit Product Configurations</h2>
+	</div>
+
+	<!-- bod -->
+	<div class="bod">
+		<div id="jsoneditor"></div>
+	</div>
+
+	<!-- foot -->
+	<div class="fot">
+		<div class="level">
+			<div class="level-left">
+				<a [ngClass]="{disabled: !changes}" (click)="save()" class="button green-bg">Save</a>
+				<a *ngIf="revert" (click)="revert_config()" class="button yellow-bg">Undo</a>
+			</div>
+			<div class="level-right">
+				<a (click)="close()" class="button dark-bg">Close</a>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+

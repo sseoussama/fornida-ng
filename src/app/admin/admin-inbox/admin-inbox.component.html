@@ -1,0 +1,172 @@
+<div id="admin-inbox" *ngIf="messages">
+
+	<!-- search -->
+	<div class="inbox-search">
+		<div class="field">
+		  <p class="control has-icons-left has-icons-right">
+		    <input class="input smooth" type="search" placeholder="Search..." [(ngModel)]="msgQuery">
+		    <span class="icon is-small is-right">
+		      <i class="fa fa-search"></i>
+		    </span>
+		  </p>
+		</div>
+	</div>
+
+
+	<!-- message columns -->
+	<div class="columns is-multiline">
+		<!-- each -->
+		<div class="column is-4" *ngFor="let item of messages | valSort:'date':true | filter:msgQuery as result">
+			<div class="card">
+			  <header class="card-header">
+			    <p class="card-header-title">{{item.full}}</p>
+
+			    <!-- remove -->
+			    <a class="card-header-icon rm" aria-label="Delete" (dblclick)="remove(item.key)">
+			      <span class="icon">
+			        <i class="fas fa-trash" aria-hidden="true"></i>
+			      </span>
+			    </a>
+
+			  </header>
+			  <div class="card-content" [ngClass]="{'expand':item.expand || item.content === 'comments'}">
+			    
+			    <ul class="inline nv">
+			    	<li (click)="item.content='details'">
+			    		<i [ngClass]="{'active': current(item, 'details') }" class="fas fa-list-ul"></i>
+			    	</li>
+			    	<li (click)="item.content='comments'"> 
+						<i [ngClass]="{'active': current(item, 'comments') }" class="fas fa-comment"></i>
+			    	</li>
+			    </ul>
+
+				<!-- expand trigger -->
+				<div class="expand_trigger" *ngIf="item.content !== 'comments'" (click)="item.expand=!item.expand;">
+			  		<span *ngIf="!item.expand">expand</span>
+			  		<span *ngIf="item.expand">close</span>
+			  	</div>
+				
+
+				<!-- details view -->
+			    <div class="content" *ngIf="current(item, 'details')">
+
+			      <!-- date -->
+			      <div class="card-info">
+			      	<div class="key">Date </div>
+			      	<div class="val">
+			      		<time datetime="2016-1-1">{{ item.date | date: 'short'}}</time>
+			      	</div>
+			      </div>
+
+			      <!-- reason -->
+			      <div class="card-info" *ngIf="item.reason">
+			      	<div class="key">reason </div>
+			      	<div class="val">{{item.reason}}</div>
+			      </div>
+
+			      <!-- desc -->
+			      <div class="card-info" *ngIf="item.desc">
+			      	<div class="key">Message </div>
+			      	<div class="val">{{item.desc}}</div>
+			      </div>
+
+			      <!-- order -->
+			      <div class="card-info" *ngIf="item.order">
+			      	<div class="key">Order </div>
+			      	<div class="val"><a target="_blank" href="https://store-2bihpr2wvz.mybigcommerce.com/manage/orders/{{item.order}}">{{item.order}}</a></div>
+			      </div>
+
+			      <!-- Company -->
+			      <div class="card-info" *ngIf="item.company">
+			      	<div class="key">Company </div>
+			      	<div class="val">{{item.company}}</div>
+			      </div>
+
+			      <!-- email -->
+			      <div class="card-info" *ngIf="item.email">
+			      	<div class="key">Email </div>
+			      	<div class="val"><a target="_blank" href="mailto:{{item.email}}">{{item.email}}</a></div>
+			      </div>
+
+			      <!-- phone -->
+			      <div class="card-info" *ngIf="item.phone">
+			      	<div class="key">phone </div>
+			      	<div class="val"><a target="_blank" href="tel:{{item.phone}}">{{item.phone}}</a></div>
+			      </div>
+
+			      <!-- bc link to customer -->
+			      <div class="card-info">
+			      	<div class="key">Lookup Customer</div>
+			      	<div class="val">
+			      		<a target="_blank" href="https://store-2bihpr2wvz.mybigcommerce.com/manage/customers?limit=20&page=1&keywords={{last(item.full)}}">By Last Name</a><br>
+			      		<a target="_blank" href="https://store-2bihpr2wvz.mybigcommerce.com/manage/customers?limit=20&page=1&keywords={{item.email}}">By Email</a>
+			      	</div>
+			      </div>
+
+			      <!-- bc link to order -->
+			      <div class="card-info">
+			      	<div class="key">Lookup Order</div>
+			      	<div class="val">
+			      		<a target="_blank" href="https://store-2bihpr2wvz.mybigcommerce.com/manage/orders?keywords={{last(item.full)}}">By Last Name</a><br>
+			      		<a target="_blank" href="https://store-2bihpr2wvz.mybigcommerce.com/manage/orders?keywords={{item.email}}">By Email</a>
+			      	</div>
+			      </div>
+
+			      <!-- products -->
+			      <div class="card-info" *ngIf="item.products">
+			      	<div class="key">Products Listed</div>
+			      	<div class="val">
+			      		<table>
+			      			<tbody>
+			      				<tr *ngFor="let p of item.products">
+			      					<td>{{p.sku}}</td>
+			      					<td *ngIf="p.qty">x {{p.qty}}</td>
+			      					<td>{{p.comments || '--'}}</td>
+			      				</tr>
+			      			</tbody>
+			      		</table>
+			      	</div>
+			      </div>
+			    </div> <!-- details -->
+
+				
+
+
+
+				<!-- comments view -->
+			    <div class="content" *ngIf="current(item, 'comments')">
+			    	<div class="control" >
+					  <textarea [(ngModel)]="item.comments" class="textarea" (ngModelChange)="comments=true" placeholder="put comments here"></textarea>
+					</div>
+					<br>
+					<a class="button" (click)="save(item)" *ngIf="comments">Save Comments</a>
+			    </div>
+
+
+			  </div>
+			    
+			  <div class="card-footer">
+			    <a 
+			    	[ngClass]="{'green-bg white':item.status==='handled'}"
+			    	(click)="status('handled',item); save(item)"
+			    	class="card-footer-item"
+			    >Handled</a>
+			    <a 
+			    	[ngClass]="{'red-bg white':item.status==='priority'}"
+			    	(click)="status('priority',item); save(item)"
+			    	class="card-footer-item"
+			    >Priority</a>
+			    <a 
+			    	[ngClass]="{'dark-bg white':item.status==='spam'}"
+			    	(click)="status('spam',item); save(item)"
+			    	class="card-footer-item"
+			    >Spam</a>
+			  </div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+<div class="p1em"></div>

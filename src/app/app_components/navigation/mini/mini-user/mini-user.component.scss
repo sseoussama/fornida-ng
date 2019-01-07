@@ -1,0 +1,105 @@
+@import "../../../../../assets/scss/inc/colors";
+
+h4{
+	&.active {
+		font-weight: bold;
+		color: $yellow;
+	}
+}
+
+.drop-body {
+	padding: 2em;
+    border: 0 !important;
+    padding-top: 0;
+}
+
+input.button {
+	width: 100%;
+	margin-top: 0.5em;
+	padding: 1em;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.drop-content {
+	padding-bottom: 0.5em;
+}
+.pointer {cursor: pointer;}
+.account-menu {
+	p.fwb {
+		padding-bottom: 0.5em;
+	}
+	a.level-item {
+		display: block;
+		background: rgba(#000,0.2);
+		border-radius: 3px;
+		margin: 0.2em;
+		padding: 1.5em 0;
+		text-align: center;
+		font-weight: bold;
+		@extend .pointer;
+		i {
+			font-size: 1.2em;
+			padding-bottom: 1em;
+		}
+		&:hover {
+			background: rgba(#000,0.3);
+		}&:active {
+			background: $green;
+		}
+	}
+}
+
+.social {
+	margin-bottom: 1em;
+	width: 100%;
+	&:first-child {
+		margin-top: 1em;
+	}
+}
+
+.drop-foot{
+	margin: 0;
+	margin: 1em auto;
+	text-align: center;
+	position: relative;
+	padding: 0.3em !important;
+    margin-top: 1.5em;
+    width: 80%;
+	.foot-pop{
+		margin: 0;
+		background: rgba(#000,0.3);
+		border-radius: 5em;
+		width: 100%;
+		padding: 0.3em;
+		position: relative;
+		// box-shadow: 1px 1px 20px rgba(#000,0.5);
+		// @include ani(0.6s, fadeInUp, 0.4s);
+		a.action{
+			color: #fff;
+			text-align: center;
+			position: relative;
+			z-index: 1;
+			transition: all 0.3s cubic-bezier(0.68, -0.30, 0.265, 1.30);
+		}
+	}
+	.bg{
+		border-radius: 5em;
+		margin: 0.3em;
+		@extend .light-bg;
+		position: absolute;
+		width: 50%;
+		right: 0;
+		height: 83%;
+		top: 0;
+		bottom: 0;
+		transition: all 0.3s cubic-bezier(0.68, -0.30, 0.265, 1.30);
+	}
+	.active-login {a.login{color: $dark !important;}}
+	.active-register {
+		.bg {
+			right: 47%;
+		}
+		a.register{color: $dark !important;}
+	}
+}

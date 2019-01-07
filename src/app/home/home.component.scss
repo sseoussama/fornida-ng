@@ -1,0 +1,116 @@
+@import "../../assets/scss/inc/colors";
+
+%gradient-over {position: relative;z-index: 2;}
+%is-narrow {-webkit-box-flex: 0; -ms-flex: none; flex: none;}
+.pointer {cursor: pointer;}
+@mixin centerer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+%narrow-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+    max-width: 95%;
+    margin: o auto;
+}
+
+@mixin ease($speed) {
+-webkit-transition: all $speed ease-in-out;
+   -moz-transition: all $speed ease-in-out;
+     -o-transition: all $speed ease-in-out;
+    -ms-transition: all $speed ease-in-out;
+        transition: all $speed ease-in-out;
+}
+
+.ff {
+    @include ease(0.2s);
+}
+
+
+#zone3 {
+    .home-sec {
+        padding-bottom: 3em;
+    }
+    .content-area {
+        position: relative;
+        .figure {
+            width: 100%;
+            position: relative;
+            .pulse-ring {
+                position: absolute;
+                top: 25%;
+                left: 43%;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+        .cto-copy {
+            text-align: left;
+            position: absolute;
+            top: 45%;
+            left: 72%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            // padding-bottom: 0.5em;
+            // margin-bottom: 0.5em;
+            // border-bottom: 1px solid darken($light,4%);
+            &.right {
+                left: inherit;
+                right: 55%;
+                text-align: right;
+            }
+            a.ref {
+                a:hover:after {
+                    color: $blue;
+                    padding-left: 0.8em;
+                }
+            }
+        }
+    }
+}
+
+
+#home {
+    padding: 4em 0;
+}
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .h-gradient {
+//     display: none;
+//     background-image: -webkit-linear-gradient(transparent, darken($lime, 30%) 30.6, $lime 68%, transparent);
+//     background-image: -o-linear-gradient(transparent, darken($lime, 30%) 30.6, $lime 68%, transparent);
+//     background-image: linear-gradient(transparent, darken($lime, 30%) 30.6, $lime 68%, transparent);
+//     background-repeat: no-repeat;
+//     background-size: 100%;
+//     //position
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     z-index: 0;
+// }

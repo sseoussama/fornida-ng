@@ -1,0 +1,140 @@
+@import '../../../../../assets/scss/inc/colors';
+
+h3 {
+	margin-bottom: 0.5em;
+}
+form{
+	padding: 1em;
+}
+.form-foot {
+	text-align: right;
+	margin-top: 1em;
+	.button {
+		margin-left: 0.4em;
+	}
+}
+
+.pull-right .button {
+	height: 36px !important;
+}
+$border: 1px solid rgba(#000, 0.1);
+.tabss {
+	border-bottom: $border;
+	.level-item {
+		// border-right: $border;
+		position: relative;
+		bottom: -1px;
+		background: $light;
+		.in {
+			text-align: center;
+			padding: 1em;
+			display: block;
+			font-size: 0.85em;
+			&:hover {
+				color: $red;
+			}
+			.mono {
+				// display: none;
+				font-weight: bold;
+			}
+			i {
+				padding-bottom: 0.25em;
+				font-size: 1.75em;
+				display: none;
+			}
+		}
+		&:first-child {
+			border-right: 0;
+		}
+		&.active {
+			border: $border;
+			border-bottom: 2px solid #fff;
+			border-top: 0;
+			background: #fff;
+			.in{
+				&:hover {
+					color: initial !important;
+				}
+			}
+		}
+	}
+}
+
+p.h33 {
+	margin-top: -0.7em;
+	margin-bottom: 1em;
+	text-align: left;
+}
+.save_config {
+}
+
+#collab {
+	pre {
+		text-transform: initial;
+		font-size: 0.7em;
+		padding: 0.2em 0.5em;
+	}
+}
+
+h2 {
+	border: 0;
+}
+
+input.error {
+	border: 1px solid red !important;
+}
+
+
+
+
+
+
+.no-auth-msg {
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(#fff, 0.8);
+	// color: #fff;
+	p {
+		text-align: center;
+		font-weight: bold;
+		font-size: 1.2em;
+		width: 100%;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

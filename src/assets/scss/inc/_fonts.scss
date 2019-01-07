@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500,600,700|Ubuntu+Condensed&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext');
+
+
+@mixin newFont($fontName) {
+	@font-face {
+	    src: url('/fonts/$fontName/$fontName.eot');
+	    src: url('/fonts/$fontName/$fontName.eot') format('embedded-opentype'),
+	         url('/fonts/$fontName/$fontName.woff2') format('woff2'),
+	         url('/fonts/$fontName/$fontName.woff') format('woff'),
+	         url('/fonts/$fontName/$fontName.ttf') format('truetype'),
+	         url('/fonts/$fontName/$fontName.svg#$fontName') format('svg');
+	}
+}
+
+//================ ChronicleDisplay-Bold ================//
+@include newFont(ChronicleDisplay-Bold);
+
+
+
+
+.opens{
+	font-family: 'Roboto', 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.ubuntu{
+	font-family: 'Ubuntu Condensed', 'Roboto', 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+
+
+.curl{
+	font-family: 'GFS Didot', serif;
+	font-style: italic;
+}
+
+.mono{
+	// font-family: 'Montserrat', 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+	font-family: 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+	text-transform: uppercase;
+	letter-spacing: .15em;
+	text-transform: uppercase;
+	font-size: 11px;
+	// color: #565b73;
+	margin-bottom: 6px;
+	font-weight: 500;
+}
+.mono2{
+    font-weight: bold;
+    font-family: mono, 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    letter-spacing: 0.0em;
+}
+
+
+
+
+
+

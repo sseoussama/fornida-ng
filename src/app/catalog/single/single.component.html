@@ -1,0 +1,152 @@
+<!-- <div class="whiteout"></div> -->
+<!-- <div class="p2em"></div> -->
+<div class="container">
+
+    
+<div id="product-view" *ngIf="product?.id && reload">
+	<div class=" pr">
+
+		<option-anchors *ngIf="loadBuilder && show_builder && product.custom_fields[0]?.name==='use_builder'" [product]="product"></option-anchors>
+
+		<div class="columns m0 is-multiline">
+			
+			<!-- left -->
+			<div class="column mn is-7 gallery x pl0" [ngClass]="{narrow: product.custom_fields[0]?.name!='use_builder'}">
+				<div class="left st fill" >
+					<product-image
+						class=""
+						*ngIf="reload"
+						[product_id]="product.id"
+						[carousel]="true"
+						[size]="'url_standard'"
+						[limit]="20"
+						[image_id]="null"
+						[loadTime]="2000"
+						[images]="product.images"
+					></product-image>
+					<br>
+					<ng-container *ngIf="loadBuilder">
+						<config-summary
+							*ngIf="product.custom_fields[0]?.name==='use_builder'"
+							[product]="product"
+							[show_builder]="show_builder"
+						></config-summary>
+					</ng-container>
+				</div>
+
+
+			</div>
+			
+			<!-- right -->
+			<div class="column mn details" id="Test">
+				<p class="b">{{variant?.sku||product.sku}} | {{product.id}}</p>
+				<h1>{{product.name}}</h1>
+				<p class="desc">
+					<!-- HPE Server Enterprise Hard Drives are ideal for transaction processing, database applications, big data analytics and high-performance computing.<br> -->
+					<!-- <a href="#desc" class="p0">More <fa [name]="'chevron-right'"></fa></a> -->
+				</p>
+				<br>
+
+				
+				<!-- configurator -->
+				<ng-container *ngIf="loadBuilder">
+					<configurator
+						*ngIf="product.custom_fields[0]?.name==='use_builder';else normalAction"
+						[product]="product"
+						(toggle_builder)="show_builder=$event"
+					></configurator>
+				</ng-container>
+				
+
+				
+				<!-- Normal simple / configurable products -->
+				<ng-template #normalAction>
+					<form (ngSubmit)="onAddToCart(product,1)">
+						<product-options
+							*ngIf="product.option_set_id"
+							[product]="product"
+							(optionSelected)="optionSelectedEvent($event)"
+						></product-options>
+						<!-- add to car column -->
+						<div class="summary level">
+							<div class="submit level-left">
+								<!-- <h4 class="level-item chat">
+									<a>
+										<fa [name]="'comments'"></fa>
+										Have a Question?
+									</a>
+								</h4> -->
+								<!-- qty -->
+								<p class="level-item total">{{product.price|currency}}</p>
+							</div>
+							<div class="submit level-right">
+					        	<number-field
+					        		[model]="simpleQty"
+					        		[onLightBg]="true"
+					        		(valChange)="simpleQty=$event"
+					        	></number-field>
+								<a class="button add level-item" (click)="onAddToCart(product,simpleQty); loading($event,2000);">Add to Cart</a>
+							</div>
+						</div>
+					</form>
+				</ng-template>
+
+
+
+
+			</div>
+		</div>
+	</div>
+	
+	<br>
+	<div class="feature-copy" *ngIf="product" [innerHtml]="product.description"></div>
+	<related-products [product]="product" *ngIf="reload"></related-products>
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<div class="admin-only" *ngIf="product?.id && mode.dev">
+	<h2>Dev Only <code>{{product.id}}</code></h2>
+
+	<a *ngIf="product.custom_fields[0]?.name==='use_builder';else converta" (click)="remove_builder(product)">Remove Builder</a>
+	
+	<ng-template #converta><a (click)="convert(product)">Convert to a configurable product</a></ng-template>
+
+	<a href="https://store-2bihpr2wvz.mybigcommerce.com/manage/products/{{product.id}}/edit" target="_blank">BigCommerce Admin</a>
+
+	<a href="http://fornida.mybigcommerce.com/{{product.custom_url.url}}" target="_blank">BigCommerce FrontEnd</a>
+	<button (click)="editorContent=product">View Product JSON</button>
+	<button (click)="generateSitemap()">Generate sitemap</button>
+	<button (click)="syncProducts()">Sync Products</button>
+</div>
+
+
+<json-viewer 
+	*ngIf="editorContent"
+	(closeModal)="editorContent=null"
+	[data]="editorContent"
+></json-viewer>
+
+
+
+
+
+</div> <!-- container -->

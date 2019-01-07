@@ -1,0 +1,64 @@
+<!-- <div class="reveal" (click)="show=!show;">Show Components</div> -->
+
+<div class="configs-list m0" [ngClass]="{'show': show}" *ngIf="product">
+	
+	<div class="columns m0 p0">
+		<!-- <div class="column is-1"></div> -->
+
+		<div class="column m0 p0">
+			<table class="table is-hoverable is-fullwidth">
+				<thead>
+					<th>Component Name</th>
+					<th class="tar">Quantity</th>
+					<th class="tar">Unit</th>
+					<th class="tar">Total</th>
+				</thead>
+				<tbody>
+					<tr class="component"  
+						*ngFor="let component of product.components; let odd=odd; let even=even;"
+						[ngClass]="{ odd: odd, even: even }"
+					>
+
+							<!-- totals -->
+							<ng-container *ngIf="component.sku && !per">
+								<td class="name">
+								<a routerLink="/product/{{component.id}}">
+									{{component.name}}
+									<p class="sku b">{{component.id}}-{{component.sku}}</p>
+								</a>
+								</td>
+								<td class="qty tar">{{component.quantity * product.buildQty}}</td>
+								<td class="unit tar">{{component.price|currency}}</td>
+								<td class="total tar">{{component.price * component.quantity * product.buildQty | currency}}</td>
+							</ng-container>
+							
+							<!-- per build -->
+							<ng-container *ngIf="component.sku && per">
+								<td class="name">
+								<a routerLink="/product/{{product.id}}">
+									{{component.name}}
+									<p class="sku b">{{component.id}}-{{component.sku}}</p>
+								</a>
+								</td>
+								<td class="qty tar">{{component.quantity}}</td>
+								<td class="unit tar">{{component.price|currency}}</td>
+								<td class="total tar">{{component.price * component.quantity | currency}}</td>
+							</ng-container>
+					</tr>
+				</tbody>
+			</table>
+			<p class="tot">
+				<strong *ngIf="!per">Total: {{(product.total|currency) || 'null'}}</strong>
+				<strong *ngIf="per">Per Build: {{(product.per_total|currency) || 'null'}}</strong>
+			</p>
+			<div class="toggler" [attr.data-tooltip]="'Per Build Totals'" data-placement="right">
+				<input (change)="toggleQty($event)" class="tgl tgl-light" id="{{product.build_id}}" type="checkbox"/>
+				<label class="tgl-btn" for="{{product.build_id}}"></label>
+			</div>
+		</div>
+
+		<!-- <div class="column is-1"></div> -->
+	</div>
+
+	<div class="p1em"></div>
+</div>

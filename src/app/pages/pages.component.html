@@ -1,0 +1,40 @@
+<div class="p2em"></div>
+<div class="container page animated fadeInUp d2" *ngIf="page" id="{{page.slug}}">
+
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="realimage.gif" />
+
+	<article *ngIf="page.status==='published'; else notPublished" id="page" class="{{page.slug}}">
+		<h1 class="ubuntu">{{page.title}}</h1>
+		<p class="author b">by {{page.author}} &bull; {{page.date|date:'MM/dd/yyyy'}}</p>
+		<div class="image-data">
+			<div class="image-contain">
+				<img src="{{imageSrc}}" alt="">
+			</div>
+		</div>
+		<div class="article-body" [innerHTML]="page.content"></div>
+	</article>
+
+	<button *ngIf="mode.dev" (click)="editorContent=page">View Page Source</button>
+
+</div>
+
+
+
+
+<!-- not published message -->
+<ng-template #notPublished>
+  This Page Is Not Published Yet.
+</ng-template>
+
+
+<!-- json viewer -->
+<json-viewer 
+	*ngIf="editorContent"
+	(closeModal)="editorContent=null"
+	[data]="editorContent"
+></json-viewer>
+
+
+<div class="p2em"></div>
+<div class="p2em"></div>
+<div class="p2em"></div>

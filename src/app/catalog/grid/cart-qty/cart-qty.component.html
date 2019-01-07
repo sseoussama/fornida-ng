@@ -1,0 +1,29 @@
+
+<div *ngIf="cart_copy[product.sku]?.id || cart_copy[product.sku]?.quantity == 0; else addIcon" (mouseleave)="save(cart_copy[product.sku],product)">
+
+	<div (click)="increment(cart_copy[product.sku],product)" class="arr up">
+		<fa [name]="'chevron-up'"></fa>
+	</div>
+
+
+	<div class="qty">{{cart_copy[product.sku].quantity|json}}</div>
+
+
+	<div (click)="decrement(cart_copy[product.sku],product)" class="arr down">
+		<fa [name]="'chevron-down'"></fa>
+	</div>
+
+</div>
+
+
+
+<ng-template #addIcon>
+	<div class="right add-icon" (click)="onAddToCart($event, product, 1)">
+		<img class="ll hide" src="assets/img/load.svg">
+		<img class="aa" src="assets/img/addtocart.svg">
+	</div>
+</ng-template>
+
+<ng-template #edit>
+	<div [attr.data-tooltip]="'edit'" data-placement="bottom" routerLink="/product/{{product.id}}" class="right add-icon e"><i class="fa fa-pencil"></i></div>
+</ng-template>

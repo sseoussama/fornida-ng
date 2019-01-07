@@ -1,0 +1,86 @@
+<br>
+
+
+<form>
+
+
+	<!-- pre-config -->
+	<div class="form-section pre">
+	<div class="form-head" id="set-pre_configs">
+		<h3>Pre-Configurations</h3>
+		<a class="b">Click to see details</a>
+	</div>
+	<div class="columns is-multiline" *ngIf="sample?.pre_configs">
+		<div *ngFor="let pre of sample.pre_configs"  class="checkbox-container column is-12">
+			<label class="" for="{{pre.name}}" id="a-{{pre.name}}">
+					<fa *ngIf="pre.icon" [name]="pre.icon"></fa>
+					<p>{{pre.name}}</p>
+					<input class="preconfig" (change)="onPreConfig($event, pre)" name="testt" id="{{pre.name}}" type="radio"> 
+					<span></span> 
+			</label>
+		</div>
+	</div>
+	</div>
+
+
+
+
+	<!-- Option Sets -->
+	<!-- {{sample.sets|json}} -->
+	<div class="form-section" *ngFor="let set of sample.sets">
+	<!-- {{set.options[0]|json}} -->
+	<div class="form-head" id="set-{{set.slug}}">
+		<h3>{{set.name}}</h3>
+		<a class="b">Which processor is right for you?</a>
+	</div>
+	<div class="columns is-multiline">
+		<div *ngFor="let option of set.options;let i = index;"  class="checkbox-container column is-12">
+			<label class="{{option.part}}" for="{{option.part}}" id="a-{{option.part}}" (click)="unsetPreConfigs()">
+				<div class="columns">
+					<div class="column L">
+						<fa *ngIf="option.icon" [name]="option.icon"></fa>
+						<p class="part">{{option.part}}</p>
+						<p>{{option.name}}</p>
+						<input class="option_input" [checked]="option.checked" (change)="checkToggled($event, option);" name="{{option.part}}" id="{{option.part}}" type="checkbox"> 
+						<span></span> 
+					</div>
+					<div class="column R is-2">
+						<p *ngIf="option.add" class="add centerer">+{{option.add}}</p>
+					</div>
+				</div>
+			</label>
+		</div>
+	</div>
+	</div>
+
+	
+
+
+	<!-- summary -->
+	<div class="summary level">
+		<div class="submit level-left">
+			<h4 class="level-item chat">
+				<a>
+					<fa [name]="'comments'"></fa>
+					Have a Question?
+				</a>
+			</h4>
+		</div>
+		<div class="submit level-right">
+			<p class="level-item total">{{sample.price.base+sample.price.additions|currency}}</p>
+			<input class="level-item" type="submit" class="button" name="Add to Cart" value="Add to Cart">
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+	
+</form>

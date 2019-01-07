@@ -1,0 +1,262 @@
+<hr style="margin-top: 0;">
+
+
+
+<pre *ngIf="mode.dev">{{config_id}}</pre>
+
+
+
+
+
+<!-- pre-config -->
+<div class="form-section pre">
+	<div class="inner-form-section">
+		<div class="form-head" id="set-pre_configs" (click)="sett.open=!sett.open">
+			<h3><i class="fa fa-cubes"></i> Recommended Configurations</h3>
+			<p [ngClass]="{hide: sett.open}" class="b fadeIn animated">A list of our most common configurations.</p>
+			<i [ngClass]="{blue: sett.open}" class="fa cl fa-ellipsis-v"></i>
+		</div>
+		<div class="columns is-multiline m0" [ngClass]="{hide: sett.open}" *ngIf="current">
+			<ng-container *ngIf="current.pre_configs">
+				<div *ngFor="let pre of toArray(current.pre_configs)"  class="checkbox-container x column p0 preconfigs is-12">
+					<ng-container *ngIf="pre.name">
+						<label class="" for="pre_{{pre.name}}" id="a-{{pre.name}}">
+							<fa *ngIf="pre.icon" [name]="pre.icon"></fa>
+							<p class="strong">{{pre.name}}</p>
+							<p class="b">{{pre.desc}}</p>
+							<input class="preconfig" (change)="onPreConfig($event, pre)" name="testt" id="pre_{{pre.name}}" type="radio"> 
+							<span></span> 
+							<!-- <div class="unsetOption" *ngIf="mode.edit" (dblclick)="rmPreConfig(pre.name)">
+								<i class="fa fa-trash"></i>
+							</div> -->
+						</label>
+						<a class="details-trigger">
+							<i class="fa fa-trash" (dblclick)="rmPreConfig(pre.name)" *ngIf="mode.edit"></i>
+						</a>
+					</ng-container>
+				</div>
+			</ng-container>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<!-- Saved Configs -->
+<saved-configs *ngIf="mode.auth" [product]="product"></saved-configs>
+
+<br>
+<hr class="hide-on-mobile">
+
+
+
+<!-- Option Sets -->
+<!-- <pre>{{current|json}}</pre> -->
+<div *ngIf="current" class="blah">
+	<div
+		class="form-section set-container"
+		*ngFor="let set of sets"
+		id="set-{{set.slug}}"
+		[attr.data-set]="set.slug"
+		[attr.data-name]="set.name"
+	> 
+	<div
+		class="inner-form-section"
+		*ngIf="set.name"
+		(mouseenter)="set.hovered=true"
+		(mouseleave)="set.hovered=false"
+	>
+		<div class="form-head" id="set-{{set.slug}}">
+			<h3 class="ti {{set.valid}}" [ngClass]="{red: !set.valid && submitted}">
+				{{set.name}}
+				 <span class="dark" *ngIf="set.required">*</span>
+				<!-- ({{set.selected}}) -->
+				<a *ngIf="mode.edit" (dblclick)="rmSet(set.slug)" class="rmSet"><i class="fa fa-trash"></i></a>
+			</h3>
+			<p class="b" *ngIf="set.note && !mode.edit">{{set.note}}</p>
+
+			<!-- admin note -->
+			<p class="b" *ngIf="mode.edit" >
+				<a (click)="set.edit=!set.edit">{{set.note||'put note here'}}</a>
+			</p>
+			<div class="field has-addons" id="addNote" *ngIf="mode.edit && set.edit">
+			  <div class="control">
+			    <input class="input" #note [(ngModel)]="set.note" type="text" placeholder="your note here...">
+			  </div>
+			  <div class="control">
+			    <a class="button white dark-bg" (click)="saveNote(note, set)">
+			      Save Note
+			    </a>
+			  </div>
+			</div>
+			<!-- <p [ngClass]="{hide: !set.radio}" class="b fadeIn animated">Select One</p> -->
+		</div>
+		<div class="columns m0 is-multiline" [ngClass]="{_hide_: set.open}">
+			
+
+			<!-- each option item -->
+				<!-- <pre>{{set.options|json}}</pre> -->
+			<ng-container *ngIf="set.options && all">
+			<div *ngFor="let option of toArray(set.options);let i = index;" class="checkbox-container x column p0 is-12" name="option.key" [ngClass]="{hide: !all[option.id].is_visible}">
+				<label class="{{option.key}}" for="i_{{option.key}}" id="a-{{option.key}}" (click)="updateValidity(set, $event)" *ngIf="option.name">
+					<button *ngIf="mode.dev" (click)="editorContent=option">View Option JSON</button>
+					<input 
+						class="option_input  {{set.slug}}"
+						[checked]="option.checked"
+						(change)="checkToggled($event, option, set);"
+						name="{{option.key}}"
+						id="i_{{option.key}}"
+						type="checkbox"
+					> 
+					<span></span>
+					<div class="columns">
+						<div class="column L">
+							<div class="inner-left">
+								<fa *ngIf="option.icon" [name]="option.icon"></fa>
+								<p class="name">{{option.name}}</p>
+								<!-- <p class="b">{{option.key}}</p> -->
+							</div>
+						</div>
+						<div class="column R is-2">
+							<p *ngIf="all" class="add centerer">
+								+ {{ (all[option.id].calculated_price || 0) | currency }}
+							</p>
+
+						</div>
+					</div>
+				</label>
+				<a class="details-trigger">
+					<i class="fas fa-pencil-alt" (click)="modal_content=option; json_loc=optionLoc(option);" *ngIf="mode.edit"></i>
+					<i class="fas fa-trash-alt" (dblclick)="removeOptionFromSet(set.key, option.key)" *ngIf="mode.edit"></i>
+					<i class="fa fa-info-circle" (click)="detailContent=all[option.id]"></i>
+				</a>
+				<!-- <app-details *ngIf="all" [option]="option" [product]="all[option.id]"></app-details> -->
+			</div>
+			</ng-container>
+
+
+
+			<!-- admin-add-item -->
+			<div 
+				*ngIf="mode.edit"
+				class="addComponentForm admin-add-item p0 column is-12"
+				[ngClass]="{hide: !set.hovered}"
+			>
+				<ng-select [items]="All"
+		           bindLabel="name"
+		           bindValue="id"
+		           placeholder="Select a Component to Add"
+		           [clearSearchOnAdd]="true"
+		           [(ngModel)]="itemSelected"
+		           class="w100"
+		           (change)="addItemToSet(set, $event); itemSelected=null;"
+		        ></ng-select>
+			</div>
+
+
+
+
+
+			
+			
+			
+			
+			
+		</div>
+	</div>
+</div>
+<a class="mobile-only finish_button" (click)="smooth('final', 100);">Review & Add-to-Cart</a>
+</div>
+
+
+
+
+
+
+
+
+
+			<!-- admin-add-set -->
+			<form *ngIf="mode.edit" class="admin-add-set column is-12" (ngSubmit)="addSetToProduct($event)">
+			
+				<!-- new option set (admin) -->
+				<div class="field has-addons">
+					<div class="control is-expanded">
+						<input class="input" type="text" class="input-name" placeholder="Set Name">
+					</div>
+					<div class="control check-control">
+						<label class="checkbox" [attr.data-tooltip]="'Make Required'" data-placement="top">
+							<input type="checkbox" name="required">
+						</label>
+					</div>
+					<div class="control check-control">
+						<label class="checkbox" [attr.data-tooltip]="'Make Radio'" data-placement="top">
+							<input type="checkbox" name="radio">
+						</label>
+					</div>
+					<div class="control">
+						<button type="submit" class="button is-primary dark-bg">Add Option Set</button>
+					</div>
+				</div>
+			
+				<!-- Duplicate Configs (admin) -->
+				<form *ngIf="mode.edit" (ngSubmit)="duplicateConfigs($event)">
+					<label class="field has-addons">
+						<div class="control is-expanded">
+							<div class="select is-fullwidth">
+								<select name="country">
+									<option *ngFor="let item of All" value="{{item.sku}}">{{item.sku}} — {{item.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="control">
+							<button type="submit" class="button is-primary dark-bg">Duplicate Configs</button>
+						</div>
+					</label>
+				</form>
+			
+			</form>
+
+			<a *ngIf="mode.edit && current" class="button" (click)="modal_content=current.config; json_loc=base">Edit Configuration</a>
+
+
+
+
+
+
+
+
+<!-- Modify Current Product Configuration -->
+<modal *ngIf="modal_content && json_loc" (closeModal)="close()">
+	<div class="box p0 oh">
+		<admin-prod-config 
+			(closeModal)="close()"
+			[data]="modal_content"
+			[loc]="json_loc"
+			[sku]="product.sku"
+		></admin-prod-config>
+	</div>
+</modal>
+
+
+
+<json-viewer 
+	*ngIf="editorContent"
+	(closeModal)="editorContent=null"
+	[data]="editorContent"
+></json-viewer>
+
+
+
+<details-popout 
+	*ngIf="detailContent"
+	(closeModal)="detailContent=null"
+	[product]="detailContent"
+></details-popout>
+
+
+
+<div class="p2em"></div>
+<img src="assets/img/addcash.png">

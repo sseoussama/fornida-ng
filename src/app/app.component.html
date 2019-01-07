@@ -1,0 +1,83 @@
+<div id="mode"></div> <!-- used in bcAuthService -->
+
+<div id="APP" class="inside-{{inside}} isMobile-{{isMobile}} __limit100vw">
+  
+  
+  <!-- Mobile Header -->
+  <ng-container *ngIf="isMobile">
+    <mobile-header [mode]="mode"></mobile-header>
+  </ng-container>
+
+  <!-- Desktop Header -->
+  <ng-container *ngIf="!isMobile">
+    <div id="above">
+      <app-head></app-head>
+      <div id="main-view">
+        <app-carousel class="db fadeIn d2 animated"   
+          *ngIf="insideDone"    
+          [ngClass]="{'fadeOut d0':inside}  
+        "></app-carousel>  
+      </div>
+    </div>
+    <div id="below" [ngClass]="{hide: inside}">
+      <discover-nav></discover-nav>
+    </div>
+  </ng-container>
+
+  <div class="black taj content-container_ forunderlines">
+    <router-outlet class="animated fadeInUp"></router-outlet>
+  </div>
+  <div class="blackout"></div>
+  <div class="whiteout"></div>
+</div>
+
+<ng-snotify></ng-snotify>
+
+<div class="editMode hide-on-mobile" *ngIf="mode.admin">
+  <div class="tg-list-item">
+    <!-- <pre *ngIf="mode.admin && mode.dev">{{mode|json}}</pre> -->
+
+      <!-- edit -->
+      <h4>Edit Mode</h4>
+      <input (change)="editToggle($event)" class="tgl tgl-light" id="edit" type="checkbox"/>
+      <label class="tgl-btn" for="edit"></label>
+
+      <!-- dev -->
+      <h4>Dev Mode</h4>
+      <input (change)="devToggle($event)" class="tgl tgl-light" id="dev" type="checkbox"/>
+      <label class="tgl-btn" for="dev"></label>
+      
+      <!-- link to admin page -->
+      <hr>
+      <div>
+        <a class="admin-link" routerLink="/admin" [queryParams]="{content:'builds'}">
+          <fa [name]="'fas fa-unlock-alt'"></fa> Admin
+        </a>
+      </div>
+
+  </div>
+</div>
+
+
+<div class="navigate-panel hide-on-mobile">
+  <div class="level">
+    
+    <a class="level-item prevPage" (click)="prevPage()">
+      <fa [name]="'fas fa-arrow-left'"></fa>
+    </a>
+    
+    <a class="level-item homePage" routerLink="/">
+      <fa [name]="'fas fa-home'"></fa>
+    </a>
+    
+    <a class="level-item forwardPage" (click)="forwardPage()">
+      <fa [name]="'fas fa-arrow-right'"></fa>
+    </a>
+
+  </div>
+</div>
+
+
+<app-footer></app-footer>
+
+

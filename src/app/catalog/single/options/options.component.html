@@ -1,0 +1,29 @@
+<div *ngIf="options">
+	<!-- <pre>{{options|json}}</pre> -->
+
+
+	<div class="form-section pre" *ngFor="let option of options">
+	<div class="form-head" id="set-pre_configs">
+		<h3>{{option.display_name}}</h3>
+		<a class="b">Click to see details</a>
+	</div>
+	<div class="columns is-multiline">
+		<div *ngFor="let val of option.option_values"  class="checkbox-container column is-12">
+			<label class="" for="t{{val.id}}" id="a-{{val.id}}">
+					<!-- <fa *ngIf="pre.icon" [name]="pre.icon"></fa> -->
+					<p>{{val.label}}</p>
+					<!-- <pre>option_id: {{val.id}}</pre> -->
+					<input class="preconfig" (change)="onOptionSelected(option.id, val)" name="set-{{option.id}}" id="t{{val.id}}" type="radio"> 
+					<span></span>
+			</label>
+		</div>
+	</div>
+	</div>
+
+	<!-- <ul *ngFor="let variant of variants">
+		<li>{{variant.sku}}</li>
+	</ul> -->
+	<!-- <pre>{{variants|json}}</pre> -->
+
+
+</div>

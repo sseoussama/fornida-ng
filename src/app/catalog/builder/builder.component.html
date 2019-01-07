@@ -1,0 +1,67 @@
+<div class="p2em"></div>
+<div id="product-view">
+	<div class="container_">
+		<div class="columns">
+			
+			<!-- left -->
+			<div class="column is-6 gallery">
+				<div class="left st" >
+					<!-- carousel -->
+					<!-- <ngx-slick class="carousel1" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+					    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+					          <img data-rellax-speed="2" src="{{slide.img}}" (click)="Next()" alt="" style="width:100%;">
+					    </div>
+					</ngx-slick> -->
+					
+					<!-- specs -->
+					<div id="specs" class="">
+						<!-- <pre>{{Configs.length|json}}</pre> -->
+						<!-- configured specs -->
+						<div class="spec-section final st_" *ngIf="Configs[0]">
+							<h2>{{title}}<span class="price">{{sample.price.base+sample.price.additions|currency}}</span></h2>
+							<table class="table is-hoverable">
+					          <tbody>
+					            <tr *ngFor="let spec of Configs" (click)="smooth('a-'+spec.part,50)">
+									<td class="detail">
+										<div class="part">{{spec.part}}</div>
+										<div class="name">{{spec.name | slice:0:64}} <span *ngIf="spec.name.length>64">...</span></div>
+									</td>
+					              <!-- <td class="name">{{spec.name}}</td> -->
+					              <td class="add">{{spec.add||"0.00"|currency}}</td>
+					            </tr>
+					          </tbody>
+					        </table>
+				        </div>
+
+						<!-- static specs -->
+						<pre>{{sample.specs|json}}</pre>
+						<div *ngIf="sample?.specs">
+					        <div class="spec-section" *ngFor="let section of sample.specs">
+								<h2>*****{{section.name}}</h2>
+								<table class="table is-hoverable">
+						          <tbody>
+						            <tr *ngFor="let spec of section.values">
+						              <td class="key">{{spec.key}}</td>
+						              <td class="value">{{spec.value}}</td>
+						            </tr>
+						          </tbody>
+						        </table>
+					        </div>
+					    </div>
+
+			    	</div>
+					
+				</div>
+			</div>
+			
+			<!-- right -->
+			<div class="column details" id="Test">
+				<h1>{{title}}</h1>
+				<p class="desc">HPE has an impressive history for their innovative use of new technology, consistently raising the bar on server design to squeeze more into a smaller box. IT Creations carries a full line of HPE ProLiant Servers to meet your business and performance needs. IT Creations has the components on hand to upgrade or custom configure your system and deliver the next day, if you order before 11am PST. Ask about our 5-Year Standard Warranty. <a>Discover <fa [name]="'chevron-right'"></fa></a></p>
+				<br>
+				<a *ngIf="!config" (click)="config=!config" class="button">Configure</a>
+				<app-add *ngIf="config"></app-add>
+			</div>
+		</div>
+	</div>
+</div>

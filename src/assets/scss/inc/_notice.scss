@@ -1,0 +1,100 @@
+#notices{
+	position: absolute;
+	z-index: 99999;
+	bottom: 25px;
+	right: 31px;
+	width: 28em;
+	font-size: 0.85em;
+	.item2{
+		margin: 1em !important;
+		width: 100%;
+		background: rgba(#000,0.45);
+		opacity: 0.9;
+		border-radius: 0;
+		overflow: hidden;
+	    border: 1px solid #000;
+	    color: #fff;
+		@extend .is-mobile;
+		.column.icon {
+			position: relative;
+			i{
+				@include centerer;
+				top: 120%;
+				&.fa-exclamation-triangle{
+					color: #FFC107;
+					font-size: 1.2em;
+					text-shadow: 1px 0px 0px rgba(#000, 0.3);
+				}
+				&.fa-magic {
+					color: $green;
+				}
+				&.fa-comments {
+					color: $blue;
+				}
+				&.fa-ban {
+					color: $red;
+					@extend .animated;
+					@extend .flash;
+					@extend .infinite;
+				}
+				&.fa-bell {
+					color: $green;
+					@extend .animated;
+					@extend .bounce;
+					@extend .infinite;
+				}
+			}
+		}
+		p{margin: 0;}
+		.column.copy{
+			border-right: 1px solid rgba(#000, 0.95);
+			padding: 0.75rem;
+			p.t{
+				text-transform: capitalize;
+				font-weight: 600;
+			}
+			p.m{
+			}
+			a{
+				color: $yellow;
+				@extend .mono;
+				font-weight: bold;
+				font-size: 0.9em;
+				font-style: underline;
+			}
+		}
+		.column.actions {
+			text-transform: capitalize;
+			text-align: center;
+			padding: 0;
+			position: relative;
+			@extend .is-2;
+			&:hover{
+				background: rgba(#000, 0.6);
+			}
+			&:active{
+			    background: #2178f3;
+				color: #fff;
+			}
+			.action{
+				padding: 0.6em 1em;
+				font-weight: 600;
+				overflow: hidden;
+				@include centerer;
+			}
+		}
+	}
+	@include bp(L-phone){
+	    left:0;
+	    right:0;
+	    top: 1em;
+	    width: 100vw !important;
+        bottom: inherit;
+		.item2{
+			margin: 0 !important;
+			margin: 0 auto !important;
+			width: 90%;
+			background: rgba(#000,0.65);
+		}
+	}
+}

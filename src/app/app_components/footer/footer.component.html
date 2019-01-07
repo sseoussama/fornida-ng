@@ -1,0 +1,97 @@
+<footer class="hide-on-mobile">
+	<div class="container">
+		<div class="columns is-centered is-mobile is-multiline max100">
+			
+
+			<!-- catalog -->
+			<div class="column is-narrow is-three-quarters-mobile">
+				<ul *ngFor="let parent of categoryTree | isvisible" class="open-{{parent.childOpen}} footer-nav">
+					
+					<!-- parent name -->
+					<p *ngIf="parent.name !== 'Shop All'" (click)="parentClick(parent)" class="test mono" #test><a>{{parent.name}}</a></p>
+
+					<!-- children ul-->
+					<ul class="children" *ngIf="parent.children.length">
+						<!-- children loop -->
+						<li *ngFor="let child of parent.children| isvisible">
+							<a
+								id="category-{{child.id}}"
+								routerLink="/category{{child.url}}"
+								routerLinkActive="active"
+								[attr.parent_id]="parent.id"
+							>{{child.name}}</a>
+						</li>
+						<br>
+					</ul>
+
+				</ul>
+			</div>
+			
+
+			<!-- Info -->
+			<div class="column is-narrow is-three-quarters-mobile">
+				<p class="mono">Info</p>
+				<ul>
+					<li><a>Lorem Ipsum</a></li>
+					<li><a>Ipsum Lorem</a></li>
+					<li><a>Ipsum again</a></li>
+					<li><a>Ipsum again again</a></li>
+				</ul>
+			</div>
+
+
+
+			<!-- support -->
+			<div class="column is-narrow is-three-quarters-mobile" *ngIf="s_topics">
+				<p class="mono">Support</p>
+				<ul>
+					<li *ngFor="let item of s_topics">
+						<a routerLink="{{item.link}}">{{item.name}}</a>
+					</li>
+				</ul>
+			</div>
+
+
+			
+			<!-- Account -->
+			<div class="column is-narrow is-three-quarters-mobile">
+				<p class="mono">Account</p>
+				<links-account [mode]="mode"></links-account>
+			</div>
+			
+
+		</div>
+		<hr>
+<p class="b"><small>Copyright © 2018 Fornida Inc. All rights reserved.</small></p>
+	</div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

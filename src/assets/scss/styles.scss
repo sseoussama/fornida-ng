@@ -1,0 +1,28 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import 'inc/colors';
+@import 'inc/variable';
+@import 'inc/bootstrap-variables';
+@import 'inc/tooltip';
+
+// packages
+@import "~ng-snotify/styles/simple";
+@import "inc/font-awesome.min";
+@import 'packages/b';
+// .is-mobile, .is-2{
+// 	color: red;
+// }
+@import 'packages/slick';
+
+// inc
+@import 'inc/responsive';
+@import 'inc/mixins';
+@import 'inc/fonts';
+@import 'inc/omar_sass';
+@import 'inc/base';
+@import 'inc/animate';
+@import 'inc/pusher';
+@import 'inc/notice';
+@import 'inc/tooltip';
+@import 'inc/dropzone';
+
+

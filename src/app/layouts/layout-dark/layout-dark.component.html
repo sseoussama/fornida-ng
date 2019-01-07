@@ -1,0 +1,57 @@
+<div class="full-width">
+	<div class="layout-dark content-{{content}}">
+		<div class="top-content">
+
+
+
+
+			<!-- one -->
+			<ng-template [ngIf]="content==1">
+				<div class="glow"></div>
+				<div class="white type-style-1 content-container home-badges">
+					<div class="columns is-multiline is-centered">
+						<div class="badge-item column is-6" *ngFor="let badge of badges">
+							<div class="columns">
+								<div class="column is-4">
+									<div class="imgr"><img src="{{badge.img}}"></div>
+								</div>
+								<div class="column">
+									<h3>{{badge.title}}</h3>
+									<p class="f">{{badge.desc}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ng-template>
+
+
+
+
+
+			<!-- two -->
+			<ng-template [ngIf]="content==2">
+				<!-- <div class="glow"></div> -->
+				<div class="content-container">
+					<div class="columns type-style-1 white">
+						<div class="column ll is-5">
+							<div class="tal home-sec sm">
+								<h3>Get CA$H for your old Hardware</h3>
+								<p class="w100">Your hardware has come to the end of its lifecycle, and the time has come for a refresh. Are you eliminating on-site hardware to move to the cloud. Fornida will help you get the most value from your equipment, while also protecting your data and minimizing the environmental impact.</p>
+								<a class="button" routerLink="/contact">Ask you account executive for details</a>
+							</div>
+						</div>
+						<div class="column rr">
+							
+						</div>
+					</div>
+				</div>
+			</ng-template>
+
+
+
+
+
+		</div>
+	</div>
+</div>

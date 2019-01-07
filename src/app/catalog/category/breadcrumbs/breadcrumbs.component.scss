@@ -1,0 +1,16 @@
+$dark: #4a4a4a; $light: #F5F5F5; $green: #00FFA2; $green: #07d0b9; $yellow: #FFBB3B; $red: #c72e1f; $white: #FFFFFF; $black: #000000;
+.disabled{opacity: 0.5; pointer-events: none; cursor: default; } .disable{pointer-events: none; cursor: default; }
+
+.breadcrumb {
+	font-weight: 500;
+	text-transform: capitalize;
+	padding-bottom: 5px;
+	a {color: $dark; }
+	a:hover { color: $green; }
+	.is-active a {
+		color: $dark !important;
+		padding-right: 0;
+		@extend .disable;
+		opacity: 0.3;
+	}
+}

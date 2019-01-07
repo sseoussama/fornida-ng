@@ -1,0 +1,18 @@
+<div id="details-popout">
+	<div class="inner">
+		<h1>{{product.name}} <button class="modal-close" (click)="onCloseModal()">Close</button></h1>
+		<div class="container">
+			<product-image
+				class="hide"
+				[product_id]="product.id"
+				[carousel]="true"
+				[size]="'url_standard'"
+				[limit]="20"
+				[image_id]="null"
+				[loadTime]="2000"
+				[images]="product.images"
+			></product-image>
+			<div class="feature-copy" *ngIf="product" [innerHtml]="product.description"></div>
+		</div>
+	 </div>
+</div>

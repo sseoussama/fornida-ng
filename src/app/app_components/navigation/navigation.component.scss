@@ -1,0 +1,135 @@
+@import "../../../assets/scss/inc/colors";
+// @mixin ease($speed) {-webkit-transition: all $speed ease-in-out; -moz-transition: all $speed ease-in-out; -o-transition: all $speed ease-in-out; -ms-transition: all $speed ease-in-out; transition: all $speed ease-in-out; }
+// @import "../../assets/scss/inc/mixins";
+// @import "../../assets/scss/inc/animate";
+
+.column.is-4 {-webkit-box-flex: 0; -ms-flex: none; flex: none; width: 33.33%; }
+.column.is-3 {-webkit-box-flex: 0; -ms-flex: none; flex: none; width: 25%; }
+.column.is-2 {-webkit-box-flex: 0; -ms-flex: none; flex: none; width: 20%; }
+%b-r { border-radius: 0em; }
+
+#navigation {
+    padding-top: 0.5em;
+    z-index: 9;
+    .navigation-list {
+    	a.navigation-itemm {
+    		padding: 1em;
+    		font-weight: bold;
+    		font-size: 0.9em;
+            margin: 0;
+    		letter-spacing: 0.05em;
+            text-transform: capitalize;
+            @extend %b-r;
+            // @include ease(0.18s);
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+    		&.active {
+    			color: $yellow;
+    		}
+    		&.active.stash {
+    			color: #fff;
+    		}
+    		&.megaActive {
+    			// color: $dark !important;
+                // @extend .light-bg;
+                opacity: 1;
+            }
+            .children{
+                display: none;
+                background: #fff;
+                position: absolute;
+                top: 80%;
+                width: 100%;
+                left: 0;
+                text-align: center;
+                padding: 0.5em;
+                @extend %b-r;
+                opacity: 0;
+                // box-shadow: 1px 2px 6px rgba(#000,0.15);
+                border-bottom: 1px solid rgba($dark, 0.16);
+                // border-top: 1em solid $dblue;
+                &.open-true {
+                    display: block;
+                    opacity: 1;
+                    // color: $dark;
+                }
+                .child-content{
+                    padding: 0;
+                    margin: 0;
+                    // -ms-flex-wrap: wrap;
+                    // flex-wrap: wrap;
+                    // display: inline-block;
+                    .section-head{
+                        color: #fff;
+                        background: $blue;
+                        padding: 0.5em;
+                        margin-bottom: 0.5em;
+                        p.mono {}
+                    }
+                    // .col-children {
+                        .child-item {
+                            @extend .is-2;
+                            display: block;
+                            // min-width: 15%;
+                            a {
+                                color: $dark;
+                                padding: 1em;
+                                display: block;
+                                // background: $light url(https://www.thinkmate.com/wwwinc/static/menu/server-gpx.png);
+                                // background-size: cover;
+                                height: 10em;
+                                // background-color: $light !important;
+                                @extend %b-r;
+                                &:hover {
+                                    color: $blue;
+                                    background-color: lighten($light,1%) !important;
+                                }
+                            }
+                            .img-container {
+                                margin-bottom: 0.25em;
+                                height: 74px;
+                                img{
+                                    height: 100%;
+                                    width: auto;
+                                }
+                            }
+                        }
+                    // }
+                    .col-brands {
+                        text-align: left;
+                        background: $light;
+                        .brand-item {
+                            a {
+                                font-weight: 500;
+                                font-size: 1.3em;
+                                text-transform: capitalize;
+                                padding: 0.1em 0.25em;
+                                display: block;
+                                &:hover {
+                                    color: $blue;
+                                }
+                            }
+                        }
+                        .promo.under-brands {
+                            padding: 0.5em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // ipadpro
+    @media (max-width: 1024px) {
+        display: none;
+    }
+
+}
+.mega-contain {z-index: 2; }
+
+
+
+#category-23{display: none;}
+
+
+
+

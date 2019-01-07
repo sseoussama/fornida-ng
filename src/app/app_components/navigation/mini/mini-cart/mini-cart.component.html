@@ -1,0 +1,104 @@
+
+
+<div class="drop-content" *ngIf="cart_set">
+
+	<!-- drop-head -->
+	<div class="drop-head level">
+		<div class="level-left">
+			<h4 class="mono">cart summary</h4>
+		</div>
+		<div class="level-right">
+			<div class="level-item subtotal mono">
+				<p>total: <span>{{cart.data.data.cart_amount|currency}}</span></p>
+			</div>
+		</div>
+	</div>
+
+	<!-- drop-body -->
+	<div *ngIf="!ui_ready" class="p1em">{{ui_not_ready}}</div>
+	<div class="drop-body" [ngClass]="{'hide': !ui_ready}">
+		<!-- item template -->
+		<div class="cart_item {{item.id}}" *ngFor="let item of cart.data.data.line_items.physical_items">
+			<button *ngIf="mode.dev" (click)="editorContent=item">JSON Viewer</button>
+			<div  *ngIf="!buildId(item)" class="icon_menu lft changer" (mouseleave)="save(item)">
+				<div class="centererr">
+					<div class="rm con" (click)="increment(item)">
+						<fa [name]="'fa fa-plus-circle'"></fa>
+					</div>
+					<div class="rm con" (click)="decrement(item)">
+						<fa [name]="'fa fa-minus-circle'"></fa>
+					</div>
+				</div>
+			</div>
+			<div class="columns m0">
+				<div class="qty-col column m0 is-2">
+					<div *ngIf="!buildId(item)" class="qty mono">{{item.quantity}}</div>
+					<div *ngIf="buildId(item)" class="qty mono">{{stash('buildQty', item)}}</div>
+				</div>
+				<div class="name-col column">
+					{{item.name| slice:0:35}}
+					<span *ngIf="item.name.length>35">...</span>
+					<i *ngIf="buildId(item)" class="reveal-items fa fa-list" (click)="item.show=!item.show"></i>
+					<ul class="options inline">
+						<li 
+							*ngFor="let o of item.options"
+							[attr.data-option-name]="o.name"
+							[attr.data-option-value]="o.value"
+						>
+							<span class="yellow">{{o.value}}</span>
+						</li>
+					</ul>
+					<li class="sku">
+						{{item.sku}}
+						<ng-container *ngIf="mode.dev">// {{buildId(item)}}</ng-container>
+					</li>
+				</div>
+				<div class="right-col column is-narrow">
+					<div *ngIf="!buildId(item)" class="lineprice mono_">{{item.extended_sale_price|currency}}</div>
+					<div *ngIf="buildId(item)" class="lineprice mono_">{{stash('total', item)|currency}}</div>
+					<!-- <div *ngIf="buildId(item)" class="lineprice mono_">**</div> -->
+				</div>
+			</div>
+			<itemized
+				*ngIf="item.build_id"
+				[product]='item'
+				[show]='item.show'
+			></itemized>
+			<div class="icon_menu">
+				<div class="centererr">
+					<!-- delete item -->
+					<div *ngIf="!buildId(item)" class="rm con" (click)="delete_item(item)"><fa [name]="'fa fa-trash'"></fa></div>
+
+					<!-- delete build -->
+					<div *ngIf="buildId(item)" class="rm con" (click)="delete_build(item)"><fa [name]="'fa fa-trash'"></fa></div>
+
+					<!-- edit build -->
+					<div *ngIf="buildId(item)" class="rm con"><fa [name]="'fa fa-pencil'" routerLink="/product/{{item.product_id}}" [queryParams]="{ editing: item.options[0].value }"></fa></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <a (mouseenter)="hov='cart'" class=" column cart m0 level-item action" href="{{cart.cart_url}}" target="_blank" href="">{{cart.cart_url}}</a -->
+
+	<!-- drop-foot -->
+	<!-- <a (mouseenter)="hov='cart'" class=" column cart m0 level-item action" href="{{cart.cart_url}}" target="_blank" href="">View Cart</a> -->
+	<div class="drop-foot level">
+		<div class="foot-pop columns m0p0 active-{{hov}}">
+			<!-- <a (mouseenter)="hov='cart'" class=" column cart m0 level-item action" (click)="gotoCart()">View Cart</a> -->
+			<a (mouseenter)="hov='cart'" class=" column cart m0 level-item action" href="{{cart.cart_url}}" target="_blank" href="">View Cart</a>
+			<a (mouseenter)="hov='checkout'" href="{{cart.checkout_url}}" target="_blank" class=" column m0 action checkout">Checkout</a>
+			<div class="bg"></div>
+		</div>
+	</div>
+
+</div>
+
+<div *ngIf="!cart_set" class="p1em">{{no_data_msg}}</div>
+
+
+<json-viewer 
+	*ngIf="editorContent"
+	(closeModal)="editorContent=null"
+	[data]="editorContent"
+></json-viewer>
+

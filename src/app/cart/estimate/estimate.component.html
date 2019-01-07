@@ -1,0 +1,113 @@
+<div class="estimate-container" [ngClass]="{reveal: theForm}">
+	<form id="estimate" [formGroup]="theForm" (ngSubmit)="onSubmit()" novalidate *ngIf="theForm && !shipping_options" class="form-style-1">
+		
+		<h2>Shipping Estimate</h2>
+		<p class="b h">Where will we be shipping you order?</p>
+
+
+		<!-- date -->
+		<input class="hide" type="text" name="" formControlName="date" id="date" [value]="date | date: 'MM-dd-yyyy HH:mm:ss'">
+
+
+		<!-- country -->
+		<div class="field">
+			<label class="label" (click)="city=''">country</label>
+		  <p class="control has-icons-left">
+		    <span class="select">
+		      <select name="country" formControlName="country">
+		        <option *ngFor="let i of countries" value="{{i.name}}">{{i.code}} — {{i.name}}</option>
+		      </select>
+		    </span>
+		    <span class="icon is-small is-left">
+		      <i class="fas fa-flag"></i>
+		    </span>
+		  </p>
+		</div>
+
+
+		<!-- state -->
+		<div class="field">
+			<label class="label" (click)="city=''">state</label>
+		  <p class="control has-icons-left">
+		    <span class="select">
+		      <select name="state" formControlName="state">
+		        <option *ngFor="let i of states" value="{{i.name}}">{{i.abv}} — {{i.name}}</option>
+		      </select>
+		    </span>
+		    <span class="icon is-small is-left">
+		      <i class="fas fa-globe"></i>
+		    </span>
+		  </p>
+		</div>
+
+
+		<!-- city -->
+		<div class="field">
+		  <label class="label" (click)="city=''">city</label>
+		  <div class="control has-icons-right">
+		    <input formControlName="city" class="input" type="city" placeholder="Normal">
+		    <span class="icon is-right">
+		      <i class="fas fa-circle"></i>
+		    </span>
+		  </div>
+		</div>	
+
+
+		<!-- zip -->
+		<div class="field">
+		  <label class="label" (click)="zip=''">zip</label>
+		  <div class="control has-icons-right">
+		    <input formControlName="zip" class="input" type="zip" placeholder="Normal">
+		    <span class="icon is-right">
+		      <i class="fas fa-circle"></i>
+		    </span>
+		  </div>
+		</div>
+
+
+		<!-- submit -->
+		<a type="submit" name="Get Estimate" class="button bt" (click)="onSubmit();loading($event,2000);">Get Estimate</a>
+
+
+
+	</form>
+
+
+
+
+
+
+
+
+
+	<!-- show shipping options -->
+	<!-- <div id="ship-options" *ngIf="shipping_options">
+		<h2>Select One</h2>
+		<div class="control">
+			<div *ngFor="let option of shipping_options" class="radio" [ngClass]="{'chosen': chosen===option.id}" (click)="chosen=option.id">
+				{{option.description}} {{option.cost | currency}}
+			</div>
+			<div class="radio" [ngClass]="{'chosen': chosen==='test'}" (click)="chosen='test'">
+				test
+			</div>
+		</div>
+
+		<a type="submit" name="finish" class="button bt" (click)="onCloseModal();loading($event,2000);">Finish</a>
+
+	</div> -->
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+

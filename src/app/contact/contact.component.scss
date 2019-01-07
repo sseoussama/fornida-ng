@@ -1,0 +1,137 @@
+@import '../../assets/scss/inc/colors';
+#contact {
+	h2.form-title {
+		position: relative;
+		font-weight: 500;
+		padding-left: 0.9em;
+		margin: 1em 0;
+		z-index: 1;
+		border: 0;
+		font-size: 2em;
+		margin-top: 3em;
+		span {
+			font-weight: bolder;
+			position: absolute;
+			left: 0;
+			font-size: 3.5em;
+			color: #efefef;
+			z-index: -1;
+		}
+	}
+
+	.checkbox-container {
+		input {
+		    display: none;
+		}
+		label {
+			padding: 0;
+			padding: 2.5em 1.2em;
+			i {
+				color: #efefef;
+			}
+			p {
+				font-weight: 500;
+				padding-top: 1em;
+			}
+			&:hover {
+				i {
+					color: $blue;
+				}
+			}
+			&.active {
+				// background: $blue;
+				@extend .blue-g;
+				color: $white;
+				i {
+					color: $white;
+				}
+			}
+		}
+	}
+	.prod {
+		padding: 0.25em 1em;
+		margin: 7px 0;
+		border-radius: 0.24em;
+		-webkit-overflow-scrolling: touch;
+		background-color: $light;
+		color: #4a4a4a;
+		font-size: .875em;
+		// overflow-x: auto;
+		// white-space: pre;
+		// word-wrap: normal;
+		position: relative;
+		font-family: monospace;
+		.right {
+			position: absolute;
+			top: 15%;
+			right: 1em;
+			opacity: 0;
+			i { color: rgba(#000,0.1); }
+			input, textarea {
+				margin-right: 0.25em;
+				padding-right: 5px;
+				&.q {
+					max-width: 4em;
+				}
+				&.comment {
+					min-width: 20em;
+				}
+			}
+		}
+		&:hover {
+			.right{opacity: 1;}
+			i{ color: $red; }
+		}
+
+	}
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  color: rgba(#000, 0.3);
+	}
+	::-moz-placeholder { /* Firefox 19+ */
+	  color: rgba(#000, 0.3);
+	}
+	:-ms-input-placeholder { /* IE 10+ */
+	  color: rgba(#000, 0.3);
+	}
+	:-moz-placeholder { /* Firefox 18- */
+	  color: rgba(#000, 0.3);
+	}
+	.ng-select .ng-select-container {
+	    margin-bottom: 1.5em;
+	}
+}
+
+input.button{
+    margin-top: 2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

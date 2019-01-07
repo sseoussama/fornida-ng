@@ -1,0 +1,14 @@
+<div class="anchor-menu">
+	<div class="inner container">
+		<div class="level scrollspy-nav">
+			<ng-container *ngFor="let set of sets">
+				<a
+					class="level-item d"
+					(click)="smooth('set-'+set.slug, 43)"
+					*ngIf="set.name"
+					[attr.data-scroll]="'set-'+set.slug"
+				>{{set.name}}</a>
+			</ng-container>
+		</div>
+	</div>
+</div>

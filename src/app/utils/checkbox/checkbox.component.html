@@ -1,0 +1,5 @@
+<label class="checkbox mono type-{{type|| 'checkbox'}}" for="{{id}}">
+	<input type="{{type|| 'checkbox'}}" id="{{id}}" (change)="onInputChange($event,id)" name="{{name}}" [checked]="state">
+	<span class="check"></span>
+	{{label}}
+</label>

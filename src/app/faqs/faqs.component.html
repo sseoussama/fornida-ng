@@ -1,0 +1,41 @@
+<div class="p2em"></div>
+<!-- faqs -->
+<div id="faqs">
+	<h2>FAQs <a *ngIf="mode.edit" href="https://app.flamelink.io/content/collection/faQs" class="blue" target="_blank"><fa [name]="'fas fa-pencil-alt'"></fa></a></h2>
+
+	<div class="level">
+		<div class="level-left">
+			<div class="faq-filters" *ngIf="tags">
+				<a *ngFor="let tag of tags" class="filter-badge white" (click)="supportQuery=tag">{{tag}}</a>
+			</div>
+
+		</div>
+
+		<div class="level-right">
+			<div class="faq-search">
+				<div class="field">
+				  <p class="control has-icons-left has-icons-right">
+				    <input class="input" type="search" placeholder="Search FAQs" [(ngModel)]="supportQuery">
+				    <span class="icon is-small is-right">
+				      <i class="fa fa-search"></i>
+				    </span>
+				  </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<br>
+
+	<div class="faq-container">
+		<div class="faq-item" *ngFor="let faq of faqs | valSort:'order' | filter:supportQuery as result" [ngClass]="{opened: faq.open}" [hidden]="!faq.visible">
+			<a class="question"  (click)="faq.open = !faq.open">
+				{{faq.question}}
+				<a *ngIf="mode.edit" href="https://app.flamelink.io/content/collection/faQs/{{faq.id}}" class="blue" target="_blank"><fa [name]="'fas fa-pencil-alt'"></fa></a>
+				<div class="close"><i class="fa fa-ellipsis-v"></i></div>
+			</a>
+			<div [hidden]="!faq.open" [innerHTML]="faq.answer" class="answer"></div>
+		</div>
+	</div>
+</div>
+

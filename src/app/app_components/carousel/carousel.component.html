@@ -1,0 +1,9 @@
+
+<ngx-slick *ngIf="slideConfig" class="carousel home-car" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+    <div ngxSlickItem *ngFor="let slide of slides" class="slide clearfix">
+		<div class="img-contain clearfix">
+			<img class="imgg" src="{{slide.img}}" alt="">
+		</div>
+    </div>
+</ngx-slick>
+<!-- <app-home-bottom></app-home-bottom> -->

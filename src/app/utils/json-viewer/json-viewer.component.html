@@ -1,0 +1,37 @@
+<!-- Modify Current Product Configuration -->
+<!-- <modal *ngIf="viewer_modal && current" (closeModal)="close()">
+	<div class="box p0 oh">
+		<json-viewer 
+			(closeModal)="close()"
+			[data]="current[0]"
+		></json-viewer>
+	</div>
+</modal> -->
+
+
+<modal (closeModal)="close()">
+	<div class="box p0 oh">
+		<div class="admin-config">
+	
+			<!-- head -->
+			<div class="head">
+				<h2>Edit Product Configurations</h2>
+			</div>
+
+			<!-- bod -->
+			<div class="bod">
+				<div id="jsoneditor"></div>
+			</div>
+
+			<!-- foot -->
+			<div class="fot">
+				<a (click)="close()" class="button red-bg">Close</a>
+			</div>
+			
+		</div>
+	</div>
+</modal>
+
+
+
+

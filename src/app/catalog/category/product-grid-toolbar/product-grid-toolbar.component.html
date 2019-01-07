@@ -1,0 +1,91 @@
+
+
+
+
+
+
+<div class="grid-bar">
+<!-- grid-toolbar -->
+<div id="grid-toolbar" class="m0">
+	
+
+	<div class="level">
+		
+		<div class="hide-on-mobile">
+			<ng-container *ngTemplateOutlet="pagination"></ng-container>
+		</div>
+
+
+		<div class="level-right rightside">
+			<div class="level-item direction {{asc}}">
+				<div (click)="asc=!asc; sortDirection(asc)">
+					<fa [name]="'fas fa-sort-amount-down'"></fa>
+				</div>
+			</div>
+			<div class="level-item">
+				<div class="field">
+				  <div class="control">
+				    <div class="select sorter">
+				      <select (change)="onSorter($event.target.value)" [ngModel]="sort" name="sort">
+				        <option>Sort by</option>
+				        <option value="total_sold">Most Popular</option>
+				        <option value="date_modified">date_modified</option>
+				        <option value="date_last_imported">date_last_imported</option>
+				        <option value="price">price</option>
+				        <option value="name">name</option>
+				      </select>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="level-item">
+				<div class="field">
+				  <div class="control">
+				    <div class="select per">
+				      <select (change)="onPerPage($event.target.value)" [ngModel]="limit" name="limit">
+				      	<option value="null">Per Page</option>
+				        <option>10</option>
+				        <option>20</option>
+				        <option>40</option>
+				        <option>60</option>
+				      </select>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="level-item search hide-on-mobile">
+				<div id="grid-search" [ngClass]="{'active': queryParams.keyword}">
+				  <button id="grid-search-button"><i class="fa fa-search"></i></button>
+				  <input [(ngModel)]="queryParams.keyword" id="grid-search-input" placeholder="" />
+				  <div class="spinner"><i class="fa fa-spinner"></i></div>
+				  <div id="clean" class="clean"><i class="fa fa-times-circle"></i></div>
+				</div>
+			</div>
+		</div>
+
+		
+	</div>
+</div>
+
+<!-- mobile search -->
+<div class="mobile-only mobile-search">
+	<input [(ngModel)]="queryParams.keyword" id="grid-search-input-mobile" placeholder="Search Category..." />
+	<div [hidden]="!queryParams.keyword" id="clean2">Clear</div>
+</div>
+
+<!-- mobile pagination -->
+<div class="mobile-only tac">
+  <ng-container *ngTemplateOutlet="pagination"></ng-container>
+</div> <br>
+
+</div>
+
+<ng-template #pagination>
+  <div class="level-left">
+    <nav class="pages">
+      <ul class="inline">
+				<li *ngFor="let p of pages | slice:0:20; let i = index;" [ngClass]="{'active': page.current_page == i+1}" (click)="onPageChange(i+1, $event)">{{i+1}}</li>
+      </ul>
+    </nav>
+  </div>
+</ng-template>

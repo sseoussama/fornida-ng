@@ -1,0 +1,19 @@
+<div *ngIf="Products" id="grid-container" class="">
+	<div class="columns is-multiline">
+		
+		<!-- item template -->
+		<div class="column is-4" *ngFor="let product of Products">
+			<product-card [product]='product' db></product-card>
+		</div>
+
+
+		<!-- No Products -->
+		<div class="no-p column is-12" *ngIf="Products.length<1">
+			<div class="tac p1em light-bg">
+				<p class="b"><strong>No Products Found...</strong></p>
+				<p class="b">Active Category: {{active_cat_id}}</p>
+			</div>
+		</div>
+
+	</div>
+</div>

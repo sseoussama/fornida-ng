@@ -1,0 +1,7 @@
+<nav class="breadcrumb is-left" aria-label="breadcrumbs" *ngIf="active_parent">
+  <ul>
+    <li><a><fa [name]="'home'"></fa></a></li>
+    <li><a routerLink="/category{{active_parent.url}}all">{{active_parent.name}}</a></li>
+    <li class="is-active"><a aria-current="page">{{child_slug}}</a></li>
+  </ul>
+</nav>

@@ -1,0 +1,158 @@
+
+
+<div class="level m0">
+  
+  <div class="level-left">
+    <div class="build-filters" *ngIf="statuses">
+        <a *ngFor="let status of statuses" class="filter-badge {{status.color}} {{status.bg}}" (click)="buildQuery=status.val">{{status.val}}</a>
+      </div>
+    </div>
+
+  <div class="level-right">
+    <div class="build-search">
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="search" placeholder="Search Builds" [(ngModel)]="buildQuery">
+          <span class="icon is-small is-right">
+            <i class="fa fa-search"></i>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<table 
+  class="table is-bordered is-hoverable smooth-table"
+  id="example" *ngIf="ready"
+>
+  <thead>
+    <tr>
+      <th
+        [ngClass]="{'active': order==='build_id', 'reverse':reverse}"
+        (click)="sort('build_id')"
+      >build_id</th>
+      <th
+        [ngClass]="{'active': order==='parent_product_id', 'reverse':reverse}"
+        (click)="sort('parent_product_id')"
+      >parent_product_id</th>
+      <th
+        [ngClass]="{'active': order==='ids', 'reverse':reverse}"
+        (click)="sort('ids')"
+      >components</th>
+      <th
+        [ngClass]="{'active': order==='created', 'reverse':reverse}"
+        (click)="sort('created')"
+      >created</th>
+      <th
+        [ngClass]="{'active': order==='modified', 'reverse':reverse}"
+        (click)="sort('modified')"
+      >Modified</th>
+      <th
+        [ngClass]="{'active': order==='buildQty', 'reverse':reverse}"
+        (click)="sort('buildQty')"
+      >buildQty</th>
+      <th
+        [ngClass]="{'active': order==='order_id', 'reverse':reverse}"
+        (click)="sort('order_id')"
+      >order_id</th>
+      <th
+        [ngClass]="{'active': order==='status', 'reverse':reverse}"
+        (click)="sort('status')"
+      >status</th>
+      <th class="tac"><fa [name]="'fas fa-trash'"></fa></th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+
+
+  <tbody >
+    <tr *ngFor="let build of builds | valSort:order:reverse | filter:buildQuery as result">
+      <ng-container>
+        <td><a (click)="componentsModal=build;">{{ build.build_id}}</a></td>
+        <td><a (click)="detailContent=build.parent_product_id">{{ build.parent_product_id}}</a></td>
+        <td>
+          <a 
+            *ngFor="let id of build.ids"
+            (click)="detailContent=id"
+          >
+            {{id}}
+          </a>
+        </td>
+        <td>{{ build.created | date: 'short'}}</td>
+        <td>{{ build.modified || build.created | date: 'short'}}</td>
+        <td>{{ build.buildQty}}</td>
+        <td>{{ build.order_id||'--'}}</td>
+        <td class="{{build.status_bg}}">
+          <div class="select">
+          <select [(ngModel)]="build.status" (ngModelChange)="saveBuild(build)" class=" {{build.status_color}}">
+            <option *ngFor="let status of statuses"  [ngValue]="status.val">{{status.val}}</option>
+          </select>
+          </div>
+        </td>
+        <td class="rm">
+          <fa *ngIf="build.build_id" (dblclick)="rmBuild(build)" [name]="'fas fa-trash'"></fa>
+          <button *ngIf="!build.build_id" (click)="editorContent=build">See JSON</button>
+        </td>
+        <td>{{build.comments || '--' | strip}}</td>
+      </ng-container>
+    </tr>
+  </tbody>
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+<details-popout 
+  *ngIf="detailContent"
+  (closeModal)="detailContent=null"
+  [product]="detailContent"
+></details-popout>
+
+
+<json-viewer *ngIf="editorContent" (closeModal)="editorContent=null" [data]="editorContent"></json-viewer>
+
+
+
+
+
+
+
+<modal
+  *ngIf="componentsModal"
+  (closeModal)="componentsModal=false;cID=false;"
+  [width]="'900px'"
+>
+  <div class="box p1em">
+    <admin-itemized
+      [build]="componentsModal"
+      (changeBuildStatus)="saveBuild($event, true)"
+      [build_stats]="statuses"
+    ></admin-itemized>
+  </div>
+</modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

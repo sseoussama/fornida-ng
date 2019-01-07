@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1473 801.063">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-img-1-back);
+      }
+
+      .cls-2 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-3 {
+        fill: #ffba00;
+        font-size: 115px;
+        font-family: HandelGothicBT-Regular, HandelGothic BT;
+        letter-spacing: -0.011em;
+      }
+
+      .cls-4 {
+        filter: url(#Up_to_the_Minute);
+      }
+
+      .cls-5 {
+        filter: url(#Ellipse_16);
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1489dd" stop-opacity="0.255"/>
+      <stop offset="0.852" stop-color="#2491df" stop-opacity="0.047"/>
+      <stop offset="1" stop-color="#1489dd" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="Ellipse_16" x="229.974" y="-47.995" width="884.052" height="884.052" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.235"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Up_to_the_Minute" x="249" y="175.031" width="974" height="156" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.11"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-img-1-back">
+      <rect width="1473" height="801.063"/>
+    </clipPath>
+  </defs>
+  <g id="img-1-back" class="cls-1">
+    <g class="cls-5" transform="matrix(1, 0, 0, 1, 0, 0)">
+      <circle id="Ellipse_16-2" data-name="Ellipse 16" class="cls-2" cx="433.026" cy="433.026" r="433.026" transform="translate(238.97 -38.99)"/>
+    </g>
+    <g class="cls-4" transform="matrix(1, 0, 0, 1, 0, 0)">
+      <text id="Up_to_the_Minute-2" data-name="Up to the Minute" class="cls-3" transform="translate(1214 292.03)"><tspan x="-955.38" y="0">Up to the Minute</tspan></text>
+    </g>
+  </g>
+</svg>

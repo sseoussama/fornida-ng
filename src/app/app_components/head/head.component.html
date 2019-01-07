@@ -1,0 +1,37 @@
+<div class="" id="head" (mouseenter)="above_top()">
+	<div class="level pr container-c is-mobile">
+		<div class="level-left nav-left">
+			<div class="level-item">
+				<div routerLink="/" class="logo pointer">
+					<img src="assets/img/logo.png" alt="" class="brand">
+				</div>
+			</div>
+		</div>
+		<!-- *responsive="show.downto('ipadpro', true)" -->
+		<app-nav class="level-item"></app-nav>
+		<div class="level-right nav-right">
+			<div class="level-item build-cta">
+				<a routerLink="/configurable" class="button">Build A Server <span class="badge in">BETA</span></a>
+			</div>
+			<div class="level-item">
+				<ul class="topcons inline active-{{content}}" [ngClass]="{'auth': mode.auth}">
+					<li><a (click)="open_mini($event,'search');"><fa [name]="'fa fa-search'"></fa></a></li>
+					<li><a #userTrigger class="UserTrigger" (click)="open_mini($event,'user');"><fa [name]="'fa fa-user'"></fa></a></li>
+					<li *ngIf="mode.auth"><a id="herE" (click)="open_mini($event,'notice');"><fa [name]="'fa fa-bell'"></fa></a></li>
+					<li class="drop-container {{content}}-content open-{{drop}}">
+						<a routerLink="/cart">
+							<fa [name]="'fa fa-shopping-basket'"></fa>
+							<span class="badge Cart"></span>
+						</a>
+						<div class="mini drop a-{{content}}">
+							<div *ngIf="content=='cart'"><app-mini-cart></app-mini-cart></div>
+							<div *ngIf="content=='user'"><app-mini-user [active]="'login'"></app-mini-user></div>
+							<div *ngIf="content=='search'"><app-mini-search></app-mini-search></div>
+							<div *ngIf="content=='notice'"><app-mini-notice></app-mini-notice></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

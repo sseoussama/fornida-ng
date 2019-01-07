@@ -1,0 +1,28 @@
+
+
+<!-- loading -->
+<div class="loading" *ngIf="!startCar">
+	<img src="assets/img/load.svg" alt="">
+</div>
+
+
+<!-- multiple images -->
+<div *ngIf="images && !carousel && !single && startCar; else singleTemplate">
+	<img *ngIf="images.length===0" src="https://blog.stylingandroid.com/wp-content/themes/lontano-pro/images/no-image-slide.png" class="animated fadeIn">
+	<img *ngFor="let image of images" src="{{image[size]}}" class="animated fadeIn">
+</div>
+
+<img *ngIf="images.length===0" src="https://blog.stylingandroid.com/wp-content/themes/lontano-pro/images/no-image-slide.png" class="animated fadeIn">
+
+<!-- single image -->
+<ng-template #singleTemplate>
+	<img *ngIf="single" src="{{single[size]}}" class="animated fadeIn">
+</ng-template>
+
+
+<!-- carousel -->
+<div [hidden]="!startCar" id="p-{{product_id}}" class="product-gallery animated fadeIn" *ngIf="carousel && images.length>0">
+    <div *ngFor="let image of images" class="slide">
+          <img (click)="Next()" src="{{image[size]}}" alt="" class="m0auto">
+    </div>
+</div>
